@@ -1,0 +1,327 @@
+# Event to determine mil lvl
+country_event = {
+	id = 7777929
+	title = "EVTNAME7777929"
+	desc = "EVTDESC7777929"
+	picture = "militarisation"
+
+	trigger = {
+		exists = yes
+		is_mobilised = no
+		civilized = yes
+	}
+
+	mean_time_to_happen =  {
+		months = 15
+
+		modifier = {
+			factor = 0.75	 #increase likelihood to happen
+			war = yes
+			NOT = { conscription = mandatory_service }
+		}
+
+		modifier = {
+			factor = 0.75
+			war = yes
+			NOT = { conscription = mandatory_service }
+			war_policy = jingoism
+		}
+		
+		modifier = {
+			factor = 0.75
+			conscription = no_draft
+			war_policy = jingoism
+		}
+
+		modifier = {
+			factor = 0.9
+			war = yes
+			NOT = { conscription = mandatory_service }
+			war_policy = pro_military
+		}
+
+		modifier = {
+			factor = 0.75
+			war = no
+			NOT = { conscription = no_draft }
+			war_policy = pacifism
+		}
+
+		modifier = {
+			factor = 0.9
+			war = no
+			conscription = mandatory_service
+			war_policy = anti_military
+		}
+		
+		modifier = {
+			factor = 0.75
+			conscription = mandatory_service
+			war_policy = pacifism
+		}
+		
+		modifier = {
+			factor = 0.5
+			has_country_flag = in_great_war
+		}
+		
+		modifier = {
+			factor = 0.5
+			revanchism = 0.2
+		}
+	}
+
+	option = {
+		name = "EVT7777929OPTA"	#raise militarisation
+
+		#### Voluntary Raising ####
+		random_owned = {
+			limit = {
+				owner = {
+					conscription = four_year_draft
+					OR = {
+						war_policy = jingoism
+						war_policy = pro_military
+					}
+					NOT = { 
+						OR = {
+							unemployment_subsidies = acceptable_subsidies
+							unemployment_subsidies = good_subsidies
+						}
+					}
+				}
+			}
+			owner = {
+				political_reform = mandatory_service
+			}
+		}
+		random_owned = {
+			limit = {
+				owner = {
+					conscription = two_year_draft
+					OR = {
+						war_policy = jingoism
+						war_policy = pro_military
+						war_policy = anti_military
+					}
+					NOT = { 
+						OR = {
+							unemployment_subsidies = acceptable_subsidies
+							unemployment_subsidies = good_subsidies
+						}
+					}
+				}
+			}
+			owner = {
+				political_reform = four_year_draft
+			}
+		}
+		random_owned = {
+			limit = {
+				owner = {
+					conscription = no_draft
+				}
+			}
+			owner = {
+				political_reform = two_year_draft
+			}
+		}
+
+		#### Forced Lowering ####
+		random_owned = {
+			limit = {
+				owner = {
+					conscription = four_year_draft
+					OR = {
+						unemployment_subsidies = acceptable_subsidies
+						unemployment_subsidies = good_subsidies
+						war_policy = pacifism
+					}
+					war = no
+				}
+			}
+			owner = {
+				political_reform = two_year_draft
+			}
+		}
+		random_owned = {
+			limit = {
+				owner = {
+					conscription = mandatory_service
+					OR = {
+						war_policy = anti_military
+						war_policy = pacifism
+						unemployment_subsidies = acceptable_subsidies
+						unemployment_subsidies = good_subsidies
+					}
+					war = no
+				}
+			}
+			owner = {
+				political_reform = four_year_draft
+			}
+		}
+		
+		ai_chance = { factor = 1 }
+	}
+
+	option = {
+		name = "EVT7777929OPTB" #maintain militarisation
+
+		#### Forced Raising ####
+		random_owned = {
+			limit = {
+				owner = {
+					conscription = two_year_draft
+					war_policy = jingoism
+					NOT = { 
+						OR = {
+							unemployment_subsidies = acceptable_subsidies
+							unemployment_subsidies = good_subsidies
+						}
+					}
+				}
+			}
+			owner = {
+				political_reform = four_year_draft
+			}
+		}
+		random_owned = {
+			limit = {
+				owner = {
+					conscription = no_draft
+					OR = {
+						war_policy = jingoism
+						war_policy = pro_military
+					}
+				}
+			}
+			owner = {
+				political_reform = two_year_draft
+			}
+		}
+
+		#### Forced Lowering ####
+		random_owned = {
+			limit = {
+				owner = {
+					conscription = four_year_draft
+					OR = {
+						war_policy = pacifism
+						unemployment_subsidies = acceptable_subsidies
+						unemployment_subsidies = good_subsidies
+					}
+					war = no
+				}
+			}
+			owner = {
+				political_reform = two_year_draft
+			}
+		}
+		random_owned = {
+			limit = {
+				owner = {
+					conscription = mandatory_service
+					OR = {
+						war_policy = anti_military
+						war_policy = pacifism
+						unemployment_subsidies = acceptable_subsidies
+						unemployment_subsidies = good_subsidies
+					}
+					war = no
+				}
+			}
+			owner = {
+				political_reform = four_year_draft
+			}
+		}
+	}
+
+	option = {
+		name = "EVT7777929OPTC" #lower militarisation
+
+		#### Voluntary Lowering ####
+		random_owned = {
+			limit = {
+				owner = {
+					conscription = two_year_draft
+					OR = {
+						war_policy = anti_military
+						war_policy = pacifism
+						unemployment_subsidies = acceptable_subsidies
+						unemployment_subsidies = good_subsidies
+					}
+				}
+			}
+			owner = {
+				political_reform = no_draft
+			}
+		}
+		random_owned = {
+			limit = {
+				owner = {
+					conscription = four_year_draft
+					OR = {
+						war_policy = pro_military
+						war_policy = anti_military
+						war_policy = pacifism
+						unemployment_subsidies = acceptable_subsidies
+						unemployment_subsidies = good_subsidies
+					}
+				}
+			}
+			owner = {
+				political_reform = two_year_draft
+			}
+		}
+		random_owned = {
+			limit = {
+				owner = {
+					conscription = mandatory_service
+				}
+			}
+			owner = {
+				political_reform = four_year_draft
+			}
+		}
+
+		#### Forced Raising ####
+		random_owned = {
+			limit = {
+				owner = {
+					conscription = two_year_draft
+					war_policy = jingoism
+					NOT = { 
+						OR = {
+							unemployment_subsidies = acceptable_subsidies
+							unemployment_subsidies = good_subsidies
+						}
+					}
+				}
+			}
+			owner = {
+				political_reform = four_year_draft
+			}
+		}
+		random_owned = {
+			limit = {
+				owner = {
+					conscription = no_draft
+					OR = {
+						war_policy = jingoism
+						war_policy = pro_military
+					}
+					NOT = { 
+						OR = {
+							unemployment_subsidies = acceptable_subsidies
+							unemployment_subsidies = good_subsidies
+						}
+					}
+				}
+			}
+			owner = {
+				political_reform = two_year_draft
+			}
+		}
+	}
+}

@@ -1,0 +1,129 @@
+leader = {
+	name = "Lambert Nypels"
+	date = 1830.1.1
+	type = land
+	personality = defence_1.1
+	background = attack_2.1
+	prestige = 0.1
+}
+
+leader = {
+	name = "Louis Evain"
+	date = 1831.1.1
+	type = land
+	personality = defence_2.1
+	background = attack_1.1
+	prestige = 0.1
+}
+
+leader = {
+	name = "Goblet"
+	date = 1831.1.1
+	type = land
+	personality = defence_1.1
+	background = attack_1.1
+	prestige = 0.1
+}
+
+leader = {
+	name = "Leopold I"
+	date = 1831.1.1
+	type = land
+	personality = defence_1.1
+	background = attack_1.1
+	prestige = 0.5
+}
+
+leader = {
+	name = "Albert Prisse"
+	date = 1834.1.1
+	type = land
+	personality = defence_1.1
+	background = attack_1.1
+	prestige = 0.1
+}
+
+army = {
+	name = "1st Army"
+	location = 387 #Brussels
+	regiment = {
+		name= "1st Infantry"
+		type = infantry
+		home = 381
+	}
+	
+	regiment = {
+		name= "2nd Infantry"
+		type = infantry
+		home = 381
+	}
+	
+	regiment = {
+		name= "3rd Infantry"
+		type = infantry
+		home = 381
+	}
+	
+	regiment = {
+		name= "4th Infantry"
+		type = infantry
+		home = 387
+	}
+	
+	regiment = {
+		name= "1st Hussars"
+		type = hussar
+		home = 387
+	}
+	
+	regiment = {
+		name= "1st Artillery"
+		type = artillery
+		home = 387
+	}
+	
+	regiment = {
+		name= "2nd Artillery"
+		type = artillery
+		home = 394
+	}
+	
+	regiment = {
+		name= "3rd Artillery"
+		type = artillery
+		home = 394
+	}
+	
+	regiment = {
+		name= "4th Artillery"
+		type = artillery
+		home = 394
+	}
+	
+	regiment = {
+		name= "5th Artillery"
+		type = artillery
+		home = 397
+	}
+
+}
+
+navy = {
+	name = "Belgische Koninklijk Marine"
+	location = 388
+	ship = {
+		name= "1e Transport Flottille"
+		type = clipper_transport
+	}
+
+	ship = {
+		name= "2e Transport Flotille"
+		type = clipper_transport
+	}
+
+	ship = {
+		name= "3e Transport Flotille"
+		type = clipper_transport
+	}
+
+}

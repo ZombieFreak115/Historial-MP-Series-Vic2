@@ -1,0 +1,17 @@
+Key;English;French;German;Polish;Spanish;Italian;Swedish;Czech;Hungarian;Dutch;Portuguese;Russian;Finnish;
+executive_abilities;Executive;;;;;;;;;;;;;
+dictatorial;Dictatorial;;;;;;;;;;;;;
+dictatorial_desc;The executive does not need to cater to the popular will of the people, popular elections either do not happen, or do not matter.;;;;;;;;;;;;;
+presidential_system;Presidential;;;;;;;;;;;;;
+semi_presidential;Semi-Presidential;;;;;;;;;;;;;
+parliamentary_system;Parliamentary;;;;;;;;;;;;;
+parliamentary_system_desc;The executive is decided in the parliament, with the Monarch or President having very limited political power or impact, if any.;;;;;;;;;;;;;
+research_policy;R&D Policy;;;;;;;;;;;;;
+no_funding;No Funding;;;;;;;;;;;;;
+no_funding_desc;The government provides no additional support to research projects.;;;;;;;;;;;;;
+limited_funding;Limited Funding;;;;;;;;;;;;;
+limited_funding_desc;Whether due to lack of money, political will, or ability, only small funds are available for research. \n§YAdvance these reforms via the decision. Can only roll these back manually.§!;;;;;;;;;;;;;
+funded;Funded;;;;;;;;;;;;;
+funded_desc;The government provides funding for public and private research initiatives.;;;;;;;;;;;;;
+prioritised_funding;Prioritised Funding;;;;;;;;;;;;;
+prioritised_funding_desc;High priority and significant funds are given to private and public institutions carrying out research.;;;;;;;;;;;;;

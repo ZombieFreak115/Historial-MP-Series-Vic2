@@ -1,0 +1,56 @@
+political_decisions = {
+	med_tolls = {
+		picture = gibraltar_straits
+		potential = {
+			OR = {
+				owns = 517
+				owns = 512
+			}
+			OR = {
+				owns = 2590
+				owns = 1687
+			}
+			NOT = { has_country_flag = has_trolled_the_med }
+			NOT = { has_global_flag = med_tomfoolery }
+		}
+		allow = {
+			war = no
+		}
+		effect = {
+			add_country_modifier = {
+				name = trolling_the_med
+				duration = -1
+			}
+			set_global_flag = med_tomfoolery
+			prestige = 15
+		}
+		ai_will_do = {
+			factor = 0
+		}
+	}
+	
+	revoke_the_tolls = {
+		picture = gibraltar_straits
+		potential = {
+			has_country_modifier = trolling_the_med
+		}
+		allow = {
+			war = no
+		}
+		effect = {
+			remove_country_modifier = trolling_the_med
+			clr_global_flag = med_tomfoolery
+			set_country_flag = has_trolled_the_med
+			any_country = {
+				limit = {
+					has_country_modifier = med_getting_trolled
+				}
+				country_event = 7777928
+			}
+			prestige = -25
+		}
+		ai_will_do = {
+			factor = 0
+		}
+	}
+}

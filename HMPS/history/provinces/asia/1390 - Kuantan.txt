@@ -1,0 +1,7 @@
+owner = PHG
+controller = PHG
+add_core = PHG
+add_core = JOH
+add_core = SIA
+trade_goods = iron
+life_rating = 35

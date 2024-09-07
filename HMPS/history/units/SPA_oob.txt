@@ -1,0 +1,398 @@
+#Sphere of Influence
+MEX = {
+	value = 75		#relation
+	level = 3		#3=cordial, 4 = friendly, 5 sphere
+	influence_value = 25
+}
+ECU = {
+	value = 100		#relation
+	level = 3		#3=cordial, 4 = friendly, 5 sphere
+	influence_value = 25
+}
+PEU = {
+	value = 100		#relation
+	level = 3		#3=cordial, 4 = friendly, 5 sphere
+	influence_value = 25
+}
+BOL = {
+	value = 100		#relation
+	level = 3		#3=cordial, 4 = friendly, 5 sphere
+	influence_value = 25
+}
+CHL = {
+	value = 100		#relation
+	level = 3		#3=cordial, 4 = friendly, 5 sphere
+	influence_value = 25
+}
+PRG = {
+	value = 100		#relation
+	level = 3		#3=cordial, 4 = friendly, 5 sphere
+	influence_value = 25
+}
+UCA = {
+	value = 100		#relation
+	level = 3		#3=cordial, 4 = friendly, 5 sphere
+	influence_value = 25
+}
+CLM = {
+	value = 100		#relation
+	level = 3		#3=cordial, 4 = friendly, 5 sphere
+	influence_value = 25
+}
+BRZ = {
+	value = 100		#relation
+	level = 3		#3=cordial, 4 = friendly, 5 sphere
+	influence_value = 25
+}
+URU = {
+	value = 75		#relation
+	level = 3		#3=cordial, 4 = friendly, 5 sphere
+	influence_value = 25
+}
+POR = {
+	value = 100		#relation
+	level = 3		#3=cordial, 4 = friendly, 5 sphere
+	influence_value = 25
+}
+
+FRA = {
+	value = 55
+}
+
+leader = {
+	name = "Baldomero Espartero"
+	date = 1834.1.1
+	type = land
+	personality = defence_1.1
+	background = attack_1.1
+	prestige = 0.1
+}
+
+leader = {
+	name = "Francisco Serrano"
+	date = 1833.1.1
+	type = land
+	personality = defence_1.1
+	background = attack_2.1
+	prestige = 0.0
+}
+
+leader = {
+	name = "Leopoldo O'Donnell"
+	date = 1836.1.1
+	type = land
+	personality = defence_2.1
+	background = attack_2.1
+	prestige = 0.0
+}
+
+leader = {
+	name = "Narváez"
+	date = 1836.1.1
+	type = land
+	personality = defence_1.1
+	background = attack_2.1
+	prestige = 0.0
+}
+
+leader = {
+	name = "Gerónimo Valdés"
+	date = 1836.1.1
+	type = land
+	personality = defence_2.1
+	background = attack_1.1
+	prestige = 0.0
+}
+
+leader = {
+	name = "Van Halen"
+	date = 1823.1.1
+	type = land
+	personality = defence_2.1
+	background = attack_3.1
+	prestige = 0.1
+}
+
+leader = {
+	name = "José Ramón Rodil"
+	date = 1824.1.1
+	type = land
+	personality = defence_2.1
+	background = attack_3.1
+	prestige = 0.1
+}
+
+#Army
+army = {
+	name = "1st Army"
+	location = 483
+	regiment = {
+		name= "1st Infantry"
+		type = infantry
+		home = 474
+	}
+	
+	regiment = {
+		name= "2nd Infantry"
+		type = infantry
+		home = 477
+	}
+	
+	regiment = {
+		name= "3rd Infantry"
+		type = infantry
+		home = 477
+	}
+	
+	regiment = {
+		name= "4th Infantry"
+		type = infantry
+		home = 484
+	}
+	
+	regiment = {
+		name= "1st Hussars"
+		type = hussar
+		home = 487
+	}
+	
+	regiment = {
+		name= "1st Artillery"
+		type = artillery
+		home = 487
+	}
+	
+	regiment = {
+		name= "2nd Artillery"
+		type = artillery
+		home = 487
+	}
+	
+	regiment = {
+		name= "3rd Artillery"
+		type = artillery
+		home = 492
+	}
+	
+	regiment = {
+		name= "4th Artillery"
+		type = artillery
+		home = 498
+	}
+	
+	regiment = {
+		name= "5th Artillery"
+		type = artillery
+		home = 503
+	}
+}
+
+army = {
+	name = "2nd Army"
+	location = 498
+	
+	regiment = {
+		name= "1st Infantry"
+		type = infantry
+		home = 512
+	}
+	
+	regiment = {
+		name= "2nd Infantry"
+		type = infantry
+		home = 512
+	}
+	
+	regiment = {
+		name= "3rd Infantry"
+		type = infantry
+		home = 513
+	}
+	
+	regiment = {
+		name= "4th Infantry"
+		type = infantry
+		home = 513
+	}
+	
+	regiment = {
+		name= "1st Hussars"
+		type = hussar
+		home = 2209
+	}
+	
+	regiment = {
+		name= "1st Artillery"
+		type = artillery
+		home = 2209
+	}
+	
+	regiment = {
+		name= "2nd Artillery"
+		type = artillery
+		home = 1455
+	}
+	
+	regiment = {
+		name= "3rd Artillery"
+		type = artillery
+		home = 1455
+	}
+	
+	regiment = {
+		name= "4th Artillery"
+		type = artillery
+		home = 1463
+	}
+	
+	regiment = {
+		name= "5th Artillery"
+		type = artillery
+		home = 1459
+	}
+}
+
+navy = {
+	name = "1st Fleet"
+	location = 506
+	ship = {
+		name= "San Raimundo"
+		type = manowar
+	}
+
+	ship = {
+		name= "Héroe"
+		type = manowar
+	}
+
+	ship = {
+		name= "San Pablo"
+		type = manowar
+	}
+
+	ship = {
+		name= "Ceres"
+		type = frigate
+	}
+
+	ship = {
+		name= "Gloria"
+		type = frigate
+	}
+
+	ship = {
+		name= "Nuestra Señora de Asunción"
+		type = frigate
+	}
+
+	ship = {
+		name= "Nuestra Señora de Atocha"
+		type = frigate
+	}
+
+	ship = {
+		name= "Santa Sabina"
+		type = frigate
+	}
+
+	ship = {
+		name = "Santiago"
+		type = manowar
+	}
+	
+	ship = {
+		name = "Hespérides"
+		type = manowar
+	}
+	
+	ship = {
+		name = "Centinela"
+		type = manowar
+	}
+	
+	ship = {
+		name = "Isla de Cuba"
+		type = frigate
+	}
+	
+	ship = {
+		name = "Cristóbal Colón"
+		type = frigate
+	}
+	
+	
+	ship = {
+		name = "Alerta"
+		type = manowar
+	}
+	
+	ship = {
+		name = "San Fernando"
+		type = manowar
+	}
+	
+	ship = {
+		name = "Legazpi"
+		type = manowar
+	}
+	
+	ship = {
+		name = "Victoria"
+		type = frigate
+	}
+	
+	ship = {
+		name = "Nuestra Señora del Patrocinio"
+		type = frigate
+	}
+}
+
+navy = {
+	name = "Transport Fleet"
+	location = 498
+	
+	ship = {
+		name= "1a Flotilla de Transporte"
+		type = clipper_transport
+	}
+
+	ship = {
+		name= "2a Flotilla de Transporte"
+		type = clipper_transport
+	}
+
+	ship = {
+		name= "3a Flotilla de Transporte"
+		type = clipper_transport
+	}
+	
+	ship = {
+		name= "1a Flotilla de Transporte"
+		type = clipper_transport
+	}
+
+	ship = {
+		name= "2a Flotilla de Transporte"
+		type = clipper_transport
+	}
+
+	ship = {
+		name= "3a Flotilla de Transporte"
+		type = clipper_transport
+	}
+	
+	ship = {
+		name= "1a Flotilla de Transporte"
+		type = clipper_transport
+	}
+
+	ship = {
+		name= "2a Flotilla de Transporte"
+		type = clipper_transport
+	}
+
+	ship = {
+		name= "3a Flotilla de Transporte"
+		type = clipper_transport
+	}
+}

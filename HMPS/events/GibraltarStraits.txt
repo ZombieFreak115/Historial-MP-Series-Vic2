@@ -1,0 +1,122 @@
+country_event = {
+	id = 7777926
+	title = "EVTNAME7777926"
+	desc = "EVTDESC7777926"
+	picture = "straits_of_gibraltar"
+
+	trigger = {
+		has_global_flag = med_tomfoolery
+		any_owned_province = { port = yes }
+		NOT = { has_country_modifier = med_getting_trolled }
+		NOT = { has_country_modifier = trolling_the_med }
+		OR = {
+			tag = ENG
+			tag = ENL
+			tag = GBR
+			tag = FRA
+			tag = SPA
+			tag = IBR
+			tag = SAR
+			tag = ITA
+			tag = PAR
+			tag = MOD
+			tag = LUC
+			tag = TUS
+			tag = PAP
+			tag = SIC
+			tag = ALD
+			tag = TUN
+			tag = TRI
+			tag = CRS
+			tag = SVY
+			tag = TRK
+			tag = EGY
+			tag = ALB
+			tag = BOS
+			tag = BUL
+			tag = CRE
+			tag = CRO
+			tag = CYP
+			tag = GRE
+			tag = ION
+			tag = MOL
+			tag = MON
+			tag = ROM
+			tag = SER
+			tag = SLO
+			tag = TUR
+			tag = WAL
+			tag = YUG
+			tag = ANT
+		}
+	}
+
+	mean_time_to_happen = {
+		months = 1
+	}
+
+	option = {
+		name = "EVT7777926OPTA"
+		add_country_modifier = {
+			name = med_getting_trolled
+			duration = -1
+		}
+	}
+}
+
+country_event = {
+	id = 7777927
+	title = "EVTNAME7777927"
+	desc = "EVTDESC7777927"
+	picture = "straits_of_gibraltar"
+
+	trigger = {
+		has_global_flag = med_tomfoolery
+		has_country_modifier = trolling_the_med
+		OR = {
+			NOT = {
+				OR = {
+					owns = 517
+					owns = 512
+				}
+			}
+			NOT = {
+				OR = {
+					owns = 2590
+					owns = 1687
+				}
+			}
+		}
+	}
+
+	mean_time_to_happen = {
+		months = 1
+	}
+
+	option = {
+		name = "EVT7777927OPTA"
+		remove_country_modifier = trolling_the_med
+		clr_global_flag = med_tomfoolery
+		set_country_flag = has_trolled_the_med
+		any_country = {
+			limit = {
+				has_country_modifier = med_getting_trolled
+			}
+			country_event = 7777928
+		}
+	}
+}
+
+country_event = {
+	id = 7777928
+	title = "EVTNAME7777928"
+	desc = "EVTDESC7777928"
+	picture = "straits_of_gibraltar"
+
+	is_triggered_only = yes
+
+	option = {
+		name = "EVT7777928OPTA"
+		remove_country_modifier = med_getting_trolled
+	}
+}

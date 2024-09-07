@@ -1,0 +1,298 @@
+BEL = {
+	value = 0
+	truce_until="1839.1.1"
+}
+
+leader = {
+	name = "David Chassé"
+	date = 1806.1.1
+	type = land
+	personality = defence_3.1
+	background = attack_1.1
+	prestige = 0.3
+}
+
+leader = {
+	name = "Frans Cochius"
+	date = 1830.1.1
+	type = land
+	personality = defence_1.1
+	background = attack_1.1
+	prestige = 0.1
+}
+
+#leader = {
+#	name = "Andreas Michiels"
+#	date = 1836.1.1
+#	type = land
+#	personality = soldierly
+#	background = school_of_firepower
+#	prestige = 0.0
+#}
+
+leader = {
+	name = "Hendrik de Kock"
+	date = 1807.1.1
+	type = land
+	personality = defence_1.1
+	background = attack_1.1
+	prestige = 0.3
+}
+
+leader = {
+	name = "van den Bosch"
+	date = 1827.1.1
+	type = land
+	personality = defence_1.1
+	background = attack_1.1
+	prestige = 0.1
+}
+
+leader = {
+	name = "Dominique de Eerens"
+	date = 1815.1.1
+	type = land
+	personality = defence_1.1
+	background = attack_2.1
+	prestige = 0.2
+}
+
+leader = {
+	name = "Frederik List"
+	date = 1830.1.1
+	type = land
+	personality = defence_1.1
+	background = attack_1.1
+	prestige = 0.1
+}
+
+leader = {
+	name = "Engelbertus Lucas"
+	date = 1830.1.1
+	type = sea
+	personality = defence_1.1
+	background = attack_1.1
+	prestige = 0.1
+}
+
+leader = {
+	name = "Charles Nepveu"
+	date = 1831.1.1
+	type = land
+	personality = defence_1.1
+	background = attack_1.1
+	prestige = 0.0
+}
+
+leader = {
+	name = "Karel Bernhard van Saksen-Weimar"
+	date = 1815.1.1
+	type = land
+	personality = defence_2.1
+	background = attack_2.1
+	prestige = 0.2
+}
+
+leader = {
+	name = "Hendrik Duycker"
+	date = 1827.1.1
+	type = land
+	personality = defence_1.1
+	background = attack_1.1
+	prestige = 0.1
+}
+
+leader = {
+	name = "Julius Rijk"
+	date = 1836.1.1
+	type = sea
+	personality = defence_1.1
+	background = attack_1.1
+	prestige = 0.0
+}
+
+army = {
+	name = "1st Army"
+	location = 375 
+	regiment = {
+		name= "1st Infantry"
+		type = infantry
+		home = 375
+	}
+	
+	regiment = {
+		name= "2nd Infantry"
+		type = infantry
+		home = 375
+	}
+	
+	regiment = {
+		name= "3rd Infantry"
+		type = infantry
+		home = 375
+	}
+	
+	regiment = {
+		name= "4th Infantry"
+		type = infantry
+		home = 1413
+	}
+	
+	regiment = {
+		name= "1st Hussars"
+		type = hussar
+		home = 379
+	}
+	
+	regiment = {
+		name= "1st Artillery"
+		type = artillery
+		home = 379
+	}
+	
+	regiment = {
+		name= "2nd Artillery"
+		type = artillery
+		home = 385
+	}
+	
+	regiment = {
+		name= "3rd Artillery"
+		type = artillery
+		home = 385
+	}
+	
+	regiment = {
+		name= "4th Artillery"
+		type = artillery
+		home = 1413
+	}
+	
+	regiment = {
+		name= "5th Artillery"
+		type = artillery
+		home = 1418
+	}
+
+}
+
+navy = {
+	name = "1st Fleet"
+	location = 375 #Amsterdam
+	ship = {
+		name= "Doggersbank"
+		type = manowar
+	}
+
+	ship = {
+		name= "Amsterdam"
+		type = manowar
+	}
+
+	ship = {
+		name= "Maria Regensbergen"
+		type = frigate
+	}
+
+	ship = {
+		name= "Pallas"
+		type = frigate
+	}
+
+	ship = {
+		name= "Proserpine"
+		type = frigate
+	}
+
+	ship = {
+		name= "Daphne"
+		type = frigate
+	}
+
+	ship = {
+		name= "Espion"
+		type = frigate
+	}
+
+	ship = {
+		name= "Zeepaard"
+		type = frigate
+	}
+
+	ship = {
+		name= "Irene"
+		type = frigate
+	}
+
+	ship = {
+		name= "Orpheus"
+		type = frigate
+	}
+
+	ship = {
+		name= "Admiraal de Ruyter"
+		type = manowar
+	}
+
+	ship = {
+		name= "Verwachting"
+		type = manowar
+	}
+
+	ship = {
+		name= "Aurora"
+		type = frigate
+	}
+
+	ship = {
+		name= "Iris"
+		type = frigate
+	}
+
+	ship = {
+		name= "Fenix"
+		type = frigate
+	}
+
+	ship = {
+		name= "Eendracht"
+		type = frigate
+	}
+	
+	ship = {
+		name= "Admiraal Generaal"
+		type = manowar
+	}
+
+	ship = {
+		name= "Diana"
+		type = frigate
+	}
+
+	ship = {
+		name= "Hoop"
+		type = frigate
+	}
+
+	
+}
+
+navy = {
+	name = "Transport Fleet"
+	location = 384
+	
+	ship = {
+		name= "1e Transport Eskader"
+		type = clipper_transport
+	}
+
+	ship = {
+		name= "2e Transport Eskader"
+		type = clipper_transport
+	}
+	
+	ship = {
+		name= "3e Transport Eskader"
+		type = clipper_transport
+	}
+}

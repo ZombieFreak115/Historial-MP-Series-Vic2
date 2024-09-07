@@ -1,0 +1,261 @@
+country_event = {
+	id = 500058
+	title = "EVTNAME500058" #Infamy on the skies
+	desc = "EVTDESC500058"
+	picture = "bad_badboy"
+	major = yes
+	
+	trigger = {
+		ai = no
+		badboy = 1.6
+		has_country_modifier = kinda_bad_badboy
+		NOT = { has_country_modifier = bad_badboy }
+	}
+		
+	mean_time_to_happen = { days = 1 }
+	
+	immediate = {
+		remove_country_modifier = kinda_bad_badboy
+		add_country_modifier = {
+			name = bad_badboy
+			duration = 3650
+		}
+	}
+
+	option = {
+		name = "EVTOPT500058A"
+		any_greater_power = {
+			leave_alliance = THIS
+			relation = { who = THIS value = -400 }
+			casus_belli = { target = THIS type = cut_down_to_size months = 36 }
+			casus_belli = { target = THIS type = dismantle_cb months = 36 }
+		}
+		any_country = {
+			limit = {
+				NOT = {
+					OR = {
+						vassal_of = THIS
+						in_sphere = THIS
+					}
+				}
+			}
+			relation = { who = THIS value = -100 }
+			casus_belli = { target = THIS type = cut_down_to_size months = 36 }
+			casus_belli = { target = THIS type = liberate_country months = 36 }
+		}
+	}
+}
+
+country_event = {
+	id = 500059
+	title = "EVTNAME500059" #Infamy too high
+	desc = "EVTDESC500059"
+	picture = "bad_badboy"
+	
+	trigger = {
+		ai = no
+		badboy = 1.3
+		NOT = {
+			OR = {
+				has_country_modifier = kinda_bad_badboy 
+				has_country_modifier = bad_badboy 
+			}
+		}
+	}
+		
+	mean_time_to_happen = { days = 1 }
+	
+	immediate = {
+		add_country_modifier = {
+			name = kinda_bad_badboy
+			duration = 3650
+		}
+	}
+
+	option = {
+		name = "EVTOPT500059A"
+		any_greater_power = {
+		casus_belli = {
+			target = THIS
+			type = humiliate
+			months = 36
+			}
+		casus_belli = {
+			target = THIS
+			type = free_peoples
+			months = 36
+			}
+		relation = {
+			who = THIS
+			value = -100
+			}
+		}
+	}
+}
+
+country_event = {
+	id = 500060
+	title = "EVTNAME500060" #Swiss Partition
+	desc = "EVTDESC500060"
+	picture = "bad_badboy"
+	
+	is_triggered_only = yes
+
+	option = {
+		name = "EVTOPTA500060"
+		badboy = 8
+		random_owned = {
+			limit = {
+				owner = { is_culture_group = french }
+			}
+			FROM = {
+				any_owned = {
+					limit = { 
+						is_core = SWI
+						region = SWI_607
+					}
+					secede_province = THIS
+				}
+				badboy = -8
+			}
+			owner = {
+				add_accepted_culture = swiss_french
+				any_owned = {
+					limit = { 
+						is_core = SWI
+						region = SWI_607
+					}
+					add_province_modifier = {
+						name = core_integration
+						duration = -1
+					}
+				}
+			}
+		}
+		
+		random_owned = {
+			limit = {
+				owner = { is_culture_group = italian }
+			}
+			FROM = {
+				any_owned = {
+					limit = {
+						is_core = SWI
+						region = SWI_2568
+					}
+					secede_province = THIS
+				}
+				badboy = -8
+			}
+			owner = { 
+				add_accepted_culture = swiss_italian
+				add_accepted_culture = romansh
+				any_owned = {
+					limit = {
+						is_core = SWI
+						region = SWI_2568
+					}
+					add_province_modifier = {
+						name = core_integration
+						duration = -1
+					}
+				}
+			}
+		}
+		
+		random_owned = {
+			limit = {
+				owner = { is_culture_group = germanic }
+			}
+			FROM = {
+				any_owned = {
+					limit = { 
+						is_core = SWI
+						region = SWI_603
+					}
+					secede_province = THIS
+				}
+				badboy = -8
+			}
+			owner = { 
+				add_accepted_culture = swiss_german
+				any_owned = {
+					limit = { 
+						is_core = SWI
+						region = SWI_603
+					}
+					add_province_modifier = {
+						name = core_integration
+						duration = -1
+					}
+				}
+			}
+		}
+		
+		ai_chance = {
+			factor = 100
+		}
+	}
+	
+	option = {
+		name = "EVTOPTB500060"
+		random_owned = {
+			limit = {
+				owner = { is_culture_group = germanic }
+			}
+			FROM = {
+				any_owned = {
+					limit = { 
+						is_core = SWI
+						region = SWI_603
+					}
+					add_province_modifier = {
+						name = nationalist_agitation
+						duration = 1095
+					}
+				}
+			}
+		}
+		
+		random_owned = {
+			limit = {
+				owner = { is_culture_group = italian }
+			}
+			FROM = {
+				any_owned = {
+					limit = {
+						is_core = SWI
+						region = SWI_2568
+					}
+					add_province_modifier = {
+						name = nationalist_agitation
+						duration = 1095
+					}
+				}
+			}
+		}
+		
+		random_owned = {
+			limit = {
+				owner = { is_culture_group = french }
+			}
+			FROM = {
+				any_owned = {
+					limit = { 
+						is_core = SWI
+						region = SWI_607
+					}
+					add_province_modifier = {
+						name = nationalist_agitation
+						duration = 1095
+					}
+				}
+			}
+		}
+		
+		prestige = 15
+		ai_chance = {
+			factor = 0
+		}
+	}
+}

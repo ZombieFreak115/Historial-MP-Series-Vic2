@@ -1,0 +1,48 @@
+political_decisions = {
+	unite_indochina = {
+		picture = form_indochina
+		potential = {
+			NOT = { IDO = { exists = yes } }
+			OR = {
+				primary_culture = vietnamese 
+				primary_culture = khmer
+				primary_culture = lao
+			}
+		}
+		allow = {
+			war = no
+			1369 = { owned_by = THIS }
+			1356 = { owned_by = THIS }
+			1379 = { owned_by = THIS }
+			1380 = { owned_by = THIS }
+			1364 = { owned_by = THIS }
+		}
+		effect = {
+			change_tag = IDO
+			DAI_1369 = { add_core = IDO }
+			LUA_1356 = { add_core = IDO }
+			DAI_1375 = { add_core = IDO }
+			DAI_1380 = { add_core = IDO }
+			SIA_1366 = { add_core = IDO }
+		}
+		ai_will_do = { factor = 0 }
+	}
+	
+	accept_ido = {
+		picture = form_indochina
+		potential = {
+			tag = IDO
+			NOT = { has_country_flag = ido_cultures }
+		}
+		allow = {
+			state_n_government = 1
+			NOT = { citizenship_policy = residency }
+		}
+		effect = {
+			primary_culture = vietnamese 
+			add_accepted_culture = khmer
+			add_accepted_culture = lao
+			set_country_flag = ido_cultures
+		}
+	}
+}

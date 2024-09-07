@@ -1,0 +1,66 @@
+political_decisions = {
+	hide_the_decisions = {
+		alert = no
+		picture = no_townes
+		potential = {
+			NOT = { has_country_flag = hiding_the_decisions }
+		}
+
+		allow = { ai = no }
+
+		effect = {
+			set_country_flag = hiding_the_decisions
+		}
+	}
+	
+	show_the_decisions = {
+		picture = yes_townes
+		alert = no
+		potential = {
+			has_country_flag = hiding_the_decisions
+		}
+
+		allow = { ai = no }
+
+		effect = {
+			clr_country_flag = hiding_the_decisions
+		}
+	}
+
+	enable_options = {
+		picture = starting_options_yes
+		alert = no
+		potential = {
+			ai = no
+			NOT = { has_global_flag = looking_through_options }
+			NOT = { year = 1837 }
+			NOT = { has_country_flag = test_dec }
+		}
+		
+		allow = {
+		}
+		
+		effect = {
+			set_global_flag = looking_through_options
+			set_country_flag = country_looking_through_options
+		}
+	}
+	
+	disable_options = {
+		picture = starting_options_no
+		alert = no
+		potential = {
+			ai = no
+			has_country_flag = country_looking_through_options
+			NOT = { year = 1837 }
+		}
+		
+		allow = {
+		}
+		
+		effect = {
+			clr_global_flag = looking_through_options
+			clr_country_flag = country_looking_through_options
+		}
+	}
+}

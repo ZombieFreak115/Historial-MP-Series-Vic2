@@ -1,0 +1,391 @@
+#Contents and brief summary
+
+#200000 = notification to country requesting aid that request is made
+
+#20000(2,4,6,8,11) = Receiving country notified giving country will give aid. Ascending, logarithmic, 1000-10 million
+#1 tacked on the end to stop conflict with germany GMU decisions ids
+
+country_event = {
+
+	
+	id = 200000
+	
+	title = "Diplomatic Aid Requested"
+	
+	desc = "We have requested diplomatic aid from foreign powers. We can only hope they respond kindly."
+	
+	is_triggered_only = yes	
+	
+	allow_multiple_instances = yes	
+
+	option = {
+	
+		name = "It is out of our hands."
+		
+		random_owned = {
+			limit = {
+				owner = {
+					capital_scope = { continent = europe }	### limits those who get the event to GPs and same continent nations
+				}
+			}
+			owner = {
+				any_country = {
+		
+					limit = {
+					
+						has_country_flag = will_give_infamy
+					
+						ai = no
+			
+						is_vassal = no
+					
+						NOT = { badboy = 1 }
+						
+						OR = {
+							is_greater_power = yes
+							capital_scope = { continent = europe }
+						}
+						
+						#NOT = { has_country_flag = our_home }
+				
+					}
+					
+					country_event = {id = 2000011 days = 0}
+				
+				}
+			}
+		}
+		
+		random_owned = {		# levant, iran, iraq area 
+			limit = {
+				owner = {
+					capital_scope = { continent = oceania }	### limits those who get the event to GPs and same continent nations
+				}
+			}
+			owner = {
+				any_country = {
+		
+					limit = {
+					
+						has_country_flag = will_give_infamy
+					
+						ai = no
+			
+						is_vassal = no
+					
+						NOT = { badboy = 1 }
+						
+						OR = {
+							is_greater_power = yes
+							capital_scope = { continent = oceania }
+						}
+						
+						#NOT = { has_country_flag = our_home }
+				
+					}
+					
+					country_event = {id = 2000011 days = 0}
+				
+				}
+			}
+		}
+		
+		random_owned = {
+			limit = {
+				owner = {
+					capital_scope = { continent = asia }	### limits those who get the event to GPs and same continent nations
+				}
+			}
+			owner = {
+				any_country = {
+		
+					limit = {
+					
+						has_country_flag = will_give_infamy
+					
+						ai = no
+			
+						is_vassal = no
+					
+						NOT = { badboy = 1 }
+						
+						OR = {
+							is_greater_power = yes
+							capital_scope = { continent = asia }
+						}
+						
+						#NOT = { has_country_flag = our_home }
+				
+					}
+					
+					country_event = {id = 2000011 days = 0}
+				
+				}
+			}
+		}
+		
+		random_owned = {
+			limit = {
+				owner = {
+					capital_scope = { continent = indochina }	### limits those who get the event to GPs and same continent nations
+				}
+			}
+			owner = {
+				any_country = {
+		
+					limit = {
+					
+						has_country_flag = will_give_infamy
+					
+						ai = no
+			
+						is_vassal = no
+					
+						NOT = { badboy = 1 }
+						
+						OR = {
+							is_greater_power = yes
+							capital_scope = { continent = indochina }
+						}
+						
+						#NOT = { has_country_flag = our_home }
+				
+					}
+					
+					country_event = {id = 2000011 days = 0}
+				
+				}
+			}
+		}
+		
+		random_owned = {
+			limit = {
+				owner = {
+					capital_scope = { continent = east_indies }	### limits those who get the event to GPs and same continent nations
+				}
+			}
+			owner = {
+				any_country = {
+		
+					limit = {
+					
+						has_country_flag = will_give_infamy
+					
+						ai = no
+			
+						is_vassal = no
+					
+						NOT = { badboy = 1 }
+						
+						OR = {
+							is_greater_power = yes
+							capital_scope = { continent = east_indies }
+						}
+						
+						#NOT = { has_country_flag = our_home }
+				
+					}
+					
+					country_event = {id = 2000011 days = 0}
+				
+				}
+			}
+		}
+		
+		random_owned = {
+			limit = {
+				owner = {
+					capital_scope = {
+						OR = {
+							continent = africa
+							continent = central_africa
+							continent = south_africa
+							continent = west_africa
+							continent = east_africa
+						}
+					}
+				}
+			}
+			owner = {
+				any_country = {
+		
+					limit = {
+					
+						has_country_flag = will_give_infamy
+					
+						ai = no
+			
+						is_vassal = no
+					
+						NOT = { badboy = 1 }
+						
+						OR = {
+							is_greater_power = yes
+							capital_scope = {
+								OR = {
+									continent = africa
+									continent = central_africa
+									continent = south_africa
+									continent = west_africa
+									continent = east_africa
+								}
+							}
+						}
+						
+						#NOT = { has_country_flag = our_home }
+				
+					}
+					
+					country_event = {id = 2000011 days = 0}
+				
+				}
+			}
+		}
+		
+		random_owned = {
+			limit = {
+				owner = {
+					capital_scope = {
+						OR = {
+							continent = north_america
+							continent = south_america
+						}
+					}
+				}
+			}
+			owner = {
+				any_country = {
+		
+					limit = {
+					
+						has_country_flag = will_give_infamy
+					
+						ai = no
+			
+						is_vassal = no
+					
+						NOT = { badboy = 1 }
+						
+						OR = {
+							is_greater_power = yes
+							capital_scope = {
+								OR = {
+									continent = north_america
+									continent = south_america
+								}
+							}
+						}
+						
+						#NOT = { has_country_flag = our_home }
+				
+					}
+					
+					country_event = {id = 2000011 days = 0}
+				
+				}
+			}
+		}
+		
+		random_owned = {
+			limit = {
+				owner = {
+					capital_scope = {
+						OR = {
+							continent = australia_new_zealand
+							continent = polynesia
+						}
+					}
+				}
+			}
+			owner = {
+				any_country = {
+		
+					limit = {
+					
+						has_country_flag = will_give_infamy
+					
+						ai = no
+			
+						is_vassal = no
+					
+						NOT = { badboy = 1 }
+						
+						OR = {
+							is_greater_power = yes
+							capital_scope = {
+								OR = {
+									continent = australia_new_zealand
+									continent = polynesia
+								}
+							}
+						}
+						
+						#NOT = { has_country_flag = our_home }
+				
+					}
+					
+					country_event = {id = 2000011 days = 0}
+				
+				}
+			}
+		}
+	
+		ai_chance = {factor = 100} 
+	
+	}
+
+}
+
+
+country_event = {
+	
+id = 2000021
+	
+	title = "$FROMCOUNTRY$ Grants Diplomatic Aid"
+	
+	desc = "$FROMCOUNTRY$ has decided to give us small diplomatic aid."
+	
+	allow_multiple_instances = yes		
+	
+	is_triggered_only = yes
+	option = {
+	
+		name = "Great!"
+	
+		ai_chance = {factor = 100} 
+	
+		FROM = { country_event = {id = 2000031 days = 0}}
+	
+	}
+
+}
+
+
+country_event = {
+
+	id = 200004
+
+	title = "$FROMCOUNTRY$ Grants Diplomatic Aid"
+
+	desc = "$FROMCOUNTRY$ has decided to give us large diplomatic aid."
+
+	allow_multiple_instances = yes
+	is_triggered_only = yes
+	option = {
+
+		name = "Great!"
+	
+		ai_chance = {factor = 100}
+		 
+FROM = {
+
+		country_event = {id = 2000031 days = 0}
+
+		country_event = {id = 2000051 days = 0}
+			
+		}
+	
+	}
+
+}
+

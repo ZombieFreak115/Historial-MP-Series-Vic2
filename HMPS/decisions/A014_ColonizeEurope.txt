@@ -1,0 +1,26 @@
+political_decisions = {
+	
+	colonize_deez_nuts = {
+		picture = rhodesia_renaminc_act
+		potential = {
+			ai = no
+			NOT = { has_country_flag = hiding_the_decisions }
+			civilized = yes
+		}
+		allow = {
+		}
+		effect = {
+			any_owned = {
+				limit = {
+					NOT = { life_rating = 1 }
+				}
+				add_province_modifier = {
+					name = marked_for_colonization
+					duration = -1
+				}
+			}
+			country_event = 477877795
+		}
+	}
+	
+}

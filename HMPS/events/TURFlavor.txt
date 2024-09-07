@@ -1,0 +1,292 @@
+country_event = {
+		
+	id = 31102 # Flight to Ankara
+	
+	trigger = {
+		tag = TUR
+		NOT = { is_greater_power = yes }
+		capital = 860
+		NOT = { owns = 817 }
+		NOT = { owns = 816 }
+		NOT = { owns = 830 }
+		owns = 876
+
+	}
+
+	mean_time_to_happen = {
+		months = 1
+	}
+
+	title = "EVTNAME31102" #Flight from Istanbul
+	desc = "EVTDESC31102" #Our position in Istanbul is no longer secure. We should move our government to a safer place.
+	picture = "administration"
+		
+	option = {
+		name = "EVTOPTA31102" #We have been ultimately driven from Europe...
+		prestige = -10
+		capital = 876
+	}
+}
+
+country_event = {
+		
+	id = 7777915
+	
+	trigger = {
+		tag = TUR
+		year = 1900
+		NOT = {
+			OR = {
+				government = hms_government
+				government = prussian_constitutionalism 
+				government = absolute_monarchy 
+			}
+		}
+		NOT = { accepted_culture = misri }
+		NOT = { accepted_culture = bedouin }
+		NOT = { accepted_culture = albanian }
+		NOT = { accepted_culture = bosniak }
+		OR = {
+			is_greater_power = no
+			has_recently_lost_war = yes
+		}
+	}
+
+	mean_time_to_happen = {
+		months = 1
+	}
+	
+	fire_only_once = yes
+
+	title = "EVTNAME7777915"
+	desc = "EVTDESC7777915"
+	picture = "young_turks"
+		
+	option = {
+		name = "EVTOPTA7777915"
+		
+		set_country_flag = ottomans_to_turks
+		remove_country_modifier = ottomanism_reform
+		remove_country_modifier = ottoman_oppression
+		remove_country_modifier = abdulmejid_i_reforms
+		remove_accepted_culture = mashriqi
+		remove_accepted_culture = bedouin
+		remove_accepted_culture = kurdish
+		remove_accepted_culture = albanian
+		remove_accepted_culture = bosniak
+		remove_accepted_culture = misri
+		remove_accepted_culture = azerbaijani
+		ANT = { all_core = { remove_core = ANT } }
+		random_owned = {
+			limit = { KWT = { exists = yes vassal_of = TUR } }
+			THIS = { release = KWT release_vassal = KWT leave_alliance = KWT }
+		}
+		random_owned = {
+			limit = { EGY = { exists = yes vassal_of = TUR } }
+			THIS = { release = EGY release_vassal = EGY leave_alliance = EGY }
+		}
+		random_owned = {
+			limit = { TUN = { exists = yes vassal_of = TUR } }
+			THIS = { release = TUN release_vassal = TUN leave_alliance = TUR }
+		}
+		random_owned = {
+			limit = { RUM = { exists = yes vassal_of = TUR } }
+			THIS = { release = RUM release_vassal = RUM leave_alliance = RUM }
+		}
+		any_country = {
+			limit = {
+				any_owned_province = { is_core = TUR }
+				NOT = { tag = THIS }
+			}
+			any_owned = {
+				limit = {
+					is_core = TUR
+					NOT = {
+						province_id = 900 #Antioch
+						region = TUR_823 #Western Thrace
+						region = TUR_809 #Eastern Rumelia				
+						region = TUR_860 #Thrace
+						region = TUR_869 #Izmir
+						region = TUR_863 #Bursa
+						region = EGY_843 #Aegean Islands
+						region = TUR_855 #Cyprus
+						region = TUR_873 #Konya
+						region = TUR_876 #Ankara
+						region = TUR_880 #Kastamonu
+						region = TUR_882 #Trebizond
+						region = TUR_890 #Van
+						region = TUR_893 #Diyarbakir
+						region = TUR_894 #Adana
+						region = TUR_885 #Kars
+						region = EGY_897 #Aleppo
+						region = TUR_923 #Mosul
+					}
+				}
+				remove_core = TUR
+			}
+		}
+		any_owned = {
+			limit = {
+				NOT = {
+					province_id = 900 #Antioch
+					region = TUR_823 #Western Thrace
+					region = TUR_809 #Eastern Rumelia				
+					region = TUR_860 #Thrace
+					region = TUR_869 #Izmir
+					region = TUR_863 #Bursa
+					region = EGY_843 #Aegean Islands
+					region = TUR_855 #Cyprus
+					region = TUR_873 #Konya
+					region = TUR_876 #Ankara
+					region = TUR_880 #Kastamonu
+					region = TUR_882 #Trebizond
+					region = TUR_890 #Van
+					region = TUR_893 #Diyarbakir
+					region = TUR_894 #Adana
+					region = TUR_885 #Kars
+					region = EGY_897 #Aleppo
+					region = TUR_923 #Mosul
+				}
+			}
+			remove_core = TUR
+		}
+		any_pop = {
+			limit = { has_pop_culture = turkish }
+			militancy = -4
+		}
+		any_pop = {
+			limit = {
+				location = { NOT = { is_core = TUR } }
+				is_primary_culture = no
+				is_accepted_culture = no
+			}
+			militancy = 5
+			consciousness = 5
+		}
+		# Remove cores
+		TUR_674 = { remove_core = TUR } # Dobrudja
+		TUR_788 = { remove_core = TUR } # Bosnia
+		TUR_810 = { remove_core = TUR } # Bulgaria
+		TUR_809 = { remove_core = TUR }	# E.Rumelia
+		TUR_803 = { remove_core = TUR } # S.Serbia
+		MON_2582 = { remove_core = TUR } # Montenegro
+		TUR_853 = { remove_core = TUR } # Albania
+		TUR_832 = { remove_core = TUR } # Thessalia
+		TUR_806 = { remove_core = TUR } # N.Macedonia
+		TUR_805 = { remove_core = TUR } # W.Macedonia
+		TUR_855 = { remove_core = TUR } # Cyprus
+		847 = { remove_core = TUR } #Chania
+		848 = { remove_core = TUR } #Iraklion
+		843 = { remove_core = TUR }
+		any_owned = {
+			limit = {
+				NOT = { is_core = TUR }
+					OR = {
+						any_core = { exists = yes }
+						any_core = { exists = no }
+					}
+			}
+			add_province_modifier = {
+				name = nationalist_agitation
+				duration = 1095
+			}
+		}
+		
+		any_owned = {
+			limit = { is_core = ROM NOT = { is_core = TUR }}
+			secede_province = ROM
+		}
+		any_owned = {
+			limit = { is_core = BOS NOT = { is_core = TUR } }
+			secede_province = BOS
+		}
+		any_owned = {
+			limit = { is_core = MON NOT = { is_core = TUR }}
+			secede_province = MON
+		}
+		any_owned = {
+			limit = { is_core = GRE NOT = { is_core = TUR }}
+			secede_province = GRE
+		}
+		any_owned = {
+			limit = { is_core = BUL NOT = { is_core = TUR }}
+			secede_province = BUL
+		}
+		any_owned = {
+			limit = { is_core = ALB NOT = { is_core = TUR }}
+			secede_province = ALB
+		}
+		any_owned = {
+			limit = { is_core = SER NOT = { is_core = TUR }}
+			secede_province = SER
+		}
+		any_owned = {
+			limit = { is_core = LBY NOT = { is_core = TUR }}
+			secede_province = LBY
+		}
+		any_owned = {
+			limit = { is_core = EGY NOT = { is_core = TUR }}
+			secede_province = EGY
+		}
+		any_owned = {
+			limit = { is_core = SUD NOT = { is_core = TUR }}
+			secede_province = SUD
+		}
+		any_owned = {
+			limit = { is_core = NEJ NOT = { is_core = TUR }}
+			secede_province = NEJ
+		}
+		any_owned = {
+			limit = { OR = { is_core = YEM is_core = NYE } NOT = { is_core = TUR }}
+			secede_province = YEM
+		}
+		any_owned = {
+			limit = { is_core = OMA NOT = { is_core = TUR }}
+			secede_province = OMA
+		}
+		any_owned = {
+			limit = { is_core = ABU NOT = { is_core = TUR }}
+			secede_province = ABU
+		}
+		any_owned = {
+			limit = { is_core = QAT NOT = { is_core = TUR }}
+			secede_province = QAT
+		}
+		any_owned = {
+			limit = { is_core = BHR NOT = { is_core = TUR }}
+			secede_province = BHR
+		}
+		any_owned = {
+			limit = { is_core = IRQ NOT = { is_core = TUR }}
+			secede_province = IRQ
+		}
+		any_owned = {
+			limit = { is_core = PER NOT = { is_core = TUR }}
+			secede_province = PER
+		}
+		any_owned = {
+			limit = { is_core = JOR NOT = { is_core = TUR }}
+			secede_province = JOR
+		}
+		any_owned = {
+			limit = { is_core = PLS NOT = { is_core = TUR }}
+			secede_province = PLS
+		}
+		any_owned = {
+			limit = { is_core = LBN NOT = { is_core = TUR }}
+			secede_province = LBN
+		}
+		any_owned = {
+			limit = { is_core = SYR NOT = { is_core = TUR }}
+			secede_province = SYR
+		}
+		TUR = {
+			all_core = {
+				add_core = TRK
+				remove_core = TUR
+			}
+		}
+		change_tag = TRK
+	}
+}
+

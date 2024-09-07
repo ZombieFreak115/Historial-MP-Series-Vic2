@@ -1,0 +1,202 @@
+#Founding Seattle - Candidate for removal and integration?
+country_event = {
+
+	id = 441255
+	title = "EVTNAME441255"
+	desc = "EVTDESC441255"
+	picture = "seattle_1870"
+
+	trigger = {
+		tag = USA   
+		owns = 78
+		owns = 79
+	}
+	
+	fire_only_once = yes
+ 
+	mean_time_to_happen = { days = 10 }
+
+	option = {
+		name = "EVTOPTA441255" 
+		prestige = 2
+		78 = { change_province_name = "Seattle" }
+		79 = { change_province_name = "Olympia" }
+		ai_chance = { factor = 100 }
+		78 = {
+			any_pop = {
+				limit = {
+					is_culture_group = native_american
+				}
+				reduce_pop = 0.3
+			}
+		}
+	}
+	
+	option = {
+		name = "EVTOPTB441255" 
+		ai_chance = { factor = 0 }
+	}
+}
+
+#Independence of Liberia
+country_event = {
+
+	id = 441266
+	title = "EVTNAME441266"
+	desc = "EVTDESC441266"
+	picture = "guinea_coast"
+
+	trigger = {
+		tag = USA  
+		war = no
+		owns = 1887
+		owns = 1888
+		year = 1846
+	}
+	
+	fire_only_once = yes
+ 
+	mean_time_to_happen = { months = 12 }
+
+	option = {
+		name = "EVTOPTA441266"
+		1887 = { add_core = LIB }
+		1888 = { add_core = LIB }
+		LIB = { all_core = { remove_core = USA } }
+		release = LIB
+		relation = { who = LIB value = 400 }
+		diplomatic_influence = { who = LIB value = 400 }
+		LIB = {
+			capital = 1887 
+			election = yes
+			add_country_modifier = { name = unrecognized_country duration = 3650 }
+		}
+		ai_chance = { factor = 100 }
+	}
+	
+	option = {
+		name = "EVTOPTB441266" 
+		treasury = -200000
+		1887 = { add_core = LIB }
+		1888 = { add_core = LIB }
+		LIB = {  all_core = { remove_core = USA }  }
+		any_owned = {
+			limit = { is_core = LIB }
+			add_province_modifier = { name = nationalist_agitation duration = 1095 }
+			any_pop = { militancy = 5 consciousness = 7 }
+		}
+			
+		ai_chance = { factor = 0 }
+	}
+}
+
+#End of homesteading
+country_event = {
+
+	id = 441267
+	title = "EVTNAME441267"
+	desc = "EVTDESC441267"
+	picture = "homesteading"
+
+	trigger = {
+		has_country_modifier = the_homestead_act
+		OR = {
+			NOT = { government = democracy }
+			NOT = { number_of_states = 3 }
+			NOT = { num_of_ports = 1 }
+		}
+	}
+	
+	fire_only_once = yes
+ 
+	mean_time_to_happen = { months = 1 }
+
+	option = {
+		name = "EVTOPTA441267" 
+		remove_country_modifier = the_homestead_act
+	}
+}
+
+country_event = {
+	id = 7777930 
+	title = "EVTNAME7777930"
+	desc = "EVTDESC7777930"
+	picture = "california_statehood"
+	fire_only_once = yes
+
+	trigger = {
+		OR = {
+			AND = {
+				tag = USA
+				MEX_85 = {
+					owned_by = USA
+					is_colonial = no
+				}
+			}
+			AND = {
+				tag = MEX
+				MEX_85 = {
+					owned_by = MEX
+					is_colonial = no
+				}
+				OR = {
+					has_country_flag = manifest_destiny_refuted
+					war = no
+				}
+			}
+		}
+		invention = manifest_destiny
+		government = democracy
+		year = 1848
+	}
+ 
+	mean_time_to_happen =  {
+		months = 6
+	}
+
+
+	option = {
+		name = "EVTOPTA7777930" 
+		MEX_85 = { add_province_modifier = { name = california_population_boom duration = 21900 }}
+	}
+}
+
+country_event = {
+
+	id = 7777931
+	title = "EVTNAME7777931"
+	desc = "EVTDESC7777931"
+	picture = "california_statehood"
+	
+	fire_only_once = yes
+
+	trigger = {
+		OR = {
+			AND = {
+				tag = USA
+				MEX_85 = {
+					owned_by = USA
+				}
+			}
+			AND = {
+				tag = MEX
+				MEX_85 = {
+					owned_by = MEX
+				}
+			}
+		}
+		NOT = { government = democracy }
+		NOT = { government = hms_government }
+		MEX_85 = { has_province_modifier = california_population_boom }
+	}
+ 
+	mean_time_to_happen =  {
+		months = 6
+	}
+
+
+	option = {
+		name = "EVTOPTA7777931" 
+		MEX_85 = { remove_province_modifier = california_population_boom }
+	}
+}

@@ -1,0 +1,162 @@
+#Hispanola Region (516000) #see Dominican Republic.txt for balance of region
+#Ruled by Haiti 1836
+#Port au Prince (312000/78000 POPS)
+2213 = {
+	capitalists = {
+		culture = north_german
+		religion = catholic
+		size = 5
+	}
+	capitalists = {
+		culture = mulatto
+		religion = catholic
+		size = 20
+	}
+	aristocrats = {
+		culture = mulatto
+		religion = catholic
+		size = 825
+	}
+	bureaucrats = {
+		culture = mulatto
+		religion = catholic
+		size = 2800
+	}
+	officers = {
+		culture = mulatto
+		religion = catholic
+		size = 1500
+	}
+	clerks = {
+		culture = mulatto
+		religion = catholic
+		size = 60
+	}
+	clergymen = {
+		culture = mulatto
+		religion = catholic
+		size = 1750
+	}
+
+	artisans = {
+		culture = mulatto
+		religion = catholic
+		size = 7050
+	}
+	artisans = {
+		culture = french_canadian
+		religion = catholic
+		size = 4050
+	}
+	soldiers = {
+		culture = afro_antillean
+		religion = catholic
+		size = 6000
+	}
+	soldiers = {
+		culture = polish
+		religion = catholic
+		size = 2000
+	}
+	farmers = {
+		culture = afro_american
+		religion = protestant
+		size = 2500
+	}
+	farmers = {
+		culture = afro_antillean
+		religion = catholic
+		size = 128300
+	}
+	farmers = {
+		culture = french_canadian
+		religion = catholic
+		size = 1000
+	}
+	farmers = {
+		culture = cajun
+		religion = catholic
+		size = 250
+	}
+	craftsmen = {
+		culture = afro_antillean
+		religion = catholic
+		size = 100
+	}
+	artisans = {
+		culture = mashriqi
+		religion = catholic
+		size = 100
+	}
+	artisans = {
+		culture = mashriqi
+		religion = sunni
+		size = 100
+	}
+	artisans = {
+		culture = persian
+		religion = shiite
+		size = 10
+	}
+	farmers = {
+		culture = armenian
+		religion = orthodox
+		size = 11
+	}
+}
+#Cap Haitien (204000/51000 POPS)
+2215 = {
+	aristocrats = {
+		culture = mulatto
+		religion = catholic
+		size = 550
+	}
+
+	clergymen = {
+		culture = mulatto
+		religion = catholic
+		size = 750
+	}
+
+	artisans = {
+		culture = mulatto
+		religion = catholic
+		size = 5550
+	}
+	artisans = {
+		culture = french_canadian
+		religion = catholic
+		size = 4050
+	}
+	soldiers = {
+		culture = afro_antillean
+		religion = catholic
+		size = 4000
+	}
+
+	farmers = {
+		culture = afro_antillean
+		religion = catholic
+		size = 96825
+	}
+	farmers = {
+		culture = french_canadian
+		religion = catholic
+		size = 1000
+	}
+	farmers = {
+		culture = cajun
+		religion = catholic
+		size = 250
+	}
+	craftsmen = {
+		culture = afro_antillean
+		religion = catholic
+		size = 100
+	}
+	artisans = {
+		culture = mashriqi
+		religion = catholic
+		size = 100
+	}
+}

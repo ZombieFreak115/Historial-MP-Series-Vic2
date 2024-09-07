@@ -1,0 +1,12 @@
+owner = ENG
+controller = ENG
+add_core = ENG
+add_core = SCO
+trade_goods = sulphur
+life_rating = 35
+naval_base = 1
+party_loyalty = {
+}
+party_loyalty = {
+}
+1861.1.1 = { railroad = 1 }

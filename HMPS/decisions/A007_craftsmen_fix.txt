@@ -1,0 +1,24 @@
+political_decisions = {
+
+	craftsmen_fix = {
+		picture = nurse_reno
+		alert = yes
+		potential = {
+			ai = no
+			NOT = { has_country_modifier = craftsmen_fix_cooldown }
+			NOT = { has_country_flag = hiding_the_decisions }
+		}
+		allow = { 
+			NOT = { has_country_modifier = craftsmen_fix_cooldown } 
+			ai = no
+		}
+		effect = {
+			country_event = {id = 9999901 days = 0}
+			add_country_modifier = {
+				name = craftsmen_fix_cooldown
+				duration = 3650
+			}
+		}
+
+	}
+}

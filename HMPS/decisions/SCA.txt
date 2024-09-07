@@ -1,0 +1,244 @@
+political_decisions = {
+
+	concede_finland = {
+		potential = {
+			tag = SWE
+			NOT = {
+				has_country_flag = Conceded_Finland
+			}
+		}
+		
+		allow = {
+			war = no
+		}
+		
+		effect = {
+			FIN = {
+				all_core = {
+					remove_core = SWE
+				}
+			}
+			prestige = 10
+			any_pop = {
+				militancy = -1
+			}
+			set_country_flag = Conceded_Finland
+		}
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	
+	embrace_the_finns = {
+		picture = form_scandinavia
+		potential = {
+			tag = SCA
+			NOT = { accepted_culture = finnish }
+		}
+		
+		allow = {
+			NOT = { citizens_rights = primary_culture_only }
+			citizenship_policy = full_citizenship
+		}
+		
+		effect = {
+			add_accepted_culture = finnish	
+			any_pop = {
+				limit = { has_pop_culture = finnish }
+				militancy = -1
+				consciousness = -3
+			}
+			
+			any_pop = {
+				limit = {
+					OR = {
+						is_primary_culture = yes
+						is_accepted_culture = yes
+					}
+				}
+				consciousness = 1
+			}
+			
+			any_pop = {
+				limit = {
+					is_primary_culture = no
+					is_accepted_culture = no
+				}
+			consciousness = 3
+			}
+		}
+		
+		ai_will_do = { factor = 1 	}
+	}
+	
+	move_capital_to_gothenburg = {
+		picture = declare_republic_of_neuchatel
+		alert = no
+		potential = {
+			tag = SCA
+			owns = 329 # Gothenburg
+			NOT = { capital = 329 }
+			capital = 322
+		}	
+		
+		allow = {
+			NOT = { capital = 329 }
+		}
+		
+		effect = {
+			capital = 329
+			prestige = 5
+		}
+		
+		ai_will_do = {
+			factor = 1
+		}
+	}
+
+	form_scandinavia = {
+		news = yes
+		news_desc_long = "form_scandinavia_NEWS_LONG"
+		news_desc_medium = "form_scandinavia_NEWS_MEDIUM"
+		news_desc_short = "form_scandinavia_NEWS_SHORT"
+		potential = {
+			NOT = { exists = SCA }
+			OR = {
+				tag = SWE
+				tag = DEN
+				tag = NOR
+				tag = ICL
+			
+			}
+		}
+		
+		allow = {
+			is_vassal = no
+			nationalism_n_imperialism = 1
+			war = no
+			SWE = {
+				all_core = {
+					OR = {
+						owned_by = THIS
+						owner = {
+							OR = {
+								in_sphere = THIS
+								vassal_of = THIS
+							}
+						}
+					}
+				}
+			}
+			DEN = {
+				all_core = {
+					OR = {
+						owned_by = THIS
+						owner = {
+							OR = {
+								in_sphere = THIS
+								vassal_of = THIS
+							}
+						}
+					}
+				}
+			}
+			NOR = {
+				all_core = {
+					OR = {
+						owned_by = THIS
+						owner = {
+							OR = {
+								in_sphere = THIS
+								vassal_of = THIS
+							}
+						}
+					}
+				}
+			}
+			ICL = {
+				all_core = {
+					OR = {
+						owned_by = THIS
+						owner = {
+							OR = {
+								in_sphere = THIS
+								vassal_of = THIS
+							}
+						}
+					}
+				}
+			}
+		}
+		
+		effect = {
+			prestige = 20
+			all_core = {
+				remove_core = THIS
+				add_core = SCA
+			}
+			change_tag = SCA
+			SWE = {
+				all_core = {
+					add_core = SCA
+				}
+			}
+			NOR = {
+				all_core = {
+					add_core = SCA
+				}
+			}
+			DEN = {
+				all_core = {
+					add_core = SCA
+				}
+			}
+			ICL = {
+				all_core = {
+					add_core = SCA
+				}
+			}
+			add_accepted_culture = swedish
+			add_accepted_culture = danish
+			add_accepted_culture = norwegian
+			add_accepted_culture = icelandic
+			
+			political_reform = federalism
+			any_country = {
+				limit = {
+					exists = yes
+					is_culture_group = scandinavian
+					OR = {
+						in_sphere = THIS
+						vassal_of = THIS
+					}
+				}
+				country_event = 11101
+			}
+		}
+
+		ai_will_do = { factor = 1 }
+	}
+
+	name_oslo = {
+		picture = declare_republic_of_neuchatel
+		potential = {
+			is_culture_group = scandinavian
+			owns = 313
+			NOT = { has_global_flag = oslo_is_back }
+		}
+		
+		allow = {
+			war = no
+			is_vassal = no
+			OR = {
+				mass_politics = 1
+				year = 1925
+			}
+		}
+		
+		effect = {
+			set_global_flag = oslo_is_back
+			prestige = 2
+			313 = { change_province_name = "Oslo" }
+		}
+	}
+}

@@ -1,0 +1,340 @@
+country_event = {
+	id = 777789
+	title = "EVTNAME777789"
+	desc = "EVTDESC777789"
+	picture = "Celebration"
+	
+	trigger = {
+		has_country_flag = republic_proclaimed
+	}
+
+	mean_time_to_happen = { 
+		months = 1
+	}
+
+	option = {
+		name = "EVTOPTA777789"
+		political_reform = confederalism
+		clr_country_flag = republic_proclaimed
+		country_event = 777798
+		country_event = {id=7777919 days = 10}
+	}
+
+	option = {
+		name = "EVTOPTB777789"
+		political_reform = regionalism
+		clr_country_flag = republic_proclaimed
+		country_event = 777798
+		country_event = {id=7777919 days = 10}
+	}
+
+	option = {
+		name = "EVTOPTC777789"
+		political_reform = federalism
+		clr_country_flag = republic_proclaimed
+		country_event = 777798
+		country_event = {id=7777919 days = 10}
+	}
+
+	option = {
+		name = "EVTOPTD777789"
+		political_reform = unitary
+		clr_country_flag = republic_proclaimed
+		country_event = 777798
+		country_event = {id=7777919 days = 10}
+	}
+}
+
+country_event = {
+	id  = 777792
+	title = "EVTNAME777792"
+	desc = "EVTDESC777792"
+	picture = "Celebration"
+	
+	trigger = {
+		NOT = { has_country_flag = republic_reforms }
+		government = democracy
+	}
+
+	mean_time_to_happen = { 
+		months = 1
+	}
+	
+	option = {
+		name = "We shall work together, across the divide"
+		set_country_flag = republic_reforms
+	}
+}
+
+country_event = {
+	id  = 777793
+	title = "EVTNAME777793"
+	desc = "EVTDESC777793"
+	picture = "failed_revolution"
+	
+	trigger = {
+		has_country_flag = republic_reforms
+		NOT = { government = democracy }
+	}
+
+	mean_time_to_happen = { 
+		months = 1
+	}
+	
+	option = {
+		name = "Our days of republican virtue are over, for now at least"
+		clr_country_flag = republic_reforms
+	}
+}
+
+country_event = {
+	id  = 777796
+	title = "EVTNAME777796"
+	desc = "EVTDESC777796"
+	picture = "asian_administration"
+	
+	trigger = {
+		NOT = { has_country_flag = executive_activated }
+		OR = {
+			executive_abilities = presidential_system 
+			executive_abilities = semi_presidential
+		}
+	}
+	
+	mean_time_to_happen = { 
+		months = 48
+		modifier = {
+			factor = 0.5 #increase likelihood to happen
+			executive_abilities = presidential_system
+		}
+	}
+	
+	option = {
+		name = "The President can issue an executive order"
+		set_country_flag = executive_activated
+	}
+}
+
+country_event = {
+	id  = 777797
+	title = "EVTNAME777797"
+	desc = "EVTDESC777797"
+	picture = "asian_administration"
+	
+	trigger = {
+		has_country_flag = executive_activated
+	}
+	
+	mean_time_to_happen = {
+		months = 2
+	}
+	
+	immediate = {
+		clr_country_flag = executive_activated
+	}
+	
+	option = {
+		name = "The President has other priorities"
+	}
+}
+
+country_event = {
+	id  = 777798
+	title = "EVTNAME777798"
+	desc = "EVTDESC777798"
+	picture = "asian_administration"
+	
+	trigger = {
+		government = democracy
+		NOT = { executive_abilities = presidential_system }
+		NOT = {	executive_abilities = semi_presidential }
+		NOT = {	executive_abilities = parliamentary_system }
+	}
+	
+	mean_time_to_happen = { 
+		months = 2
+	}
+	
+	option = {
+		name = "Presidential System"
+		political_reform = presidential_system 
+		ai_chance = {
+			factor = 0
+			modifier = {
+				factor = 100
+				OR = {
+					continent = north_america 
+					continent = south_america 
+				}
+			}
+		}
+	}
+	
+	option = {
+		name = "Semi-Presidential System"
+		political_reform = semi_presidential 
+		ai_chance = {
+			factor = 10
+			modifier = {
+				factor = -100
+				NOT = { tag = FRA }
+			}
+		}
+	}
+	
+	option = {
+		name = "Parliamentary System"
+		political_reform = parliamentary_system  
+		ai_chance = {
+			factor = 1
+		}
+	}
+}
+
+country_event = {
+	id  = 777799
+	title = "EVTNAME777799"
+	desc = "EVTDESC777799"
+	picture = "asian_administration"
+	
+	trigger = {
+		OR = {
+			government = absolute_monarchy
+			government = proletarian_dictatorship 
+			government = presidential_dictatorship 
+			government = bourgeois_dictatorship 
+			government = fascist_dictatorship 
+			government = theocracy
+		}
+		NOT = { executive_abilities = dictatorial }
+	}
+	
+	mean_time_to_happen = {
+		months = 1
+	}
+	
+	option = {
+		name = "Absolute Power of the Leader"
+		political_reform = dictatorial 
+	}
+}
+
+country_event = {
+	id  = 777800
+	title = "EVTNAME777800"
+	desc = "EVTDESC777800"
+	picture = "asian_administration"
+	
+	trigger = {
+		government = hms_government
+		NOT = { executive_abilities = parliamentary_system }
+	}
+	
+	mean_time_to_happen = { 
+		months = 1
+	}
+	
+	option = {
+		name = "Transition to parliamentary system"
+		political_reform = parliamentary_system 
+	}
+}
+
+country_event = {
+	id = 7777919
+	title = "EVTNAME7777919"
+	desc = "EVTDESC7777919"
+	picture = "Celebration"
+	
+	is_triggered_only = yes
+
+	option = {
+		name = "EVTOPTA7777919"
+		random_owned = {
+			limit = {
+				owner = {
+					OR = {
+						liberal = 35
+						AND = {
+							liberal = 20
+							socialist = 15
+						}
+						radical = 20
+						nationalvalue = nv_liberty
+					}
+				}
+			}
+			owner = {
+				nationalvalue = nv_liberty
+				add_country_modifier = {
+					name = nv_cooldown
+					duration = 7300
+				}
+			}
+		}
+	}
+
+	option = {
+		name = "EVTOPTB7777919"
+		random_owned = {
+			limit = {
+				owner = {
+					OR = {
+						socialist = 35
+						AND = {
+							OR = {
+								liberal = 15
+								radical = 15
+							}
+							socialist = 20
+						}
+						nationalvalue = nv_equality
+					}
+				}
+			}
+			owner = {
+				nationalvalue = nv_equality
+				add_country_modifier = {
+					name = nv_cooldown
+					duration = 7300
+				}
+			}
+		}
+	}
+
+	option = {
+		name = "EVTOPTC7777919"
+		nationalvalue = nv_order
+		add_country_modifier = {
+			name = nv_cooldown
+			duration = 7300
+		}
+	}
+
+	option = {
+		name = "EVTOPTD7777919"
+		random_owned = {
+			limit = {
+				owner = {
+					OR = {
+						AND = {
+							stock_exchange = 1
+							private_bank_money_bill_printing = 1
+							collectivist_theory = 1
+							business_regulations = 1
+							scientific_management = 1
+						}
+						nationalvalue = nv_productivity
+					}
+				}
+			}
+			owner = {
+				nationalvalue = nv_productivity
+				add_country_modifier = {
+					name = nv_cooldown
+					duration = 7300
+				}
+			}
+		}
+	}
+}

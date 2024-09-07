@@ -1,0 +1,29 @@
+capital = 1948
+primary_culture = fulbe
+culture = hausa
+culture = east_kwa
+culture = tiv
+religion = sunni
+government = absolute_monarchy
+plurality = 0.0
+nationalvalue = nv_equality
+literacy = 0.01
+non_state_culture_literacy = 0.01
+
+#GreaterPowers = prestige
+prestige = 0
+
+ruling_party = GBR_liberal
+last_election = 1835.2.6
+upper_house = {
+	fascist = 0
+	liberal = 35
+	conservative = 60
+	reactionary = 5
+	anarcho_liberal = 0
+	socialist = 0
+	communist = 0
+}
+
+centralization = regionalism
+colonial_policy = no_colonies 

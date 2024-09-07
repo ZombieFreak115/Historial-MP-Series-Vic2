@@ -1,0 +1,47 @@
+country_event = {
+
+	id = 7777918
+	title = "EVTNAME7777918"
+	desc = "EVTDESC7777918"
+	picture = "india"
+
+	trigger = {
+		tag = ENG
+		NOT = { owns = 263 }
+		NOT = { owns = 269 }
+		NOT = { owns = 300 }
+		NOT = { owns = 273 }
+		GBR = { is_greater_power = yes }
+	}
+	
+	fire_only_once = yes
+ 
+	mean_time_to_happen =  {
+		months = 2
+	}
+
+	option = {
+		name = "EVTOPTA7777918" 
+		ENG = { 
+			all_core = { remove_core = ENG }
+			capital = 57
+			change_tag = CAN
+		}
+		ENG_296 = { remove_core = GBR add_core = ENL add_core = GBR }
+		ENG_277 = { remove_core = GBR add_core = ENL add_core = GBR }
+		ENG_280 = { remove_core = GBR add_core = ENL add_core = GBR }
+		ENG_284 = { remove_core = GBR add_core = ENL add_core = GBR }
+		ENG_291 = { remove_core = GBR add_core = ENL add_core = GBR }
+		ENG_300 = { remove_core = GBR add_core = ENL add_core = GBR }
+		set_global_flag = eng_to_canada_flag
+		prestige = -25
+		release_vassal = EIC
+		diplomatic_influence = {
+			who = EIC
+			value = -400
+		}
+		EIC = {
+			country_event = 9990005
+		}
+	}
+}

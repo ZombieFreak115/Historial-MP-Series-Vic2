@@ -1,0 +1,65 @@
+professional_training = {
+	limit = { army_professionalism = 1 }
+	chance = {
+		base = 100
+	}
+	effect = {
+		artillery = {
+			build_time = 25
+			maximum_speed = 0.5
+		}
+		infantry = {
+			build_time = 20
+			maximum_speed = 0.5
+		}
+		guard = {
+			build_time = 25
+			maximum_speed = 0.5
+		}
+		engineer = {
+			build_time = 25
+		}
+		cuirassier = {
+			build_time = 25
+		}
+		dragoon = {
+			build_time = 25
+		}
+		hussar = {
+			build_time = 25
+		}
+		cavalry = {
+			build_time = 25
+		}
+		irregular = {
+			build_time = -5
+		}
+	}
+}
+
+professional_training_2 = {
+	limit = { great_war_experience = 1 }
+	chance = {
+		base = 100
+	}
+	effect = {
+		artillery = {
+			build_time = 25
+			maximum_speed = 0.5
+		}
+		infantry = {
+			build_time = 20
+			maximum_speed = 0.5
+		}
+		guard = {
+			build_time = 25
+			maximum_speed = 0.5
+		}
+		engineer = {
+			build_time = 25
+		}
+		tank = {
+			maximum_speed = 1
+		}
+	}
+}

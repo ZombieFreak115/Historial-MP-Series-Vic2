@@ -1,0 +1,18 @@
+political_decisions = {
+	incorp = { 
+		picture = victorian_diplomats
+		potential = {
+			is_greater_power = yes
+			ai = no
+			NOT = { has_global_flag = no_incorp }
+			NOT = { has_country_flag = hiding_the_decisions }
+		}
+		allow = {
+			war = no
+		}
+		effect = {
+			country_event = 9705979
+		}
+		ai_will_do = { factor = 0 }
+	}
+}

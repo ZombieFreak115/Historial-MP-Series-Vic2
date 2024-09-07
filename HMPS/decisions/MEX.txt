@@ -1,0 +1,41 @@
+political_decisions = {
+	mexican_central_america = {
+		picture = mexican_central_america
+		potential = {
+			tag = MEX
+			NOT = { has_country_flag = mexico_central_america }
+		}
+		allow = {
+			war = no
+			is_vassal = no
+			is_disarmed = no
+			UCA = {
+				OR = {
+					exists = no
+					in_sphere = THIS
+					vassal_of = THIS
+					all_core = {
+						owned_by = THIS
+					}
+				}
+			}
+		}
+		effect = {
+			set_country_flag = mexico_central_america
+			add_accepted_culture = central_american
+			any_country = {
+				limit = {
+					ai = yes
+					OR = {
+						in_sphere = THIS
+						vassal_of = THIS
+					}
+					primary_culture = central_american
+				}
+				any_owned = {
+					secede_province = THIS
+				}
+			}
+		}
+	}
+}

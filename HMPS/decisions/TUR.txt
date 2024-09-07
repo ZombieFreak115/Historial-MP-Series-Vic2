@@ -1,0 +1,789 @@
+political_decisions = {
+	tanzimat_reforms = {
+		potential = {
+			tag = TUR
+			NOT = { has_country_flag = tanzimat_reforms_enacted }
+			has_country_modifier = ottoman_oppression
+		}
+		
+		allow = {
+			OR = {
+				AND = {
+					average_militancy = 4
+					average_consciousness = 5
+				}
+				nationalism_n_imperialism = 1
+			}
+		}
+		
+		effect = {
+			set_country_flag = tanzimat_reforms_enacted
+			set_country_flag = secularized_muslim_society
+			add_country_modifier = {  name = tanzimat_land_reform duration = 365 }
+			remove_country_modifier = ottoman_oppression
+			political_reform = open_borders
+			political_reform = unitary
+			political_reform = exploitation
+			random_owned = {
+				limit = { owner = { debt_law = serfdom } }
+				owner = { political_reform = peonage }
+			}
+			
+			random_owned = {
+				limit = { owner = { slavery = yes_slavery } }
+				owner = { political_reform = no_slavery }
+			}
+			
+			random_owned = {
+				limit = { owner = { slavery = freedom_of_womb } }
+				owner = { political_reform = no_slavery }
+			}
+			
+			random_owned = { limit = { owner = { conscription = four_year_draft } } owner = { political_reform = mandatory_service } }
+			random_owned = { limit = { owner = { conscription = two_year_draft } } owner = { political_reform = four_year_draft } }
+			random_owned = { limit = { owner = { conscription = no_draft } } owner = { political_reform = two_year_draft } }
+			
+			
+			any_pop = {
+				limit = { is_primary_culture = no }
+				militancy = -3
+				consciousness = 2
+			}
+			any_pop = {
+				limit = { is_primary_culture = yes }
+				ideology = {
+					value = liberal
+					factor = 0.05
+				}
+				scaled_consciousness = {
+					ideology = liberal
+					factor = 3
+				}
+			}
+		}
+		
+		ai_will_do = { factor = 1 }
+	}
+	
+	hatt_i_humayun = {
+		picture = kanun_i_esasi
+		potential = {
+			tag = TUR
+			NOT = {
+				has_country_flag = enacted_ottomanism
+				has_country_flag = ottomans_to_turks
+			}
+		}
+		
+		allow = {
+			has_country_flag = tanzimat_reforms_enacted
+			OR = {
+				government = democracy
+				government = hms_government
+				government = prussian_constitutionalism
+			}
+			revolution_n_counterrevolution = 1
+			NOT = { citizenship_policy = residency }
+			NOT = { citizens_rights = primary_culture_only }
+		}
+		
+		effect = {
+			set_country_flag = enacted_ottomanism
+			add_accepted_culture = albanian
+			add_accepted_culture = bosniak
+			add_accepted_culture = misri
+			add_accepted_culture = azerbaijani
+			add_accepted_culture = mashriqi
+			add_accepted_culture = bedouin
+			add_accepted_culture = kurdish
+			add_country_modifier = {
+				name = ottomanism_reform
+				duration = -1
+			}
+			any_pop = {
+				scaled_militancy = {
+					ideology = liberal
+					factor = -6
+				}
+			}
+		}
+		
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	
+	republican_reforms = {
+		picture = mustafa_kemal
+		potential = {
+			tag = TRK
+			government = democracy
+			NOT = { has_country_flag = had_ataturk_reforms }
+		}
+		
+		allow = {
+			election = no
+			OR = {
+				ruling_party_ideology = liberal
+				ruling_party_ideology = conservative
+			}
+		}
+		
+		effect = {
+			set_country_flag = had_ataturk_reforms
+			add_country_modifier = {
+				name = great_statesman
+				duration = 5475
+			}
+			add_country_modifier = {
+				name = republican_reforms
+				duration = 3650
+			}
+			nationalvalue = nv_equality
+		}
+	}
+	
+	end_tunisian_independence = {
+		picture = tunisia_map
+		potential = {
+			tag = TUR
+			NOT = { has_country_flag = tunisia_annexed }
+			TUN = { 
+				exists = yes
+				vassal_of = THIS
+				neighbour = THIS
+			}
+		}
+		
+		allow = {
+			OR = {
+				is_greater_power = yes
+				is_secondary_power = yes
+			}
+			nationalism_n_imperialism = 1
+			OR = {
+				owns = 1745
+				AND = {
+					is_our_vassal = EGY
+					is_sphere_leader_of = EGY
+				}
+			}
+			war = no
+			TUN = {
+				vassal_of = THIS
+				neighbour = THIS
+			}
+		}
+		
+		effect = {
+			badboy = 2
+			set_country_flag = tunisia_annexed
+			TUN = { tech_school = unciv_tech_school country_event = 986500 }
+		}
+		
+		ai_will_do = { 
+		factor = 100
+			modifier = {
+					factor = 0
+					badboy = 0.9
+				}
+			}
+	}
+		
+	end_wallachia_independence = {
+		picture = map_wallachia
+		potential = {
+			tag = TUR
+			NOT = { exists = ROM }
+			NOT = { has_country_flag = wallachia_annexed }
+			WAL = { 
+				vassal_of = THIS
+				neighbour = THIS
+			}
+		}
+		
+		allow = {
+			war = no
+			has_recently_lost_war = no
+			#invention = manifest_destiny
+			OR = {
+				is_greater_power = yes
+				is_secondary_power = yes
+			}
+			nationalism_n_imperialism = 1
+			OR = {
+				war_policy = jingoism
+				war_policy = pro_military
+			}
+			WAL = {
+				vassal_of = THIS
+				neighbour = THIS
+			}
+		}
+		
+		effect = {
+			set_country_flag = wallachia_annexed
+			badboy = 5
+			relation = {
+				who = RUS
+				value = -200
+			}
+			any_greater_power = { limit = { NOT = { tag = RUS } capital_scope = { continent = europe } }
+				relation = { who = THIS value = -25 }
+			}
+			WAL = { country_event = 986500 }
+		}
+		
+		ai_will_do = { 
+			factor = 1 
+			modifier = {
+				factor = 0
+				badboy = 0.5
+			}
+		}
+	}
+		
+	end_moldavia_independence = {
+		picture = map_moldavia
+		potential = {
+			tag = TUR
+			NOT = { exists = ROM }
+			NOT = { has_country_flag = moldavia_annexed }
+			MOL = { 
+				vassal_of = THIS
+				neighbour = THIS
+			}
+		}
+		
+		allow = {
+			war = no
+			has_recently_lost_war = no
+			#invention = manifest_destiny
+			OR = {
+				is_greater_power = yes
+				is_secondary_power = yes
+			}
+			nationalism_n_imperialism = 1
+			OR = {
+				war_policy = jingoism
+				war_policy = pro_military
+			}
+			MOL = {
+				vassal_of = THIS
+				neighbour = THIS
+			}
+		}
+		
+		effect = {
+			set_country_flag = moldavia_annexed
+			badboy = 5
+			relation = {
+				who = RUS
+				value = -200
+			}
+			any_greater_power = { limit = { NOT = { tag = RUS } capital_scope = { continent = europe } }
+				relation = { who = THIS value = -25 }
+			}
+			MOL = { country_event = 986500 }
+		}
+		
+		ai_will_do = { 
+			factor = 1 
+			modifier = {
+				factor = 0
+				badboy = 0.5
+			}
+		}
+	}
+	
+	reclaim_greece = {
+		picture = greek_map
+		potential = {
+			tag = TUR
+			NOT = { 834 = { is_core = TUR } }
+		}
+		
+		allow = {
+			war = no
+			owns = 834
+			owns = 840
+			nationalism_n_imperialism = 1
+		}
+		
+		effect = {
+			GRE = {
+				all_core = {
+					add_core = THIS
+				}
+			}
+			badboy = 5
+		}
+	}
+	
+	integrate_tatar_crimea = {
+		picture = crimea_map
+		potential = {
+			tag = TUR
+			NOT = { accepted_culture = tatar }
+		}
+		allow = {
+			NOT = { citizenship_policy = residency }
+			owns = 964
+		}
+		effect = {
+			add_accepted_culture = tatar
+		}
+	}
+		
+	yazidi_kurdistan = {
+		picture = yazidi_symbol
+		potential = {
+			tag = BHT
+			NOT = { has_country_flag = yazidi_kurdistan }
+			has_country_flag = yazidi_country
+		}
+		
+		allow = {
+			nationalism_n_imperialism = 1
+			civilized = yes
+			is_vassal = no
+			KDS = { exists = no }
+			war = no
+		}
+		
+		effect = {
+			set_country_flag = yazidi_kurdistan
+			prestige = 5
+			KDS = { all_core = { add_core = BHT } }
+		}
+		
+		ai_will_do = { factor = 1 }
+	}
+		
+	become_kurdistan = {
+		picture = old_kurdistan_map
+		potential = {
+			NOT = { tag = KDS }
+			NOT = { has_country_flag = yazidi_country }
+			NOT = { has_country_flag = became_kurdistan }
+			KDS = { exists = no }
+			primary_culture = kurdish
+		}
+		
+		allow = {
+			nationalism_n_imperialism = 1
+			civilized = yes
+			is_vassal = no
+			war = no
+		}
+		
+		effect = {
+			set_country_flag = became_kurdistan
+			prestige = 5
+			change_tag = KDS
+			any_country = { 
+				limit = { 
+					primary_culture = kurdish 
+					OR = {
+						vassal_of = THIS
+						in_sphere = THIS
+					}
+				}
+			annex_to = THIS
+			}
+			any_owned = {
+					remove_core = BHT
+					remove_core = MKN
+					remove_core = SRN
+					remove_core = BNB
+					remove_core = BDN
+					remove_core = BTL
+					remove_core = RDL
+				}
+		}
+		
+		ai_will_do = { factor = 1 }
+		}
+		
+	centralize_kurdish_states = {
+		picture = old_kurdistan_map
+		potential = {
+			tag = TUR
+			NOT = { has_country_flag = centralized_kurdish_states }
+			any_neighbor_country = { vassal_of = THIS primary_culture = kurdish }
+		}
+		
+		allow = {
+			OR = {
+				state_n_government = 1
+				has_country_flag = tanzimat_reforms_enacted
+			}
+			war = no
+		}
+		
+		effect = {
+			set_country_flag = centralized_kurdish_states
+			prestige = 5
+			any_country = { limit = { primary_culture = kurdish } relation = { who = THIS value = -400 } }
+			2414 = { change_province_name = "Cizre" }
+			892 = { change_province_name = "Hakkari" }
+			924 = { change_province_name = "Arbil" }
+			925 = { change_province_name = "Kirkuk" }
+			
+			random_country = {
+				limit = {
+					exists = yes
+					tag = SRN
+					vassal_of = TUR
+					}
+				TUR = { release_vassal = SRN diplomatic_influence = { who = SRN value = -400 } }
+			}
+			
+			random_country = {
+				limit = {
+					exists = yes
+					tag = BTL
+					vassal_of = TUR
+					}
+				TUR = { release_vassal = BTL diplomatic_influence = { who = BTL value = -400 } }
+			}
+			
+			random_country = {
+				limit = {
+					exists = yes
+					tag = BHT
+					vassal_of = TUR
+					}
+				TUR = { release_vassal = BHT diplomatic_influence = { who = BHT value = -400 } }
+			}
+			
+			random_country = {
+				limit = {
+					exists = yes
+					tag = BNB
+					vassal_of = TUR
+					}
+				TUR = { release_vassal = BNB diplomatic_influence = { who = BNB value = -400 } }
+			}
+			
+			random_country = {
+				limit = {
+					exists = yes
+					tag = BDN
+					vassal_of = TUR
+					}
+				TUR = { release_vassal = BDN diplomatic_influence = { who = BDN value = -400 } }
+			}
+			
+			any_country = {
+				limit = {
+					exists = yes
+					OR = {
+						tag = BDN
+						tag = BNB
+						tag = BTL
+						tag = SRN
+						tag = BHT
+					}
+				}
+			country_event = 986500
+			}
+		}
+		
+		ai_will_do = { factor = 1 }
+	}
+
+	adopt_yazidi = {
+		picture = yazidi_symbol
+		potential = {
+			tag = BHT
+			NOT = { has_country_flag = yazidi_country }
+		}
+		
+		allow = {
+			war = no
+			NOT = { religious_policy = moralism }
+		}
+		
+		effect = {
+			clr_country_flag = sunni_country
+			set_country_flag = yazidi_country
+			religion = yazidi
+			any_pop = { limit = { is_state_religion = no } militancy = 9 }
+		}
+		
+		ai_will_do = { factor = 0 modifier = { factor = 100 civilized = yes } }
+	}
+	
+	renamed_istanbul_constantinople = {
+		picture = constantinople
+		#alert = yes
+		potential = {
+			OR = {
+				is_culture_group = pan_albanian
+				is_culture_group = pan_romanian
+				is_culture_group = south_slavic
+				is_culture_group = east_slavic
+				is_culture_group = levantine
+				is_culture_group = czecho_slovak_culture_group
+			}
+			owns = 860
+			NOT = { has_global_flag = istanbul_named_constantinople }
+			NOT = { has_country_flag = istanbul_renamed }
+		}
+		
+		allow = {
+			war = no
+			state_n_government = 1
+		}
+		
+		effect = {
+			set_global_flag = istanbul_named_constantinople
+			clr_global_flag = istanbul_named_tsargrad
+			any_country = { clr_country_flag = istanbul_renamed }
+			set_country_flag = istanbul_renamed
+			prestige = 2
+			860 = {
+				change_province_name = "Constantinople"
+				any_pop = { limit = { is_culture_group = levantine } militancy = -1 }
+			}
+		}
+		
+		ai_will_do = { 
+			factor = 1 
+			
+			modifier = {
+				factor = 0
+				OR = {
+					tag = RUS
+					tag = BUL
+				}
+			}
+		
+		}
+	}
+	
+	renamed_istanbul_tsargrad = {
+		picture = constantinople
+		#alert = yes
+		potential = {
+			OR = {
+				is_culture_group = pan_albanian
+				is_culture_group = pan_romanian
+				is_culture_group = south_slavic
+				is_culture_group = east_slavic
+				is_culture_group = czecho_slovak_culture_group
+			}
+			owns = 860
+			NOT = { has_global_flag = istanbul_named_tsargrad }
+			NOT = { has_country_flag = istanbul_renamed }
+		}
+		
+		allow = {
+			war = no
+			state_n_government = 1
+		}
+		
+		effect = {
+			clr_global_flag = istanbul_named_constantinople
+			set_global_flag = istanbul_named_tsargrad
+			any_country = { clr_country_flag = istanbul_renamed }
+			set_country_flag = istanbul_renamed
+			prestige = 2
+			860 = {
+				change_province_name = "Tsargrad"
+				any_pop = {
+				limit = {
+					OR = {
+					is_culture_group = south_slavic
+					is_culture_group = east_slavic
+						}
+					}
+				militancy = -1
+				}
+			}
+		}
+		
+		ai_will_do = { factor = 1 }
+	}
+	
+	renamed_istanbul_back = {
+		picture = constantinople
+		potential = {
+			is_culture_group = turko_semitic
+			owns = 860
+				OR = {
+					has_global_flag = istanbul_named_constantinople
+					has_global_flag = istanbul_named_tsargrad
+				}
+			}
+		
+		allow = {
+			war = no
+			state_n_government = 1
+		}
+		
+		effect = {
+			clr_global_flag = istanbul_named_constantinople
+			clr_global_flag = istanbul_named_tsargrad
+			any_country = { clr_country_flag = istanbul_renamed }
+			prestige = 2
+			860 = {
+				change_province_name = "Istanbul"
+				any_pop = { limit = { has_pop_culture = turkish } militancy = -4 }
+			}
+		}
+		
+		ai_will_do = { factor = 1 }
+	}
+	
+	turkish_tea = {
+		picture = turkish_coffee_house
+		potential = {
+			tag = TUR
+			NOT = { has_country_flag = turkish_tea_in_turkey }
+		}
+		
+		allow = {
+			war = no
+			owns = 884
+			owns = 882
+			owns = 879
+			owns = 877
+			owns = 878
+			OR = {
+				year = 1915
+				organizational_development = 1
+			}
+		}
+		
+		effect = {
+			set_country_flag = turkish_tea_in_turkey
+			884 = { trade_goods = tea }
+			882 = { trade_goods = tea }
+			relation = { who = ENG value = -50 }
+		}
+		
+		ai_will_do = { factor = 1 }
+	}
+	
+	revoke_kuwait_autonomy = {
+		picture = bahrain_trade
+		potential = {
+			tag = TUR
+			NOT = { has_country_flag = revoke_kuwait_autonomy }
+			KWT = { 
+				vassal_of = THIS
+				neighbour = THIS
+			}
+		}
+		
+		allow = {
+			OR = {
+				government = absolute_monarchy
+				government = prussian_constitutionalism
+				war_policy = jingoism
+				war_policy = pro_military
+			}
+			war = no
+			has_recently_lost_war = no
+			OR = {
+				is_greater_power = yes
+				is_secondary_power = yes
+			}
+			mass_politics = 1
+			KWT = {
+				vassal_of = THIS
+				neighbour = THIS
+			}
+		}
+		
+		effect = {
+			set_country_flag = revoke_kuwait_autonomy
+			badboy = 2
+			relation = {
+				who = ENG
+				value = -200
+			}
+			any_greater_power = { limit = { NOT = { tag = ENG } capital_scope = { continent = europe } }
+				relation = { who = THIS value = -25 }
+			}
+			inherit = KWT
+			KWT = { 
+				all_core = {
+					secede_province = TUR
+				}
+			}
+		}
+		
+		ai_will_do = { 
+			factor = 1 
+			modifier = {
+				factor = 0
+				badboy = 0.5
+			}
+		}
+	}
+	
+	revoke_samos_autonomy = {
+		picture = gtfo
+		potential = {
+			tag = TUR
+			NOT = { has_country_flag = revoke_samos_autonomy }
+			SAM = { 
+				OR = {
+					vassal_of = THIS
+					substate_of = THIS
+				}
+			}
+		}
+		
+		allow = {
+			OR = {
+				government = absolute_monarchy
+				government = prussian_constitutionalism
+				war_policy = jingoism
+				war_policy = pro_military
+			}
+			war = no
+			has_recently_lost_war = no
+			OR = {
+				is_greater_power = yes
+				is_secondary_power = yes
+			}
+			mass_politics = 1
+			SAM = {
+				OR = {
+					vassal_of = THIS
+					substate_of = THIS
+				}
+			}
+		}
+		
+		effect = {
+			set_country_flag = revoke_samos_autonomy
+			badboy = 1
+			relation = {
+				who = GRE
+				value = -200
+			}
+			any_greater_power = { limit = { NOT = { tag = GRE } capital_scope = { continent = europe } }
+				relation = { who = THIS value = -25 }
+			}
+			inherit = SAM
+			SAM = {
+				all_core = {
+					secede_province = TUR
+				}
+			}
+		}
+		
+		ai_will_do = { 
+			factor = 1 
+			modifier = {
+				factor = 0
+				badboy = 0.5
+			}
+		}
+	}
+}

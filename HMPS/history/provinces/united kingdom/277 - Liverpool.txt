@@ -1,0 +1,56 @@
+owner = ENG
+controller = ENG
+add_core = ENG
+trade_goods = fish
+life_rating = 35
+terrain = liverpool
+railroad = 1
+party_loyalty = {
+}
+party_loyalty = {
+}
+state_building = {
+	level = 2
+	building = steel_factory
+	upgrade = yes
+}
+state_building = {
+	level = 2
+	building = bronze_factory
+	upgrade = yes
+}
+state_building = {
+	level = 2
+	building = luxury_furniture_factory
+	upgrade = yes
+}
+state_building = {
+	level = 3
+	building = fabric_factory
+	upgrade = yes
+}
+state_building = {
+	level = 3
+	building = regular_clothes_factory
+	upgrade = yes
+}
+state_building = {
+	level = 2
+	building = liquor_distillery
+	upgrade = yes
+}
+state_building = {
+	level = 2
+	building = shoe_factory
+	upgrade = yes
+}
+state_building = {
+	level = 3
+	building = clipper_shipyard
+	upgrade = yes
+}
+naval_base = 2
+1861.1.1 = { 
+	railroad = 3 
+	naval_base = 2
+}

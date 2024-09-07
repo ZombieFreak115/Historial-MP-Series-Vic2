@@ -1,0 +1,627 @@
+#########################################################
+#														#
+#       Events for the Panthay and                      #
+#       Dungan Rebellion in China		                #
+#														#
+#########################################################
+
+province_event = {
+	id = 80120
+	title = "EVTNAME80120" #Hui Unrest in $STATENAME$
+	desc = "EVTDESC80120"
+	
+	trigger = {
+		OR = {
+			owned_by = QNG
+			owner = { substate_of = QNG }
+		}
+		OR = {
+			controlled_by = QNG
+			controller = { substate_of = QNG }
+		}
+		NOT = { has_province_modifier = anti_manchu_sentiment }
+		QNG = {
+			has_global_flag = hong
+			has_country_flag = mandate
+		}
+		OR = { 
+			AND = {	
+				region = CHI_1601 # Yunnan
+				owner = { NOT = { has_global_flag = panthay_rebellion } }
+			}
+			AND = {
+				OR = {
+					region = CHI_1600 # Urumqui
+					region = CHI_1594 # Kashgar
+					region = CHI_1490 # Gansu
+					region = CHI_1559 # Shaanxi
+				}
+				owner = { NOT = { has_global_flag = dungan_rebellion } }
+			}
+		}
+	}
+	
+	mean_time_to_happen = {
+		months = 60
+		modifier = {
+			factor = 0.5
+			owner = { has_global_flag = panthay_rebellion }
+		}
+		modifier = {
+			factor = 0.5
+			owner = { has_global_flag = dungan_rebellion }
+		}
+		modifier = {
+			factor = 0.5
+			any_neighbor_province = { has_province_modifier = anti_manchu_sentiment }
+		}
+	}
+	
+	option = {
+		name = "EVT80120OPTA"
+		add_province_modifier = {
+			name = anti_manchu_sentiment
+			duration = 3650
+		}
+		any_pop = {
+			limit = { has_pop_religion = sunni }
+			reduce_pop = 0.99
+			militancy = 10
+			consciousness = 10
+		}
+		any_pop = {
+			limit = { NOT = { has_pop_religion = sunni } }
+			consciousness = 4
+		}
+	}
+	
+	option = {
+		name = "EVT80120OPTB"
+		state_scope = {
+			any_owned = {
+				add_province_modifier = {
+					name = anti_manchu_sentiment
+					duration = 1825
+				}
+			}
+			any_pop = {
+				limit = { has_pop_religion = sunni }
+				militancy = 5
+				consciousness = 5
+			}
+			any_pop = {
+				limit = { NOT = { has_pop_religion = sunni } }
+				consciousness = 2
+			}
+		}
+	}
+}
+
+country_event = {
+	id = 80121
+	title = "EVTNAME80121" #Panthay Rebellion
+	desc = "EVTDESC80121"
+	picture = "panthay_rebellion"
+	
+	fire_only_once = yes
+	
+	trigger = {
+		tag = QNG
+		war_with = TPG
+		YNN = {
+			substate_of = THIS
+			NOT = { num_of_revolts = 1 }
+			ai = yes
+		}
+		1602 = {
+			owned_by = YNN
+			controlled_by = YNN
+			OR = {
+				has_province_modifier = anti_manchu_sentiment
+				average_militancy = 3
+			}
+		}
+		has_global_flag = tpg_war_started
+		NOT = { has_global_flag = panthay_rebellion }
+	}
+	
+	mean_time_to_happen = {
+		months = 4
+		modifier = {
+			factor = 0.1
+			war = yes
+		}
+	}
+	
+	option = {
+		name = "EVT80121OPTA"
+		set_global_flag = panthay_rebellion
+		release_vassal = YNN
+		YNN = {
+			capital = 1602
+			any_pop = {
+				consciousness = -5
+				militancy = -5
+			}
+			add_country_modifier = { name = taiping_losing_boost duration = 150 }		
+		}
+		any_country = {
+			limit = { war_with = YNN }
+			end_war = YNN
+		}
+		YNN = { change_tag = PGG }
+		PGG = { government = absolute_monarchy religion = sunni set_country_flag = sunni_country clr_country_flag = mahayana_country }
+		casus_belli = {
+			target = PGG
+			type = make_puppet
+			months = 12
+		}
+		war = {
+			target = PGG
+			attacker_goal = { casus_belli = make_puppet }
+			defender_goal = { casus_belli = status_quo }
+		}
+		ai_chance = { factor = 100 }
+	}
+}
+
+country_event = {
+	id = 80122
+	title = "EVTNAME80122" #Panthay Rebellion Crushed
+	desc = "EVTDESC80122"
+	picture = "panthay_rebellion"
+	
+	trigger = {
+		tag = QNG
+		OR = { 
+			has_global_flag = panthay_rebellion
+			truce_with = PGG
+		}
+		is_our_vassal = PGG
+	}
+	
+	mean_time_to_happen = {
+		days = 10
+	}
+	
+	option = {
+		name = "EVT80126OPTA"
+		clr_global_flag = panthay_rebellion
+		prestige = 10
+		plurality = -2
+		PGG = { change_tag = YNN }
+		YNN = {
+			government = colonial_company
+			religion = mahayana
+			set_country_flag = mahayana_country
+			clr_country_flag = sunni_country
+			any_owned = {
+				remove_province_modifier = anti_manchu_sentiment
+				any_pop = {
+					limit = { has_pop_religion = sunni }
+					reduce_pop = 0.7
+					militancy = -4
+				}
+			}
+		}
+		inherit = YNN
+		PGG = { all_core = { remove_core = PGG } }
+	}
+}
+
+country_event = {
+	id = 80123
+	title = "EVTNAME80123" #Panthay Rebellion Victorious!
+	desc = "EVTDESC80123"
+	news = yes
+	news_title = "EVTNAME80123_NEWS_TITLE"
+	news_desc_long = "EVTDESC80123_NEWS_LONG"
+	news_desc_medium = "EVTDESC80123_NEWS_MEDIUM"
+	news_desc_short = "EVTDESC80123_NEWS_SHORT"
+	picture = "panthay_rebellion"
+	fire_only_once = yes
+	
+	trigger = {
+		tag = PGG
+		has_global_flag = panthay_rebellion
+		is_vassal = no
+		NOT = { war_with = QNG }
+	}
+	
+	mean_time_to_happen = {
+		days = 10
+	}
+	
+	option = {
+		name = "EVT80123OPTA"
+		prestige = 10
+		QNG = { prestige = -10 plurality = -2 }
+		clr_global_flag = panthay_rebellion
+		PGG = { all_core = { remove_core = YNN } }
+	}
+}
+
+country_event = {
+	id = 80125
+	title = "EVTNAME80125" #Dungan Revolt
+	desc = "EVTDESC80125"
+	picture = "dungan_revolt_xinhai"
+	
+	fire_only_once = yes
+	
+	trigger = {
+		tag = QNG
+		XIN = { 
+			substate_of = THIS
+			NOT = { num_of_revolts = 1 }
+			ai = yes
+		}		
+		1594 = {
+			owned_by = XIN
+			controlled_by = XIN
+			OR = {
+				has_province_modifier = anti_manchu_sentiment
+				average_militancy = 4
+			}
+		}
+		OR = {
+			has_global_flag = tpg_war_started
+			year = 1860
+		}
+		NOT = { has_global_flag = dungan_rebellion }
+	}
+	
+	mean_time_to_happen = {
+		months = 6
+		modifier = {
+			factor = 4
+			war = no
+		}
+		modifier = {
+			factor = 0.1
+			has_global_flag = ever_victorious_army
+		}
+	}
+	
+	option = {
+		name = "EVT80125OPTA"
+		set_global_flag = dungan_rebellion
+		plurality = -2
+		release_vassal = XIN
+		any_country = {
+			limit = { war_with = XIN }
+			end_war = XIN
+		}
+		XIN = { change_tag = UYG }
+		UYG = {
+			government = absolute_monarchy
+			primary_culture = uighur
+			add_accepted_culture = tajik
+			add_accepted_culture = kazak
+			add_accepted_culture = kirgiz
+			capital = 1594
+			any_pop = {
+				consciousness = -5
+				militancy = -5
+			}
+			relation = { who = RUS value = 400 }
+		}
+		casus_belli = {
+			target = UYG
+			type = make_puppet
+			months = 30
+		}
+		war = {
+			target = UYG
+			attacker_goal = {
+				casus_belli = make_puppet
+			}		
+			defender_goal = {
+				casus_belli = status_quo
+			}
+		}
+		ai_chance = {
+			factor = 100
+		}
+	}
+}
+
+country_event = {
+	id = 80126
+	title = "EVTNAME80126" #Dungan Revolt Crushed
+	desc = "EVTDESC80126"
+	picture = "dungan_revolt_xinhai"
+	
+	fire_only_once = yes
+	
+	trigger = {
+		tag = QNG
+		has_global_flag = dungan_rebellion
+		OR = {
+			is_our_vassal = UYG
+			UYG = { exists = no }
+		}
+	}
+	
+	mean_time_to_happen = {
+		days = 10
+	}
+	
+	option = {
+		name = "EVT80126OPTA"
+		#clr_global_flag = dungan_rebellion
+		prestige = 10
+		plurality = -2
+		UYG = { 
+			change_tag = XIN
+			end_war = QNG
+		}
+		XIN = {
+			any_owned = {
+				remove_province_modifier = anti_manchu_sentiment
+				any_pop = {
+					limit = { has_pop_religion = sunni }
+					reduce_pop = 0.60
+					militancy = -4
+				}
+			}
+			primary_culture = beifaren
+			add_accepted_culture = uighur
+			remove_accepted_culture = tajik
+			remove_accepted_culture = kazak
+			remove_accepted_culture = kirgiz
+			capital = 1600
+		}
+	}
+}
+
+
+
+#Miao Rebellion
+country_event = {
+	id = 99947
+	title = "EVTTITLE99947" #Miao Rebellion
+	desc = "EVTDESC99947"
+	picture = "miao_rebellion"
+	
+	fire_only_once = yes
+	
+	trigger = {
+		tag = QNG
+		OR = {
+			has_global_flag = tpg_war_started
+			year = 1857
+		}
+		NOT = { has_global_flag = miao_rebellion }
+	}
+	
+	mean_time_to_happen = {
+		days = 120
+		modifier = {
+			factor = 4
+			war = no
+		}
+		modifier = {
+			factor = 0.1
+			war = yes
+		}
+	}
+	
+	option = {
+		name = "EVT80121OPTA"
+		set_global_flag = miao_rebellion
+		plurality = -1
+		GUI = {
+			government = absolute_monarchy
+			primary_culture = miao
+			religion = animist
+			any_pop = {
+				limit = {
+					culture = nanfaren
+				}
+				consciousness = 10
+				militancy = 10
+			}	
+			any_pop = {
+				limit = { culture = miao }
+				consciousness = -10
+				militancy = -10
+			}			
+		}
+		any_country = { limit = { war_with = GUI } end_war = GUI }
+		release_vassal = GUI
+		casus_belli = { target = GUI type = conquest months = 12 }
+		war = {
+			target = GUI
+			attacker_goal = { casus_belli = conquest_any }
+			defender_goal = { casus_belli = status_quo }
+			call_ally = no
+		}
+		set_variable = { which = china_destablization value = 1 }
+		ai_chance = { factor = 100 }
+	}
+}
+
+country_event = {
+	id = 99948
+	title = "EVTNAME99948" #Miao Rebellion Crushed
+	desc = "EVTDESC99948"
+	picture = "miao_rebellion"
+	
+	trigger = {
+		OR = {
+			tag = QNG
+			tag = TPG
+		}
+		OR = {
+			QNG = { exists = no }
+			TPG = { exists = no }
+		}
+		has_global_flag = miao_rebellion
+		owns = 1505
+	}
+	
+	mean_time_to_happen = { days = 5 }
+	
+	option = {
+		name = "EVT80126OPTA"
+		clr_global_flag = miao_rebellion
+		prestige = 10
+		plurality = -1
+		CHI_1505 = { any_pop = { limit = { culture = miao } reduce_pop = 0.5 } }
+		any_owned = { limit = { is_core = GUI } remove_core = GUI }
+	}
+}
+
+#The Nian Rebellion - Setup
+country_event = {
+	id = 99964
+	title = "EVTNAME99964"
+	desc = "EVTDESC99964"
+	picture = "destroyed_forest"
+
+	trigger = {
+		tag = QNG
+		has_global_flag = huang1
+		owns = 1512
+		NOT = { has_country_flag = nian_setup }
+	}
+
+	mean_time_to_happen = { days = 10 }
+
+	option = {
+		name = "EVTOPT99964"
+		set_country_flag = nian_setup
+		1512 = {
+			any_pop = {
+				limit = { is_primary_culture = no }
+				militancy = 3
+				consciousness = 2
+			}
+		}
+		CHI_1508 = { add_core = NIA }
+	}
+}
+
+country_event = {
+	id = 99965
+	title = "EVTNAME99965" #Nien Rebellion
+	desc = "EVTDESC99965"
+	picture = "nien_rebellion"
+	fire_only_once = yes
+	
+	trigger = {
+		tag = QNG
+		has_global_flag = huang2
+		has_global_flag = tpg_war_started
+		NOT = { has_global_flag = nien_rebellion }
+	}
+	
+	mean_time_to_happen = { days = 14 }
+	
+	option = {
+		name = "EVT80121OPTA"
+		set_global_flag = nien_rebellion
+		QNG = {
+			country_event = { id = 99966 days = 14 }
+			set_variable = { which = china_destablization value = 1 }
+		}	
+		any_owned = { limit = { is_core = NIA not = { province_id = 1616 } } secede_province = NIA }
+		NIA = {
+			grain = 50
+			treasury = 10000
+			capital = 1508
+			NIA = { military_reform = yes_foreign_weapons activate_technology = flintlock_rifles }
+			any_pop = { consciousness = -5 militancy = -5 }
+			define_general = {
+				name = "Li Zhang Lexing"
+				personality = defence_1.1
+				background = innovative_tactician
+			}
+			define_general = {
+				name = "Lai Wenguang"
+				personality = spirited
+				background = gifted_administrator
+			}
+			define_general = {
+				name = "Zhang Zongyu"
+				personality = stout
+				background = incompetent
+			}
+			define_general = {
+				name = "Ren Zhu"
+				personality = audacious
+				background = expert_raider
+			}
+		}
+		random_owned = { limit = { owner = { land_reform = yes_land_reform } } NIA = { economic_reform = yes_land_reform } }
+		random_owned = { limit = { owner = { admin_reform = yes_admin_reform } } NIA = { economic_reform = yes_admin_reform } }
+		random_owned = { limit = { owner = { finance_reform = yes_finance_reform } } NIA = { economic_reform = yes_finance_reform } }
+		random_owned = { limit = { owner = { finance_reform = finance_reform_two } } NIA = { economic_reform = finance_reform_two } }
+		random_owned = { limit = { owner = { monetary_reform = yes_monetary_reform } } NIA = { economic_reform = yes_monetary_reform } }
+		random_owned = { limit = { owner = { monetary_reform = monetary_reform_two } } NIA = { economic_reform = monetary_reform_two activate_technology = no_standard } }
+		random_owned = { limit = { owner = { education_reform = yes_western_science } } NIA = { economic_reform = yes_western_science } }
+		random_owned = { limit = { owner = { research_reform = yes_education_reform } } NIA = { economic_reform = yes_education_reform activate_technology = late_enlightenment_philosophy } }
+		random_owned = { limit = { owner = { foreign_training = yes_foreign_training } } NIA = { military_reform = yes_foreign_training } }
+		random_owned = { limit = { owner = { foreign_weapons = yes_foreign_weapons } } NIA = { military_reform = yes_foreign_weapons activate_technology = flintlock_rifles } }
+		random_owned = { limit = { owner = { foreign_officers = yes_foreign_officers } } NIA = { military_reform = yes_foreign_officers activate_technology = military_staff_system } }
+		random_owned = { limit = { owner = { army_schools = yes_army_schools } } NIA = { military_reform = yes_army_schools } }
+		random_owned = { limit = { owner = { foreign_naval_officers = yes_foreign_naval_officers } } NIA = { military_reform = yes_foreign_naval_officers } }	
+		random_owned = { limit = { owner = { naval_schools = yes_naval_schools } } NIA = { military_reform = yes_naval_schools } }
+		random_owned = { limit = { owner = { foreign_navies = yes_foreign_navies } } NIA = { military_reform = yes_foreign_navies activate_technology = post_nelsonian_thought } }
+		random_owned = { limit = { owner = { foreign_artillery = yes_foreign_artillery } } NIA = { military_reform = yes_foreign_artillery activate_technology = bronze_muzzle_loaded_artillery } }
+	}
+}
+
+#Nien Declare War
+country_event = {
+	id = 99966
+	title = "EVTNAME99966" #The Nien Rebellion
+	desc = "EVTDESC99966"
+	picture = "nien_rebellion"
+	fire_only_once = yes	
+	is_triggered_only = yes
+
+	option = {
+		name = "EVTOPT99966"
+		plurality = -1
+		define_general = {
+			name = "Sengge Rinchen"
+			personality = defence_3.1
+			background = expert_raider
+		}
+		war = {
+			target = NIA
+			attacker_goal = { casus_belli = conquest_any }
+			defender_goal = { casus_belli = status_quo }
+			call_ally = no
+		}
+	}
+}
+
+#Nien Rebellion Crushed
+country_event = {
+	id = 99967
+	title = "EVTNAME99967" 
+	desc = "EVTDESC99967"
+	picture = "nien_rebellion"
+	
+	trigger = {
+		tag = QNG
+		has_global_flag = nien_rebellion
+		owns = 1508
+		NOT = { has_country_flag = nien_rebellion_crushed }
+	}
+	
+	mean_time_to_happen = { days = 5 }
+	
+	option = {
+		name = "EVT80126OPTA"
+		prestige = 10
+		plurality = -1
+		CHI_1508 = { any_pop = { reduce_pop = 0.95 } }
+		CHI_1510 = { any_pop = { reduce_pop = 0.95 } }
+		any_owned = { limit = { is_core = NIA } remove_core = NIA }
+		set_country_flag = nien_rebellion_crushed
+	}
+}

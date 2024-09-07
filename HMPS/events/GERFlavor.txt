@@ -1,0 +1,69 @@
+#Germany picks a capital
+country_event = {
+	id = 33042
+	title = "EVTNAME33042"
+	desc = "EVTDESC33042"
+	picture = "german_rhine"
+
+	is_triggered_only = yes
+	
+	option = {
+		name = "EVT33042OPTA" #Berlin - Prussian leadership
+		random_owned = {
+			limit = { owner = { owns = 549 } }
+			owner = {
+				capital = 549
+				549 = { any_pop = { militancy = -1 } }
+			}
+		}
+		ai_chance = { factor = 90 }
+	}
+	
+	option = {
+		name = "EVT33042OPTB" #Hamburg - Naval capital
+		random_owned = {
+			limit = { owner = { owns = 528 } }
+			owner = {
+				capital = 528
+				528 = { any_pop = { militancy = -1 } }
+			}
+		}
+		ai_chance = { factor = 2 }
+	}
+	
+	option = {
+		name = "EVT33042OPTC" #Frankfurt - 1848 rememberance
+		random_owned = {
+			limit = { owner = { owns = 564 } }
+			owner = {
+				capital = 564
+				564 = { any_pop = { militancy = -1 } }
+			}
+		}
+		ai_chance = { factor = 2 }
+	}
+	
+	option = {
+		name = "EVT33042OPTD" #Vienna - Habsburg
+		random_owned = {
+			limit = { owner = { owns = 619 } }
+			owner = {
+				capital = 619
+				619 = { any_pop = { militancy = -1 } }
+			}
+		}
+		ai_chance = { factor = 2 }
+	}
+	
+	option = {
+		name = "EVT33042OPTE" #Prague - Central capital
+		random_owned = {
+			limit = { owner = { owns = 625 } }
+			owner = {
+				capital = 625
+				625 = { any_pop = { militancy = -1 } }
+			}
+		}
+		ai_chance = { factor = 0 }
+	}
+}

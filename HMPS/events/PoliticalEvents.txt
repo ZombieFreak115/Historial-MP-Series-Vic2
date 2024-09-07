@@ -1,0 +1,3522 @@
+#The Communists kick out the bourgeoisie
+country_event = {
+	id = 4431
+	title = "EVTNAME4431"
+	desc = "EVTDESC4431"
+	picture = "workers_revolution"
+	
+	trigger = {
+		government = proletarian_dictatorship
+		ruling_party_ideology = communist
+		OR = {
+			any_owned_province = { has_pop_type = capitalists }
+			any_owned_province = { has_pop_type = aristocrats }
+		}
+	}
+	
+	mean_time_to_happen = { days = 5 }
+	
+	option = {
+		name = "EVTOPTA4431"
+			add_tax_relative_income = 0.4
+			any_pop = { limit = { type = capitalists }
+				militancy = 9 consciousness = 9 money = -200 pop_type = craftsmen 
+			}
+			any_pop = { limit = { type = aristocrats } money = -10000 }
+			any_owned = { 
+				limit = { has_pop_type = labourers }
+				any_pop = {
+					limit = { type = aristocrats }
+					militancy = 9
+					consciousness = 9
+					money = -200
+					pop_type = labourers
+				}
+			}
+			any_owned = { 
+				limit = { has_pop_type = farmers }
+				any_pop = {
+					limit = { type = aristocrats }
+					militancy = 9
+					consciousness = 9
+					money = -200
+					pop_type = farmers
+				}
+			}
+			nationalize = yes
+			ai_chance = { factor = 80 }
+	}
+	
+	option = {
+		name = "EVTOPTB4431"
+			badboy = 1
+			add_tax_relative_income = 0.8
+			any_pop = { limit = { type = capitalists } money = -500 reduce_pop = 0.0 }
+			any_pop = { limit = { type = aristocrats } money = -500 reduce_pop = 0.0 }
+			any_pop = { militancy = -2 }
+			nationalize = yes
+			ai_chance = { factor = 20 }
+	}
+}
+
+#Genocide - Set Up
+country_event = {
+	id = 4433
+	title = "EVTNAME4433"
+	desc = "EVTDESC4433"
+	picture = "concentration_camp"
+	
+	trigger = {
+		NOT = { has_country_modifier = preparations_to_kill }
+		has_country_flag = preparations_to_kill
+	}
+		
+	mean_time_to_happen = { days = 10  }
+		
+	option = {
+		name = "EVTOPTA4433" #Religion
+		random_owned = { limit = { owner = { NOT = { has_country_flag = animists_run } } } owner = { set_country_flag = animists_run } }
+		country_event = 4434
+	}
+		
+	option = {
+		name = "EVTOPTB4433" #Ethnicity
+		random_owned = { limit = { owner = { NOT = { has_country_flag = animists_run } } } owner = { set_country_flag = animists_run } }
+		country_event = 4435 
+	}
+}
+	
+#Genocide - Set Up - Religious	
+country_event = {
+	id = 4434
+	title = "EVTNAME4434"
+	desc = "EVTDESC4434"
+	picture = "concentration_camp"
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = "EVTOPTA4434" #Everyone - Colonial Only
+		random_owned = { limit = { owner = { NOT = { has_country_flag = preparations_to_kill } } } owner = { badboy = 50 } }
+		clr_country_flag = preparations_to_kill
+		any_owned = {
+			limit = { any_pop = { is_state_religion = no } is_colonial = yes }
+			add_province_modifier = { name = genocide duration = 1825 }
+		}
+		any_pop = {
+			limit = { is_state_religion = no location = { is_colonial = yes } }
+			militancy = 4
+			consciousness = 8
+			random_list = {
+				25 = { reduce_pop = 0.7 }
+				25 = { reduce_pop = 0.6 }
+				25 = { reduce_pop = 0.5 }
+				25 = { reduce_pop = 0.4 }
+			}
+		}
+		any_country = {
+			limit = { NOT = { relation = { who = THIS value = 0 } } }
+			casus_belli = { target = THIS type = humiliate months = 24 } 
+		}
+	}
+
+	option = {
+		name = "EVTOPTB4434" #Everyone - Non-Colonial Only
+		random_owned = { limit = { owner = { NOT = { has_country_flag = preparations_to_kill } } } owner = { badboy = 50 } }
+		clr_country_flag = preparations_to_kill
+		any_owned = {
+			limit = { any_pop = { is_state_religion = no } is_colonial = no }
+			add_province_modifier = { name = genocide duration = 1825 }
+		}
+		any_pop = {
+			limit = { is_state_religion = no location = { is_colonial = no } }
+			militancy = 9
+			consciousness = 9
+			random_list = {
+				25 = { reduce_pop = 0.7 }
+				25 = { reduce_pop = 0.6 }
+				25 = { reduce_pop = 0.5 }
+				25 = { reduce_pop = 0.4 }
+			}
+		}
+		any_country = {
+			limit = { NOT = { relation = { who = THIS value = 0 } } }
+			casus_belli = { target = THIS type = humiliate months = 24 } 
+		}
+	}
+		
+	option = {
+		name = "EVTOPTC4434" #Really Everyone
+		random_owned = { limit = { owner = { NOT = { has_country_flag = preparations_to_kill } } } owner = { badboy = 50 } }
+		clr_country_flag = preparations_to_kill
+		any_owned = {
+			limit = { any_pop = { is_state_religion = no } }
+			add_province_modifier = { name = genocide duration = 1825 }
+		}
+		any_pop = {
+			limit = { is_state_religion = no }
+			militancy = 9
+			consciousness = 9
+			random_list = {
+				25 = { reduce_pop = 0.7 }
+				25 = { reduce_pop = 0.6 }
+				25 = { reduce_pop = 0.5 }
+				25 = { reduce_pop = 0.4 }
+			}
+		}
+		any_country = {
+			limit = { NOT = { relation = { who = THIS value = 0 } } }
+			casus_belli = { target = THIS type = humiliate months = 24 } 
+		}
+	}
+	
+	option = {
+		name = "EVTOPTD4434" #Going in specifics
+		country_event = 443007
+		}
+	
+	option = {
+		name = "EVTOPTE4434" #go back and try again
+		country_event = 4433
+		}
+	}
+	
+#Genocide - Set Up - Ethnic	
+country_event = {
+	id = 4435
+	title = "EVTNAME4435"
+	desc = "EVTDESC4435"
+	picture = "concentration_camp"
+	
+	is_triggered_only = yes
+	
+	immediate = {
+		clr_country_flag = everywhere_genocide_only
+		clr_country_flag = non_colonial_genocide_only
+		clr_country_flag = colonial_genocide_only
+	}
+	
+	option = {
+		name = "EVTOPTA4435" #Colonial Only
+		random_owned = { limit = { owner = { NOT = { has_country_flag = preparations_to_kill } } } owner = { badboy = 50 } }
+		clr_country_flag = preparations_to_kill
+		any_owned = {
+			limit = { is_colonial = yes has_national_minority = yes }
+			add_province_modifier = { name = genocide duration = 1825 }
+		}
+		any_pop = {
+			limit = { is_primary_culture = no is_accepted_culture = no location = { is_colonial = yes } }
+			militancy = 4
+			consciousness = 3
+			random_list = {
+				25 = { reduce_pop = 0.7 }
+				25 = { reduce_pop = 0.6 }
+				25 = { reduce_pop = 0.5 }
+				25 = { reduce_pop = 0.4 }
+			}
+		}
+		any_country = {
+			limit = { NOT = { relation = { who = THIS value = 0 } } }
+			casus_belli = { target = THIS type = humiliate months = 24 }
+		}
+	}
+		
+	option = {
+		name = "EVTOPTB4435" #Non-Colonial Only
+		random_owned = { limit = { owner = { NOT = { has_country_flag = preparations_to_kill } } } owner = { badboy = 50 } }
+		clr_country_flag = preparations_to_kill
+		any_owned = {
+			limit = { has_national_minority = yes is_colonial = no }
+			add_province_modifier = { name = genocide duration = 1825 }
+		}
+		any_pop = {
+			limit = { is_primary_culture = no is_accepted_culture = no location = { is_colonial = no } }
+			militancy = 9
+			consciousness = 9
+			random_list = {
+				25 = { reduce_pop = 0.7 }
+				25 = { reduce_pop = 0.6 }
+				25 = { reduce_pop = 0.5 }
+				25 = { reduce_pop = 0.4 }
+			}
+		}
+		any_country = {
+			limit = { NOT = { relation = { who = THIS value = 0 } } }
+			casus_belli = { target = THIS type = humiliate months = 24 }
+		}
+	}
+		
+	option = {
+		name = "EVTOPTC4435" #I don't make any distinctions, really
+		random_owned = { limit = { owner = { NOT = { has_country_flag = preparations_to_kill } } } owner = { badboy = 50 } }
+		clr_country_flag = preparations_to_kill
+		any_owned = {
+			limit = { has_national_minority = yes }
+			add_province_modifier = { name = genocide duration = 1825 }
+		}
+		any_pop = {
+			limit = { is_primary_culture = no is_accepted_culture = no }
+			militancy = 9
+			consciousness = 7
+			random_list = {
+				25 = { reduce_pop = 0.7 }
+				25 = { reduce_pop = 0.6 }
+				25 = { reduce_pop = 0.5 }
+				25 = { reduce_pop = 0.4 }
+			}
+		}
+		any_country = {
+			limit = { NOT = { relation = { who = THIS value = 0 } } }
+			casus_belli = { target = THIS type = humiliate months = 24 }
+		}
+	}
+
+	option = {
+		name = "EVTOPTE4434" #go back and try again
+		country_event = 4433
+	}
+}
+
+#Choose the religion
+country_event = {
+	
+	id = 443007
+	title = "EVTNAME443007"
+	desc = "EVTDESC443007"
+	picture = "religions"
+	
+	is_triggered_only = yes
+	
+	immediate = {
+		clr_country_flag = everywhere_genocide_only
+		clr_country_flag = non_colonial_genocide_only
+		clr_country_flag = colonial_genocide_only
+	}
+		
+	option = {
+		name = "EVT443007OPTA" #Christians
+		country_event = 443008
+		}
+		
+	option = {
+		name = "EVT443007OPTB" #Muslims and Jews
+		country_event = 443012
+		}
+		
+	option = {
+		name = "EVT443007OPTC" #Budhism
+		country_event = 443016
+		}
+		
+	option = {
+		name = "EVT443007OPTD" #Shintoism, Mahayana, animism and Yazidis
+		country_event = 443020
+		}
+	
+	option = {
+		name = "EVT443007OPTE" #Go back to start
+		country_event = 4433
+		}
+	}
+	
+#Christians - Choose the place
+country_event = {
+	
+	id = 443008
+	title = "EVTNAME443008"
+	desc = "EVTDESC443008"
+	picture = "christian_religion"
+	
+	is_triggered_only = yes
+	
+	immediate = {
+		clr_country_flag = everywhere_genocide_only
+		clr_country_flag = non_colonial_genocide_only
+		clr_country_flag = colonial_genocide_only
+	}
+		
+	option = {
+		name = "EVT443008OPTA" #Colonial
+		set_country_flag = colonial_genocide_only
+		country_event = 443009
+		any_country = {
+			limit = {
+				exists = yes
+				NOT = { tag = TUR }
+				OR = {
+					has_country_flag = catholic_country
+					has_country_flag = protestant_country
+					has_country_flag = mormon_country
+					has_country_flag = orthodox_country
+					has_country_flag = coptic_country
+				}
+			}
+			casus_belli = { target = THIS type = cut_down_to_size months = 60 }
+			random_list = {
+				25 = { relation = { who = THIS value = -400 } }
+				25 = { relation = { who = THIS value = -300 } }
+				25 = { relation = { who = THIS value = -200 } }
+				25 = { relation = { who = THIS value = -150 } }
+			}
+		}
+	}
+		
+	option = {
+		name = "EVT443008OPTB" #Non Colonial
+		set_country_flag = non_colonial_genocide_only
+		country_event = 443009
+		any_country = {
+			limit = {
+				exists = yes
+				NOT = { tag = TUR }
+				OR = {
+					has_country_flag = catholic_country
+					has_country_flag = protestant_country
+					has_country_flag = mormon_country
+					has_country_flag = orthodox_country
+					has_country_flag = coptic_country
+				}
+			}
+			casus_belli = { target = THIS type = cut_down_to_size months = 60 }
+			random_list = {
+				25 = { relation = { who = THIS value = -400 } }
+				25 = { relation = { who = THIS value = -300 } }
+				25 = { relation = { who = THIS value = -200 } }
+				25 = { relation = { who = THIS value = -150 } }
+			}
+		}
+	}
+		
+	option = {
+		name = "EVT443008OPTC" #Both
+		set_country_flag = everywhere_genocide_only
+		country_event = 443009
+		any_country = {
+			limit = {
+				exists = yes
+				NOT = { tag = TUR }
+				OR = {
+					has_country_flag = catholic_country
+					has_country_flag = protestant_country
+					has_country_flag = mormon_country
+					has_country_flag = orthodox_country
+					has_country_flag = coptic_country
+				}
+			}
+			casus_belli = { target = THIS type = cut_down_to_size months = 60 }
+			random_list = {
+				25 = { relation = { who = THIS value = -400 } }
+				25 = { relation = { who = THIS value = -300 } }
+				25 = { relation = { who = THIS value = -200 } }
+				25 = { relation = { who = THIS value = -150 } }
+			}
+		}
+	}
+		
+	option = {
+		name = "EVT443007OPTE" #Go Back
+		country_event = 4433
+		}
+	}
+	
+#Christians
+country_event = {
+	id = 443009
+	title = "EVTNAME443009"
+	desc = "EVTDESC443009"
+	picture = "demolished_church"
+	
+	is_triggered_only = yes
+		
+	immediate = {
+		random_owned = { limit = { owner = { NOT = { has_country_flag = preparations_to_kill } } } owner = { badboy = 50 } }
+		clr_country_flag = preparations_to_kill
+	}
+		
+	option = {
+		name = "EVT443009OPTA" #Bye Catholics
+		random_owned = { limit = { owner = { has_country_flag = colonial_genocide_only } }
+			owner = {
+		
+			any_owned = {
+				limit = { any_pop = { has_pop_religion = catholic is_state_religion = no } is_colonial = yes }
+				add_province_modifier = { name = genocide duration = 1825 }
+			}
+		
+			any_pop = {
+				limit = { has_pop_religion = catholic is_state_religion = no location = { is_colonial = yes } }
+				militancy = 9
+				consciousness = 9
+				random_list = {
+					25 = { reduce_pop = 0.7 }
+					25 = { reduce_pop = 0.6 }
+					25 = { reduce_pop = 0.5 }
+					25 = { reduce_pop = 0.4 }
+				}
+			}
+			clr_country_flag = colonial_genocide_only
+			}
+		}
+		
+		random_owned = { limit = { owner = { has_country_flag = non_colonial_genocide_only } }
+			owner = {
+			
+			any_owned = {
+				limit = { any_pop = { has_pop_religion = catholic is_state_religion = no } is_colonial = no }
+				add_province_modifier = { name = genocide duration = 1825 }
+			}
+			any_pop = {
+				limit = { has_pop_religion = catholic is_state_religion = no location = { is_colonial = no } }
+				militancy = 9
+				consciousness = 9
+				random_list = {
+					25 = { reduce_pop = 0.7 }
+					25 = { reduce_pop = 0.6 }
+					25 = { reduce_pop = 0.5 }
+					25 = { reduce_pop = 0.4 }
+				}
+			}
+			clr_country_flag = non_colonial_genocide_only
+			}
+		}
+	
+		random_owned = { limit = { owner = { has_country_flag = everywhere_genocide_only } }
+				owner = {
+				
+				any_owned = {
+					limit = { any_pop = { has_pop_religion = catholic is_state_religion = no } }
+					add_province_modifier = { name = genocide duration = 1825 }
+				}
+				any_pop = { limit = { has_pop_religion = catholic is_state_religion = no }
+					militancy = 9
+					consciousness = 9
+					random_list = {
+						25 = { reduce_pop = 0.7 }
+						25 = { reduce_pop = 0.6 }
+						25 = { reduce_pop = 0.5 }
+						25 = { reduce_pop = 0.4 }
+					}
+				}
+				
+				clr_country_flag = everywhere_genocide_only
+			}
+		}
+	}
+		
+	option = {
+		name = "EVT443009OPTB" #Bye protestants
+		random_owned = { limit = { owner = { has_country_flag = colonial_genocide_only } }
+			owner = {
+		
+			any_owned = { limit = { any_pop = { has_pop_religion = protestant is_state_religion = no } is_colonial = yes }
+				add_province_modifier = { name = genocide duration = 1825 }
+			}
+			any_pop = {
+				limit = { has_pop_religion = protestant is_state_religion = no location = { is_colonial = yes } }
+				militancy = 9
+				consciousness = 9
+				random_list = {
+					25 = { reduce_pop = 0.7 }
+					25 = { reduce_pop = 0.6 }
+					25 = { reduce_pop = 0.5 }
+					25 = { reduce_pop = 0.4 }
+				}
+			}
+			clr_country_flag = colonial_genocide_only
+			}
+		}
+		
+		random_owned = { limit = { owner = { has_country_flag = non_colonial_genocide_only } }
+			owner = {
+			
+			any_owned = {
+				limit = { any_pop = { has_pop_religion = protestant is_state_religion = no } is_colonial = no }
+				add_province_modifier = { name = genocide duration = 1825 }
+			}
+			any_pop = {
+				limit = { has_pop_religion = protestant is_state_religion = no location = { is_colonial = no } }
+				militancy = 9
+				consciousness = 9
+				random_list = {
+					25 = { reduce_pop = 0.7 }
+					25 = { reduce_pop = 0.6 }
+					25 = { reduce_pop = 0.5 }
+					25 = { reduce_pop = 0.4 }
+				}
+			}
+			clr_country_flag = non_colonial_genocide_only
+			}
+		}
+		
+		random_owned = { limit = { owner = { has_country_flag = everywhere_genocide_only } }
+				owner = {
+				
+				any_owned = {
+					limit = { any_pop = { has_pop_religion = protestant is_state_religion = no } }
+					add_province_modifier = { name = genocide duration = 1825 }
+				}
+				any_pop = { limit = { has_pop_religion = protestant is_state_religion = no }
+					militancy = 9
+					consciousness = 9
+					random_list = {
+						25 = { reduce_pop = 0.7 }
+						25 = { reduce_pop = 0.6 }
+						25 = { reduce_pop = 0.5 }
+						25 = { reduce_pop = 0.4 }
+					}
+				}
+			clr_country_flag = everywhere_genocide_only
+			}
+		}
+	}
+		
+	option = {
+		name = "EVT443009OPTC" #orthodox
+		random_owned = { limit = { owner = { has_country_flag = colonial_genocide_only } }
+			owner = {
+		
+			any_owned = {
+				limit = { any_pop = { has_pop_religion = orthodox is_state_religion = no } is_colonial = yes }
+				add_province_modifier = { name = genocide duration = 1825 }
+			}
+			any_pop = {
+				limit = { has_pop_religion = orthodox is_state_religion = no location = { is_colonial = yes } }
+				militancy = 9
+				consciousness = 9
+				random_list = {
+					25 = { reduce_pop = 0.7 }
+					25 = { reduce_pop = 0.6 }
+					25 = { reduce_pop = 0.5 }
+					25 = { reduce_pop = 0.4 }
+				}
+			}
+			clr_country_flag = colonial_genocide_only
+			}
+		}
+		
+		random_owned = { limit = { owner = { has_country_flag = non_colonial_genocide_only } }
+			owner = {
+			
+			any_owned = { limit = { any_pop = { has_pop_religion = orthodox is_state_religion = no } is_colonial = no }
+				add_province_modifier = { name = genocide duration = 1825 }
+			}
+			any_pop = {
+				limit = { has_pop_religion = orthodox is_state_religion = no location = { is_colonial = no } }
+				militancy = 9
+				consciousness = 9
+				random_list = {
+					25 = { reduce_pop = 0.7 }
+					25 = { reduce_pop = 0.6 }
+					25 = { reduce_pop = 0.5 }
+					25 = { reduce_pop = 0.4 }
+				}
+			}
+			clr_country_flag = non_colonial_genocide_only
+			}
+		}
+			
+		random_owned = { limit = { owner = { has_country_flag = everywhere_genocide_only } }
+				owner = {
+				
+				any_owned = {
+					limit = { any_pop = { has_pop_religion = orthodox is_state_religion = no } }
+					add_province_modifier = { name = genocide duration = 1825 }
+				}
+				any_pop = {
+					limit = { has_pop_religion = orthodox is_state_religion = no }
+					militancy = 9
+					consciousness = 9
+					random_list = {
+						25 = { reduce_pop = 0.7 }
+						25 = { reduce_pop = 0.6 }
+						25 = { reduce_pop = 0.5 }
+						25 = { reduce_pop = 0.4 }
+					}
+				}
+			clr_country_flag = everywhere_genocide_only
+			}
+		}
+	}
+		
+	option = {
+		name = "EVT443009OPTD" #coptic
+		random_owned = { limit = { owner = { has_country_flag = colonial_genocide_only } }
+			owner = {
+			
+			any_owned = { limit = { any_pop = { has_pop_religion = coptic is_state_religion = no } is_colonial = yes }
+				add_province_modifier = { name = genocide duration = 1825 }
+			}
+			any_pop = {
+				limit = { has_pop_religion = coptic is_state_religion = no location = { is_colonial = yes } }
+				militancy = 9
+				consciousness = 9
+				random_list = {
+					25 = { reduce_pop = 0.7 }
+					25 = { reduce_pop = 0.6 }
+					25 = { reduce_pop = 0.5 }
+					25 = { reduce_pop = 0.4 }
+				}
+			}
+			clr_country_flag = colonial_genocide_only
+			}
+		}
+		
+		random_owned = { limit = { owner = { has_country_flag = non_colonial_genocide_only } }
+			owner = {
+			
+			any_owned = { limit = { any_pop = { has_pop_religion = coptic is_state_religion = no } is_colonial = no }
+				add_province_modifier = { name = genocide duration = 1825 }
+			}
+			any_pop = {
+				limit = { has_pop_religion = coptic is_state_religion = no location = { is_colonial = no } }
+				militancy = 9
+				consciousness = 9
+				random_list = {
+					25 = { reduce_pop = 0.7 }
+					25 = { reduce_pop = 0.6 }
+					25 = { reduce_pop = 0.5 }
+					25 = { reduce_pop = 0.4 }
+				}
+			}
+			clr_country_flag = non_colonial_genocide_only
+			}
+		}
+		
+		random_owned = { limit = { owner = { has_country_flag = everywhere_genocide_only } }
+				owner = {
+				
+				any_owned = {
+					limit = { any_pop = { has_pop_religion = coptic is_state_religion = no } }
+					add_province_modifier = { name = genocide duration = 1825 }
+				}
+				any_pop = { limit = { has_pop_religion = coptic is_state_religion = no }
+					militancy = 9
+					consciousness = 9
+					random_list = {
+						25 = { reduce_pop = 0.7 }
+						25 = { reduce_pop = 0.6 }
+						25 = { reduce_pop = 0.5 }
+						25 = { reduce_pop = 0.4 }
+					}
+				}
+				
+			clr_country_flag = everywhere_genocide_only
+			}
+		}
+	}
+
+	option = {
+		name = "EVT443009OPTE" #Every Christian
+		random_owned = { limit = { owner = { has_country_flag = colonial_genocide_only } }
+			owner = {
+		
+			any_owned = {
+				limit = {
+					is_colonial = yes
+					any_pop = {
+						is_state_religion = no
+						OR = {
+							has_pop_religion = catholic
+							has_pop_religion = protestant
+							has_pop_religion = orthodox
+							has_pop_religion = coptic
+							has_pop_religion = mormon
+						}
+					}
+				}
+			add_province_modifier = { name = genocide duration = 1825 }
+			}
+			any_pop = {
+				limit = {
+					is_state_religion = no
+					location = { is_colonial = yes }
+					OR = {
+						has_pop_religion = catholic
+						has_pop_religion = protestant
+						has_pop_religion = orthodox
+						has_pop_religion = coptic
+						has_pop_religion = mormon
+					}
+				}
+				militancy = 9
+				consciousness = 9
+			random_list = {
+				25 = { reduce_pop = 0.7 }
+				25 = { reduce_pop = 0.6 }
+				25 = { reduce_pop = 0.5 }
+				25 = { reduce_pop = 0.4 }
+				}
+			}
+			
+			clr_country_flag = colonial_genocide_only
+			}
+		}
+		
+		
+		random_owned = { limit = { owner = { has_country_flag = non_colonial_genocide_only } }
+			owner = {
+			
+			any_owned = {
+				limit = {
+				is_colonial = no
+				any_pop = {
+					is_state_religion = no
+					OR = {
+						has_pop_religion = catholic
+						has_pop_religion = protestant
+						has_pop_religion = orthodox
+						has_pop_religion = coptic
+						has_pop_religion = mormon
+						}
+					} 
+				}
+			add_province_modifier = { name = genocide duration = 1825 }
+			}
+			any_pop = {
+				limit = {
+				is_state_religion = no
+				location = { is_colonial = no }
+				OR = {
+					has_pop_religion = catholic
+					has_pop_religion = protestant
+					has_pop_religion = orthodox
+					has_pop_religion = coptic
+					has_pop_religion = mormon
+				} 
+			}
+				militancy = 9
+				consciousness = 9
+			random_list = {
+				25 = { reduce_pop = 0.7 }
+				25 = { reduce_pop = 0.6 }
+				25 = { reduce_pop = 0.5 }
+				25 = { reduce_pop = 0.4 }
+				}
+			}
+			clr_country_flag = non_colonial_genocide_only
+			}
+		}
+		
+		random_owned = { limit = { owner = { has_country_flag = everywhere_genocide_only } }
+				owner = {
+				
+				any_owned = {
+					limit = {
+					is_state_religion = no
+					any_pop = { 
+						OR = {
+							has_pop_religion = catholic
+							has_pop_religion = protestant
+							has_pop_religion = orthodox
+							has_pop_religion = coptic
+							has_pop_religion = mormon
+						}
+					}
+				}
+				add_province_modifier = { name = genocide duration = 1825 }
+				}
+				
+				any_pop = {
+					limit = {
+						is_state_religion = no
+						OR = {
+							has_pop_religion = catholic
+							has_pop_religion = protestant
+							has_pop_religion = orthodox
+							has_pop_religion = coptic
+							has_pop_religion = mormon
+						}
+					}
+					militancy = 9
+					consciousness = 9
+					random_list = {
+						25 = { reduce_pop = 0.7 }
+						25 = { reduce_pop = 0.6 }
+						25 = { reduce_pop = 0.5 }
+						25 = { reduce_pop = 0.4 }
+					}
+				}
+			clr_country_flag = everywhere_genocide_only
+			}
+		}
+	}
+}
+
+	
+
+#Muslims - Choose the place
+country_event = {
+	
+	id = 443012
+	title = "EVTNAME443012"
+	desc = "EVTDESC443008"
+	picture = "islam_religion"
+	
+	is_triggered_only = yes
+	
+	immediate = {
+		clr_country_flag = everywhere_genocide_only
+		clr_country_flag = non_colonial_genocide_only
+		clr_country_flag = colonial_genocide_only
+	}
+		
+	option = {
+		name = "EVT443008OPTA" #Colonial
+		set_country_flag = colonial_genocide_only
+		country_event = 443013
+		any_country = {
+			limit = { NOT = { relation = { who = THIS value = 0 } } }
+			casus_belli = { target = THIS type = humiliate months = 24 }
+		}
+	}
+		
+	option = {
+		name = "EVT443008OPTB" #Non Colonial
+		set_country_flag = non_colonial_genocide_only
+		country_event = 443013
+		any_country = {
+			limit = { NOT = { relation = { who = THIS value = 0 } } }
+			casus_belli = { target = THIS type = humiliate months = 24 }
+		}
+	}
+		
+	option = {
+		name = "EVT443008OPTC" #Both
+		set_country_flag = everywhere_genocide_only
+		country_event = 443013
+		any_country = {
+			limit = { NOT = { relation = { who = THIS value = 0 } } }
+			casus_belli = { target = THIS type = humiliate months = 24 }
+		}
+	}
+		
+	option = {
+		name = "EVT443007OPTE" #Go Back
+		country_event = 4433
+	}
+}
+	
+#Muslims/Jews
+country_event = {
+	id = 443013
+	title = "EVTNAME443013"
+	desc = "EVTDESC443013"
+	picture = "demolished_mosque"
+	
+	is_triggered_only = yes
+
+	immediate = {
+		random_owned = { limit = { owner = { NOT = { has_country_flag = preparations_to_kill } } } owner = { badboy = 50 } }
+		clr_country_flag = preparations_to_kill
+	}
+	
+	option = {
+		name = "EVT443013OPTA" #Bye Sunnis
+
+		random_owned = { limit = { owner = { has_country_flag = colonial_genocide_only } }
+			owner = {
+		
+			any_owned = {
+				limit = { any_pop = { has_pop_religion = sunni is_state_religion = no } is_colonial = yes }
+				add_province_modifier = { name = genocide duration = 1825 }
+			}
+		
+			any_pop = {
+				limit = { has_pop_religion = sunni is_state_religion = no location = { is_colonial = yes } }
+				militancy = 9
+				consciousness = 9
+				random_list = {
+					25 = { reduce_pop = 0.7 }
+					25 = { reduce_pop = 0.6 }
+					25 = { reduce_pop = 0.5 }
+					25 = { reduce_pop = 0.4 }
+				}
+			}
+			clr_country_flag = colonial_genocide_only
+			}
+		}
+		
+		random_owned = { limit = { owner = { has_country_flag = non_colonial_genocide_only } }
+			owner = {
+			
+			any_owned = {
+				limit = { any_pop = { has_pop_religion = sunni is_state_religion = no } is_colonial = no }
+				add_province_modifier = { name = genocide duration = 1825 }
+			}
+			any_pop = {
+				limit = { has_pop_religion = sunni is_state_religion = no location = { is_colonial = no } }
+				militancy = 9
+				consciousness = 9
+				random_list = {
+					25 = { reduce_pop = 0.7 }
+					25 = { reduce_pop = 0.6 }
+					25 = { reduce_pop = 0.5 }
+					25 = { reduce_pop = 0.4 }
+				}
+			}
+			clr_country_flag = non_colonial_genocide_only
+			}
+		}
+	
+		random_owned = { limit = { owner = { has_country_flag = everywhere_genocide_only } }
+				owner = {
+				
+				any_owned = {
+					limit = { any_pop = { has_pop_religion = sunni is_state_religion = no } }
+					add_province_modifier = { name = genocide duration = 1825 }
+				}
+				any_pop = { limit = { has_pop_religion = sunni is_state_religion = no }
+					militancy = 9
+					consciousness = 9
+					random_list = {
+						25 = { reduce_pop = 0.7 }
+						25 = { reduce_pop = 0.6 }
+						25 = { reduce_pop = 0.5 }
+						25 = { reduce_pop = 0.4 }
+					}
+				}
+				clr_country_flag = everywhere_genocide_only
+			}
+		}
+		
+		any_country = {
+			limit = {
+				exists = yes
+				OR = {
+					has_country_flag = sunni_country
+					has_country_flag = ibadi_country
+				}
+			}
+			casus_belli = { target = THIS type = cut_down_to_size months = 60 }
+			relation = { who = THIS value = -400 }
+		}
+	}
+		
+	option = {
+		name = "EVT443013OPTB" #Bye Shiites
+		
+		random_owned = { limit = { owner = { has_country_flag = colonial_genocide_only } }
+			owner = {
+		
+			any_owned = {
+				limit = { any_pop = { has_pop_religion = shiite is_state_religion = no } is_colonial = yes }
+				add_province_modifier = { name = genocide duration = 1825 }
+			}
+		
+			any_pop = {
+				limit = { has_pop_religion = shiite is_state_religion = no location = { is_colonial = yes } }
+				militancy = 9
+				consciousness = 9
+				random_list = {
+					25 = { reduce_pop = 0.7 }
+					25 = { reduce_pop = 0.6 }
+					25 = { reduce_pop = 0.5 }
+					25 = { reduce_pop = 0.4 }
+				}
+			}
+			clr_country_flag = colonial_genocide_only
+			}
+		}
+		
+		random_owned = { limit = { owner = { has_country_flag = non_colonial_genocide_only } }
+			owner = {
+			
+			any_owned = {
+				limit = { any_pop = { has_pop_religion = shiite is_state_religion = no } is_colonial = no }
+				add_province_modifier = { name = genocide duration = 1825 }
+			}
+			any_pop = {
+				limit = { has_pop_religion = shiite is_state_religion = no location = { is_colonial = no } }
+				militancy = 9
+				consciousness = 9
+				random_list = {
+					25 = { reduce_pop = 0.7 }
+					25 = { reduce_pop = 0.6 }
+					25 = { reduce_pop = 0.5 }
+					25 = { reduce_pop = 0.4 }
+				}
+			}
+			
+				clr_country_flag = non_colonial_genocide_only
+			}
+		}
+	
+		random_owned = { limit = { owner = { has_country_flag = everywhere_genocide_only } }
+				owner = {
+				
+				any_owned = {
+					limit = { any_pop = { has_pop_religion = shiite is_state_religion = no } }
+					add_province_modifier = { name = genocide duration = 1825 }
+				}
+				any_pop = { limit = { has_pop_religion = shiite is_state_religion = no }
+					militancy = 9
+					consciousness = 9
+					random_list = {
+						25 = { reduce_pop = 0.7 }
+						25 = { reduce_pop = 0.6 }
+						25 = { reduce_pop = 0.5 }
+						25 = { reduce_pop = 0.4 }
+					}
+				}
+				
+				clr_country_flag = everywhere_genocide_only
+			}
+		}
+		
+		any_country = {
+			limit = {
+				exists = yes
+				OR = {
+					has_country_flag = shiite_country
+					has_country_flag = ibadi_country
+				}
+			}
+			casus_belli = { target = THIS type = cut_down_to_size months = 60 }
+			relation = { who = THIS value = -400 }
+		}
+	}
+	
+	option = {
+		name = "EVT443013OPTD" #Ibadi
+		
+		random_owned = { limit = { owner = { has_country_flag = colonial_genocide_only } }
+			owner = {
+		
+			any_owned = {
+				limit = { any_pop = { has_pop_religion = ibadi is_state_religion = no } is_colonial = yes }
+				add_province_modifier = { name = genocide duration = 1825 }
+			}
+		
+			any_pop = {
+				limit = { has_pop_religion = ibadi is_state_religion = no location = { is_colonial = yes } }
+				militancy = 9
+				consciousness = 9
+				random_list = {
+					25 = { reduce_pop = 0.7 }
+					25 = { reduce_pop = 0.6 }
+					25 = { reduce_pop = 0.5 }
+					25 = { reduce_pop = 0.4 }
+				}
+			}
+			
+				clr_country_flag = colonial_genocide_only
+			}
+		}
+		
+		random_owned = { limit = { owner = { has_country_flag = non_colonial_genocide_only } }
+			owner = {
+			
+			any_owned = {
+				limit = { any_pop = { has_pop_religion = ibadi }is_state_religion = no  is_colonial = no }
+				add_province_modifier = { name = genocide duration = 1825 }
+			}
+			any_pop = {
+				limit = { has_pop_religion = ibadi is_state_religion = no location = { is_colonial = no } }
+				militancy = 9
+				consciousness = 9
+				random_list = {
+					25 = { reduce_pop = 0.7 }
+					25 = { reduce_pop = 0.6 }
+					25 = { reduce_pop = 0.5 }
+					25 = { reduce_pop = 0.4 }
+				}
+			}
+			clr_country_flag = non_colonial_genocide_only
+			}
+		}
+	
+		random_owned = { limit = { owner = { has_country_flag = everywhere_genocide_only } }
+				owner = {
+				
+				any_owned = {
+					limit = { any_pop = { has_pop_religion = ibadi is_state_religion = no } }
+					add_province_modifier = { name = genocide duration = 1825 }
+				}
+				any_pop = { limit = { has_pop_religion = ibadi is_state_religion = no }
+					militancy = 9
+					consciousness = 9
+					random_list = {
+						25 = { reduce_pop = 0.7 }
+						25 = { reduce_pop = 0.6 }
+						25 = { reduce_pop = 0.5 }
+						25 = { reduce_pop = 0.4 }
+					}
+				}
+				clr_country_flag = everywhere_genocide_only
+			}
+		}
+		
+		any_country = {
+			limit = {
+				exists = yes
+				OR = {
+					has_country_flag = sunni_country
+					has_country_flag = shiite_country
+					has_country_flag = ibadi_country
+				}
+			}
+			casus_belli = { target = THIS type = cut_down_to_size months = 60 }
+			relation = { who = THIS value = -400 }
+		}
+	}
+		
+	option = {
+		name = "EVT443013OPTC" #jewish
+		
+		random_owned = { limit = { owner = { has_country_flag = colonial_genocide_only } }
+			owner = {
+		
+				any_owned = {
+					limit = { any_pop = { has_pop_religion = jewish is_state_religion = no } is_colonial = yes }
+					add_province_modifier = { name = genocide duration = 1825 }
+				}
+		
+				any_pop = {
+					limit = { has_pop_religion = jewish is_state_religion = no location = { is_colonial = yes } }
+					militancy = 9
+					consciousness = 9
+					random_list = {
+						25 = { reduce_pop = 0.7 }
+						25 = { reduce_pop = 0.6 }
+						25 = { reduce_pop = 0.5 }
+						25 = { reduce_pop = 0.4 }
+					}
+				}
+				clr_country_flag = colonial_genocide_only
+			}
+		}
+		
+		random_owned = { limit = { owner = { has_country_flag = non_colonial_genocide_only } }
+			owner = {
+			
+			any_owned = {
+				limit = { any_pop = { has_pop_religion = jewish is_state_religion = no } is_colonial = no }
+				add_province_modifier = { name = genocide duration = 1825 }
+			}
+			any_pop = {
+				limit = { has_pop_religion = jewish is_state_religion = no location = { is_colonial = no } }
+				militancy = 9
+				consciousness = 9
+				random_list = {
+					25 = { reduce_pop = 0.7 }
+					25 = { reduce_pop = 0.6 }
+					25 = { reduce_pop = 0.5 }
+					25 = { reduce_pop = 0.4 }
+				}
+			}
+				clr_country_flag = non_colonial_genocide_only
+			}
+		}
+	
+		random_owned = { limit = { owner = { has_country_flag = everywhere_genocide_only } }
+				owner = {
+				
+				any_owned = {
+					limit = { any_pop = { has_pop_religion = jewish is_state_religion = no } }
+					add_province_modifier = { name = genocide duration = 1825 }
+				}
+				any_pop = { limit = { has_pop_religion = jewish is_state_religion = no }
+					militancy = 9
+					consciousness = 9
+					random_list = {
+						25 = { reduce_pop = 0.7 }
+						25 = { reduce_pop = 0.6 }
+						25 = { reduce_pop = 0.5 }
+						25 = { reduce_pop = 0.4 }
+					}
+				}
+				clr_country_flag = everywhere_genocide_only
+			}
+		}
+			
+		any_country = {
+			limit = { has_country_flag = jewish_country }
+			casus_belli = { target = THIS type = cut_down_to_size months = 60 }
+			relation = { who = THIS value = -400 }
+		}
+		any_country = {
+			limit = {
+				is_greater_power = yes
+				NOT = { has_country_flag = sunni_country }
+				NOT = { has_country_flag = shiite_country }
+				OR = {
+					capital_scope = { continent = europe }
+					capital_scope = { continent = north_america }
+					capital_scope = { continent = south_america }
+					capital_scope = { continent = australia_new_zealand }
+				}
+			}
+			relation = { who = THIS value = -100 }
+		}
+	}
+		
+	option = {
+		name = "EVT443009OPTE" #All of them Only
+	
+		random_owned = { limit = { owner = { has_country_flag = colonial_genocide_only } }
+			owner = {
+		
+			any_owned = {
+				limit = {
+					is_colonial = yes
+					any_pop = {
+						is_state_religion = no
+						OR = {
+							has_pop_religion = sunni
+							has_pop_religion = shiite
+							has_pop_religion = ibadi
+							has_pop_religion = jewish
+						}
+					}
+				}
+			add_province_modifier = { name = genocide duration = 1825 }
+			}
+			any_pop = {
+				limit = {
+					is_state_religion = no
+					location = { is_colonial = yes }
+					OR = {
+						has_pop_religion = sunni
+						has_pop_religion = shiite
+						has_pop_religion = ibadi
+						has_pop_religion = jewish
+					}
+				}
+				militancy = 9
+				consciousness = 9
+			random_list = {
+				25 = { reduce_pop = 0.7 }
+				25 = { reduce_pop = 0.6 }
+				25 = { reduce_pop = 0.5 }
+				25 = { reduce_pop = 0.4 }
+				}
+			}
+			clr_country_flag = colonial_genocide_only
+			}
+		}
+		
+		
+		random_owned = { limit = { owner = { has_country_flag = non_colonial_genocide_only } }
+			owner = {
+			
+			any_owned = {
+				limit = {
+				is_colonial = no
+				any_pop = { 
+					is_state_religion = no
+					OR = {
+						has_pop_religion = sunni
+						has_pop_religion = shiite
+						has_pop_religion = ibadi
+						has_pop_religion = jewish
+						}
+					} 
+				}
+			add_province_modifier = { name = genocide duration = 1825 }
+			}
+			any_pop = {
+				limit = {
+				is_state_religion = no
+				location = { is_colonial = no }
+				OR = {
+					has_pop_religion = sunni
+					has_pop_religion = shiite
+					has_pop_religion = ibadi
+					has_pop_religion = jewish
+				} 
+			}
+				militancy = 9
+				consciousness = 9
+			random_list = {
+				25 = { reduce_pop = 0.7 }
+				25 = { reduce_pop = 0.6 }
+				25 = { reduce_pop = 0.5 }
+				25 = { reduce_pop = 0.4 }
+				}
+			}
+			clr_country_flag = non_colonial_genocide_only
+			}
+		}
+		
+		random_owned = { limit = { owner = { has_country_flag = everywhere_genocide_only } }
+				owner = {
+				
+				any_owned = {
+					limit = {
+					any_pop = {
+						is_state_religion = no
+						OR = {
+							has_pop_religion = sunni
+							has_pop_religion = shiite
+							has_pop_religion = ibadi
+							has_pop_religion = jewish
+						}
+					}
+				}
+				add_province_modifier = { name = genocide duration = 1825 }
+				}
+				
+				any_pop = {
+					limit = {
+						is_state_religion = no
+						OR = {
+							has_pop_religion = sunni
+							has_pop_religion = shiite
+							has_pop_religion = ibadi
+							has_pop_religion = jewish
+						}
+					}
+					militancy = 9
+					consciousness = 9
+					random_list = {
+						25 = { reduce_pop = 0.7 }
+						25 = { reduce_pop = 0.6 }
+						25 = { reduce_pop = 0.5 }
+						25 = { reduce_pop = 0.4 }
+					}
+				}
+			clr_country_flag = everywhere_genocide_only
+			}
+		}
+			
+		any_country = {
+			limit = {
+				OR = {
+					has_country_flag = sunni_country
+					has_country_flag = shiite_country
+					has_country_flag = ibadi_country
+				}
+			}
+			casus_belli = { target = THIS type = cut_down_to_size months = 60 }
+			relation = { who = THIS value = -400 }
+		}
+	}
+}
+	
+#Buddhism - Choose the place
+country_event = {
+	
+	id = 443016
+	title = "EVTNAME443016"
+	desc = "EVTDESC443008"
+	picture = "budhist_religion"
+	
+	is_triggered_only = yes
+	
+	immediate = {
+		clr_country_flag = everywhere_genocide_only
+		clr_country_flag = non_colonial_genocide_only
+		clr_country_flag = colonial_genocide_only
+	}
+		
+	option = {
+		name = "EVT443008OPTA" #Colonial
+		country_event = 443017
+		set_country_flag = colonial_genocide_only
+		any_country = {
+			limit = { NOT = { relation = { who = THIS value = 0 } } }
+			casus_belli = { target = THIS type = humiliate months = 24 } 
+		}
+		any_country = {
+			limit = {
+				OR = {
+					has_country_flag = mahayana_country
+					has_country_flag = gelugpa_country
+					has_country_flag = theravada_country
+					has_country_flag = hindu_country
+					has_country_flag = shinto_country
+					has_country_flag = sikh_country
+				}
+			}
+			casus_belli = { target = THIS type = cut_down_to_size months = 60 }
+			random_list = {
+				25 = { relation = { who = THIS value = -400 } }
+				25 = { relation = { who = THIS value = -300 } }
+				25 = { relation = { who = THIS value = -200 } }
+				25 = { relation = { who = THIS value = -150 } }
+			}
+		}
+	}
+		
+	option = {
+		name = "EVT443008OPTB" #Non Colonial
+		country_event = 443017
+		set_country_flag = non_colonial_genocide_only
+		any_country = {
+			limit = { NOT = { relation = { who = THIS value = 0 } } }
+			casus_belli = { target = THIS type = humiliate months = 24 }
+		}
+		any_country = {
+			limit = {
+				OR = {
+					has_country_flag = mahayana_country
+					has_country_flag = gelugpa_country
+					has_country_flag = theravada_country
+					has_country_flag = hindu_country
+					has_country_flag = shinto_country
+					has_country_flag = sikh_country
+				}
+			}
+			casus_belli = { target = THIS type = cut_down_to_size months = 60 }
+			random_list = {
+				25 = { relation = { who = THIS value = -400 } }
+				25 = { relation = { who = THIS value = -300 } }
+				25 = { relation = { who = THIS value = -200 } }
+				25 = { relation = { who = THIS value = -150 } }
+			}
+		}
+	}
+		
+	option = {
+		name = "EVT443008OPTC" #Both
+		country_event = 443017
+		set_country_flag = everywhere_genocide_only
+		any_country = {
+			limit = { NOT = { relation = { who = THIS value = 0 } } }
+			casus_belli = { target = THIS type = humiliate months = 24 }
+		}
+		any_country = {
+			limit = {
+				OR = {
+					has_country_flag = mahayana_country
+					has_country_flag = gelugpa_country
+					has_country_flag = theravada_country
+					has_country_flag = hindu_country
+					has_country_flag = shinto_country
+					has_country_flag = sikh_country
+				}
+			}
+			casus_belli = { target = THIS type = cut_down_to_size months = 60 }
+			random_list = {
+				25 = { relation = { who = THIS value = -400 } }
+				25 = { relation = { who = THIS value = -300 } }
+				25 = { relation = { who = THIS value = -200 } }
+				25 = { relation = { who = THIS value = -150 } }
+			}
+		}
+	}
+		
+	option = {
+		name = "EVT443007OPTE" #Go Back
+		country_event = 4433
+	}
+}
+	
+#Buddhists
+country_event = {
+	id = 443017
+	title = "EVTNAME443017"
+	desc = "EVTDESC443017"
+	picture = "demolished_budha"
+	
+	is_triggered_only = yes
+	
+	immediate = {
+		random_owned = { limit = { owner = { NOT = { has_country_flag = preparations_to_kill } } } owner = { badboy = 50 } }
+		clr_country_flag = preparations_to_kill
+	}
+		
+	option = {
+		name = "EVT443017OPTA" #Bye Sikh
+		
+		random_owned = { limit = { owner = { has_country_flag = colonial_genocide_only } }
+			owner = {
+		
+			any_owned = {
+				limit = { any_pop = { has_pop_religion = sikh is_state_religion = no } is_colonial = yes }
+				add_province_modifier = { name = genocide duration = 1825 }
+			}
+		
+			any_pop = {
+				limit = { has_pop_religion = sikh is_state_religion = no location = { is_colonial = yes } }
+				militancy = 9
+				consciousness = 9
+				random_list = {
+					25 = { reduce_pop = 0.7 }
+					25 = { reduce_pop = 0.6 }
+					25 = { reduce_pop = 0.5 }
+					25 = { reduce_pop = 0.4 }
+				}
+			}
+			clr_country_flag = colonial_genocide_only
+			}
+		}
+		
+		random_owned = { limit = { owner = { has_country_flag = non_colonial_genocide_only } }
+			owner = {
+			
+			any_owned = {
+				limit = { any_pop = { has_pop_religion = sikh is_state_religion = no } is_colonial = no }
+				add_province_modifier = { name = genocide duration = 1825 }
+			}
+			any_pop = {
+				limit = { has_pop_religion = sikh is_state_religion = no location = { is_colonial = no } }
+				militancy = 9
+				consciousness = 9
+				random_list = {
+					25 = { reduce_pop = 0.7 }
+					25 = { reduce_pop = 0.6 }
+					25 = { reduce_pop = 0.5 }
+					25 = { reduce_pop = 0.4 }
+				}
+			}
+				clr_country_flag = non_colonial_genocide_only
+			}
+		}
+	
+		random_owned = { limit = { owner = { has_country_flag = everywhere_genocide_only } }
+				owner = {
+				
+				any_owned = {
+					limit = { any_pop = { has_pop_religion = sikh is_state_religion = no } }
+					add_province_modifier = { name = genocide duration = 1825 }
+				}
+				any_pop = { limit = { has_pop_religion = sikh is_state_religion = no }
+					militancy = 9
+					consciousness = 9
+					random_list = {
+						25 = { reduce_pop = 0.7 }
+						25 = { reduce_pop = 0.6 }
+						25 = { reduce_pop = 0.5 }
+						25 = { reduce_pop = 0.4 }
+					}
+				}
+				clr_country_flag = everywhere_genocide_only
+			}
+		}
+	}
+		
+	option = {
+		name = "EVT443017OPTB" #Bye Gelugpa
+		random_owned = { limit = { owner = { has_country_flag = colonial_genocide_only } }
+			owner = {
+		
+			any_owned = {
+				limit = { any_pop = { has_pop_religion = gelugpa is_state_religion = no } is_colonial = yes }
+				add_province_modifier = { name = genocide duration = 1825 }
+			}
+		
+			any_pop = {
+				limit = { has_pop_religion = gelugpa is_state_religion = no location = { is_colonial = yes } }
+				militancy = 9
+				consciousness = 9
+				random_list = {
+					25 = { reduce_pop = 0.7 }
+					25 = { reduce_pop = 0.6 }
+					25 = { reduce_pop = 0.5 }
+					25 = { reduce_pop = 0.4 }
+				}
+			}
+				clr_country_flag = colonial_genocide_only
+			}
+		}
+		
+		random_owned = { limit = { owner = { has_country_flag = non_colonial_genocide_only } }
+			owner = {
+			
+			any_owned = {
+				limit = { any_pop = { has_pop_religion = gelugpa is_state_religion = no } is_colonial = no }
+				add_province_modifier = { name = genocide duration = 1825 }
+			}
+			any_pop = {
+				limit = { has_pop_religion = gelugpa is_state_religion = no location = { is_colonial = no } }
+				militancy = 9
+				consciousness = 9
+				random_list = {
+					25 = { reduce_pop = 0.7 }
+					25 = { reduce_pop = 0.6 }
+					25 = { reduce_pop = 0.5 }
+					25 = { reduce_pop = 0.4 }
+				}
+			}
+				clr_country_flag = non_colonial_genocide_only
+			}
+		}
+	
+		random_owned = { limit = { owner = { has_country_flag = everywhere_genocide_only } }
+				owner = {
+				
+				any_owned = {
+					limit = { any_pop = { has_pop_religion = gelugpa is_state_religion = no } }
+					add_province_modifier = { name = genocide duration = 1825 }
+				}
+				any_pop = { limit = { has_pop_religion = gelugpa is_state_religion = no }
+					militancy = 9
+					consciousness = 9
+					random_list = {
+						25 = { reduce_pop = 0.7 }
+						25 = { reduce_pop = 0.6 }
+						25 = { reduce_pop = 0.5 }
+						25 = { reduce_pop = 0.4 }
+					}
+				}
+				clr_country_flag = everywhere_genocide_only
+			}
+		}
+	}
+		
+	option = {
+		name = "EVT443017OPTC" #Theravada
+		random_owned = { limit = { owner = { has_country_flag = colonial_genocide_only } }
+			owner = {
+		
+			any_owned = {
+				limit = { any_pop = { has_pop_religion = theravada is_state_religion = no } is_colonial = yes }
+				add_province_modifier = { name = genocide duration = 1825 }
+			}
+		
+			any_pop = {
+				limit = { has_pop_religion = theravada is_state_religion = no location = { is_colonial = yes } }
+				militancy = 9
+				consciousness = 9
+				random_list = {
+					25 = { reduce_pop = 0.7 }
+					25 = { reduce_pop = 0.6 }
+					25 = { reduce_pop = 0.5 }
+					25 = { reduce_pop = 0.4 }
+				}
+			}
+				clr_country_flag = colonial_genocide_only
+			}
+		}
+		
+		random_owned = { limit = { owner = { has_country_flag = non_colonial_genocide_only } }
+			owner = {
+			
+			any_owned = {
+				limit = { any_pop = { has_pop_religion = theravada is_state_religion = no } is_colonial = no }
+				add_province_modifier = { name = genocide duration = 1825 }
+			}
+			any_pop = {
+				limit = { has_pop_religion = theravada is_state_religion = no location = { is_colonial = no } }
+				militancy = 9
+				consciousness = 9
+				random_list = {
+					25 = { reduce_pop = 0.7 }
+					25 = { reduce_pop = 0.6 }
+					25 = { reduce_pop = 0.5 }
+					25 = { reduce_pop = 0.4 }
+				}
+			}
+				clr_country_flag = non_colonial_genocide_only
+			}
+		}
+	
+		random_owned = { limit = { owner = { has_country_flag = everywhere_genocide_only } }
+				owner = {
+				
+				any_owned = {
+					limit = { any_pop = { has_pop_religion = theravada is_state_religion = no } }
+					add_province_modifier = { name = genocide duration = 1825 }
+				}
+				any_pop = { limit = { has_pop_religion = theravada is_state_religion = no }
+					militancy = 9
+					consciousness = 9
+					random_list = {
+						25 = { reduce_pop = 0.7 }
+						25 = { reduce_pop = 0.6 }
+						25 = { reduce_pop = 0.5 }
+						25 = { reduce_pop = 0.4 }
+					}
+				}
+				clr_country_flag = everywhere_genocide_only
+			}
+		}
+	}
+		
+	option = {
+		name = "EVT443017OPTD" #Hindu
+		random_owned = { limit = { owner = { has_country_flag = colonial_genocide_only } }
+			owner = {
+		
+			any_owned = {
+				limit = { any_pop = { has_pop_religion = hindu is_state_religion = no } is_colonial = yes }
+				add_province_modifier = { name = genocide duration = 1825 }
+			}
+		
+			any_pop = {
+				limit = { has_pop_religion = hindu is_state_religion = no location = { is_colonial = yes } }
+				militancy = 9
+				consciousness = 9
+				random_list = {
+					25 = { reduce_pop = 0.7 }
+					25 = { reduce_pop = 0.6 }
+					25 = { reduce_pop = 0.5 }
+					25 = { reduce_pop = 0.4 }
+				}
+			}
+			clr_country_flag = colonial_genocide_only
+			}
+		}
+		
+		random_owned = { limit = { owner = { has_country_flag = non_colonial_genocide_only } }
+			owner = {
+			
+				any_owned = {
+					limit = { any_pop = { has_pop_religion = hindu is_state_religion = no } is_colonial = no }
+					add_province_modifier = { name = genocide duration = 1825 }
+				}
+				any_pop = {
+					limit = { has_pop_religion = hindu is_state_religion = no location = { is_colonial = no } }
+					militancy = 9
+					consciousness = 9
+					random_list = {
+						25 = { reduce_pop = 0.7 }
+						25 = { reduce_pop = 0.6 }
+						25 = { reduce_pop = 0.5 }
+						25 = { reduce_pop = 0.4 }
+					}
+				}
+				clr_country_flag = non_colonial_genocide_only
+			}
+		}
+	
+		random_owned = { limit = { owner = { has_country_flag = everywhere_genocide_only } }
+				owner = {
+				
+				any_owned = {
+					limit = { any_pop = { has_pop_religion = hindu is_state_religion = no } }
+					add_province_modifier = { name = genocide duration = 1825 }
+				}
+				any_pop = { limit = { has_pop_religion = hindu is_state_religion = no }
+					militancy = 9
+					consciousness = 9
+					random_list = {
+						25 = { reduce_pop = 0.7 }
+						25 = { reduce_pop = 0.6 }
+						25 = { reduce_pop = 0.5 }
+						25 = { reduce_pop = 0.4 }
+					}
+				}
+				
+				clr_country_flag = everywhere_genocide_only
+			}
+		}
+	}
+	
+	option = {
+		name = "EVT443017OPTE" #Everyone
+		random_owned = { limit = { owner = { has_country_flag = colonial_genocide_only } }
+			owner = {
+		
+			any_owned = {
+				limit = {
+					is_colonial = yes
+					any_pop = {
+						is_state_religion = no
+						OR = {
+							has_pop_religion = sikh
+							has_pop_religion = gelugpa
+							has_pop_religion = theravada
+							has_pop_religion = hindu
+						}
+					}
+				}
+			add_province_modifier = { name = genocide duration = 1825 }
+			}
+			any_pop = {
+				limit = {
+					is_state_religion = no
+					location = { is_colonial = yes }
+					OR = {
+						has_pop_religion = sikh
+						has_pop_religion = gelugpa
+						has_pop_religion = theravada
+						has_pop_religion = hindu
+					}
+				}
+				militancy = 9
+				consciousness = 9
+			random_list = {
+				25 = { reduce_pop = 0.7 }
+				25 = { reduce_pop = 0.6 }
+				25 = { reduce_pop = 0.5 }
+				25 = { reduce_pop = 0.4 }
+				}
+			}
+			
+			clr_country_flag = colonial_genocide_only
+			}
+		}
+		
+		
+		random_owned = { limit = { owner = { has_country_flag = non_colonial_genocide_only } }
+			owner = {
+			
+			any_owned = {
+				limit = {
+				is_colonial = no
+				any_pop = {
+					is_state_religion = no
+					OR = {
+						has_pop_religion = sikh
+						has_pop_religion = gelugpa
+						has_pop_religion = theravada
+						has_pop_religion = hindu
+						}
+					} 
+				}
+			add_province_modifier = { name = genocide duration = 1825 }
+			}
+			any_pop = {
+				limit = {
+				is_state_religion = no
+				location = { is_colonial = no }
+				OR = {
+					has_pop_religion = sikh
+					has_pop_religion = gelugpa
+					has_pop_religion = theravada
+					has_pop_religion = hindu
+				} 
+			}
+				militancy = 9
+				consciousness = 9
+			random_list = {
+				25 = { reduce_pop = 0.7 }
+				25 = { reduce_pop = 0.6 }
+				25 = { reduce_pop = 0.5 }
+				25 = { reduce_pop = 0.4 }
+				}
+			}
+			
+			clr_country_flag = non_colonial_genocide_only
+			}
+		}
+		
+		random_owned = { limit = { owner = { has_country_flag = everywhere_genocide_only } }
+				owner = {
+				
+				any_owned = {
+					limit = {
+					any_pop = { 
+						is_state_religion = no
+						OR = {
+							has_pop_religion = sikh
+							has_pop_religion = gelugpa
+							has_pop_religion = theravada
+							has_pop_religion = hindu
+						}
+					}
+				}
+				add_province_modifier = { name = genocide duration = 1825 }
+				}
+				
+				any_pop = {
+					limit = {
+						is_state_religion = no
+						OR = {
+							has_pop_religion = sikh
+							has_pop_religion = gelugpa
+							has_pop_religion = theravada
+							has_pop_religion = hindu
+						}
+					}
+					militancy = 9
+					consciousness = 9
+					random_list = {
+						25 = { reduce_pop = 0.7 }
+						25 = { reduce_pop = 0.6 }
+						25 = { reduce_pop = 0.5 }
+						25 = { reduce_pop = 0.4 }
+					}
+				}
+				
+			clr_country_flag = everywhere_genocide_only
+			}
+		}
+	}
+}
+	
+#Shintoism and the fart east - Choose the place
+country_event = {
+	
+	id = 443020
+	title = "EVTNAME443020"
+	desc = "EVTDESC443008"
+	picture = "shintoism_religion"
+	
+	is_triggered_only = yes
+	
+	immediate = {
+		clr_country_flag = everywhere_genocide_only
+		clr_country_flag = non_colonial_genocide_only
+		clr_country_flag = colonial_genocide_only
+	}
+		
+	option = {
+		name = "EVT443008OPTA" #Colonial
+		set_country_flag = colonial_genocide_only
+		any_country = {
+			limit = { NOT = { relation = { who = THIS value = 0 } } }
+			casus_belli = { target = THIS type = humiliate months = 24 }
+		}
+		country_event = 443021
+	}
+		
+	option = {
+		name = "EVT443008OPTB" #Non Colonial
+		set_country_flag = non_colonial_genocide_only
+		any_country = {
+			limit = { NOT = { relation = { who = THIS value = 0 } } }
+			casus_belli = { target = THIS type = humiliate months = 24 }
+		}
+		country_event = 443021
+	}
+		
+	option = {
+		name = "EVT443008OPTC" #Both
+		set_country_flag = everywhere_genocide_only
+		any_country = {
+			limit = { NOT = { relation = { who = THIS value = 0 } } }
+			casus_belli = { target = THIS type = humiliate months = 24 }
+		}
+		country_event = 443021
+	}
+		
+	option = {
+		name = "EVT443007OPTE" #Go Back
+		country_event = 4433
+	}
+}
+	
+#Far Eastern
+country_event = {
+	id = 443021
+	title = "EVTNAME443021"
+	desc = "EVTDESC443021"
+	picture = "demolished_shrine"
+	
+	is_triggered_only = yes
+	
+	immediate = {
+		random_owned = { limit = { owner = { NOT = { has_country_flag = preparations_to_kill } } } owner = { badboy = 50 } }
+		clr_country_flag = preparations_to_kill
+	}
+
+	option = {
+		name = "EVT443021OPTA" #Bye Shinto
+		
+		random_owned = { limit = { owner = { has_country_flag = colonial_genocide_only } }
+			owner = {
+		
+			any_owned = {
+				limit = { any_pop = { has_pop_religion = shinto is_state_religion = no } is_colonial = yes }
+				add_province_modifier = { name = genocide duration = 1825 }
+			}
+		
+			any_pop = {
+				limit = { has_pop_religion = shinto is_state_religion = no location = { is_colonial = yes } }
+				militancy = 9
+				consciousness = 9
+				random_list = {
+					25 = { reduce_pop = 0.7 }
+					25 = { reduce_pop = 0.6 }
+					25 = { reduce_pop = 0.5 }
+					25 = { reduce_pop = 0.4 }
+				}
+			}
+			
+				clr_country_flag = colonial_genocide_only
+			}
+		}
+		
+		random_owned = { limit = { owner = { has_country_flag = non_colonial_genocide_only } }
+			owner = {
+			
+			any_owned = {
+				limit = { any_pop = { has_pop_religion = shinto is_state_religion = no } is_colonial = no }
+				add_province_modifier = { name = genocide duration = 1825 }
+			}
+			any_pop = {
+				limit = { has_pop_religion = shinto is_state_religion = no location = { is_colonial = no } }
+				militancy = 9
+				consciousness = 9
+				random_list = {
+					25 = { reduce_pop = 0.7 }
+					25 = { reduce_pop = 0.6 }
+					25 = { reduce_pop = 0.5 }
+					25 = { reduce_pop = 0.4 }
+				}
+			}
+				clr_country_flag = non_colonial_genocide_only
+			}
+		}
+	
+		random_owned = { limit = { owner = { has_country_flag = everywhere_genocide_only } }
+				owner = {
+				
+				any_owned = {
+					limit = { any_pop = { has_pop_religion = shinto is_state_religion = no } }
+					add_province_modifier = { name = genocide duration = 1825 }
+				}
+				any_pop = { limit = { has_pop_religion = shinto is_state_religion = no }
+					militancy = 9
+					consciousness = 9
+					random_list = {
+						25 = { reduce_pop = 0.7 }
+						25 = { reduce_pop = 0.6 }
+						25 = { reduce_pop = 0.5 }
+						25 = { reduce_pop = 0.4 }
+					}
+				}
+				
+				clr_country_flag = everywhere_genocide_only
+			}
+		}
+		
+		any_country = {
+			limit = {
+				OR = {
+					has_country_flag = mahayana_country
+					has_country_flag = gelugpa_country
+					has_country_flag = theravada_country
+					has_country_flag = hindu_country
+					has_country_flag = shinto_country
+					has_country_flag = sikh_country
+				}
+			}
+			casus_belli = { target = THIS type = cut_down_to_size months = 60 }
+			relation = { who = THIS value = -400 }
+		}
+	}
+		
+	option = {
+		name = "EVT443021OPTB" #Bye Mahayana
+		random_owned = { limit = { owner = { has_country_flag = colonial_genocide_only } }
+			owner = {
+		
+			any_owned = {
+				limit = { any_pop = { has_pop_religion = mahayana is_state_religion = no } is_colonial = yes }
+				add_province_modifier = { name = genocide duration = 1825 }
+			}
+		
+			any_pop = {
+				limit = { has_pop_religion = mahayana is_state_religion = no location = { is_colonial = yes } }
+				militancy = 9
+				consciousness = 9
+				random_list = {
+					25 = { reduce_pop = 0.7 }
+					25 = { reduce_pop = 0.6 }
+					25 = { reduce_pop = 0.5 }
+					25 = { reduce_pop = 0.4 }
+				}
+			}
+			
+				clr_country_flag = colonial_genocide_only
+			}
+		}
+		
+		random_owned = { limit = { owner = { has_country_flag = non_colonial_genocide_only } }
+			owner = {
+			
+			any_owned = {
+				limit = { any_pop = { has_pop_religion = mahayana is_state_religion = no } is_colonial = no }
+				add_province_modifier = { name = genocide duration = 1825 }
+			}
+			any_pop = {
+				limit = { has_pop_religion = mahayana is_state_religion = no location = { is_colonial = no } }
+				militancy = 9
+				consciousness = 9
+				random_list = {
+					25 = { reduce_pop = 0.7 }
+					25 = { reduce_pop = 0.6 }
+					25 = { reduce_pop = 0.5 }
+					25 = { reduce_pop = 0.4 }
+				}
+			}
+			
+				clr_country_flag = non_colonial_genocide_only
+			}
+		}
+	
+		random_owned = { limit = { owner = { has_country_flag = everywhere_genocide_only } }
+				owner = {
+				
+				any_owned = {
+					limit = { any_pop = { has_pop_religion = mahayana is_state_religion = no } }
+					add_province_modifier = { name = genocide duration = 1825 }
+				}
+				any_pop = { limit = { has_pop_religion = mahayana is_state_religion = no }
+					militancy = 9
+					consciousness = 9
+					random_list = {
+						25 = { reduce_pop = 0.7 }
+						25 = { reduce_pop = 0.6 }
+						25 = { reduce_pop = 0.5 }
+						25 = { reduce_pop = 0.4 }
+					}
+				}
+				
+				clr_country_flag = everywhere_genocide_only
+			}
+		}
+		
+		any_country = {
+			limit = {
+				OR = {
+					has_country_flag = mahayana_country
+					has_country_flag = gelugpa_country
+					has_country_flag = theravada_country
+					has_country_flag = hindu_country
+					has_country_flag = shinto_country
+					has_country_flag = sikh_country
+				}
+			}
+			casus_belli = { target = THIS type = cut_down_to_size months = 60 }
+			relation = { who = THIS value = -400 }
+		}
+	}
+		
+	option = {
+		name = "EVT443021OPTC" #animist
+		random_owned = { limit = { owner = { has_country_flag = colonial_genocide_only } }
+			owner = {
+		
+			any_owned = {
+				limit = { any_pop = { has_pop_religion = animist is_state_religion = no } is_colonial = yes }
+				add_province_modifier = { name = genocide duration = 1825 }
+			}
+		
+			any_pop = {
+				limit = { has_pop_religion = animist is_state_religion = no location = { is_colonial = yes } }
+				militancy = 9
+				consciousness = 9
+				random_list = {
+					25 = { reduce_pop = 0.7 }
+					25 = { reduce_pop = 0.6 }
+					25 = { reduce_pop = 0.5 }
+					25 = { reduce_pop = 0.4 }
+				}
+			}
+			
+				clr_country_flag = colonial_genocide_only
+			}
+		}
+		
+		random_owned = { limit = { owner = { has_country_flag = non_colonial_genocide_only } }
+			owner = {
+			
+			any_owned = {
+				limit = { any_pop = { has_pop_religion = animist is_state_religion = no } is_colonial = no }
+				add_province_modifier = { name = genocide duration = 1825 }
+			}
+			any_pop = {
+				limit = { has_pop_religion = animist is_state_religion = no location = { is_colonial = no } }
+				militancy = 9
+				consciousness = 9
+				random_list = {
+					25 = { reduce_pop = 0.7 }
+					25 = { reduce_pop = 0.6 }
+					25 = { reduce_pop = 0.5 }
+					25 = { reduce_pop = 0.4 }
+				}
+			}
+			
+				clr_country_flag = non_colonial_genocide_only
+			}
+		}
+	
+		random_owned = { limit = { owner = { has_country_flag = everywhere_genocide_only } }
+				owner = {
+				
+				any_owned = {
+					limit = { any_pop = { has_pop_religion = animist is_state_religion = no } }
+					add_province_modifier = { name = genocide duration = 1825 }
+				}
+				any_pop = { limit = { has_pop_religion = animist is_state_religion = no }
+					militancy = 9
+					consciousness = 9
+					random_list = {
+						25 = { reduce_pop = 0.7 }
+						25 = { reduce_pop = 0.6 }
+						25 = { reduce_pop = 0.5 }
+						25 = { reduce_pop = 0.4 }
+					}
+				}
+				
+				clr_country_flag = everywhere_genocide_only
+			}
+		}
+	}
+		
+	option = {
+		name = "EVT443021OPTD" #The Yazidi
+		random_owned = { limit = { owner = { has_country_flag = colonial_genocide_only } }
+			owner = {
+		
+			any_owned = {
+				limit = { any_pop = { has_pop_religion = yazidi is_state_religion = no } is_colonial = yes }
+				add_province_modifier = { name = genocide duration = 1825 }
+			}
+		
+			any_pop = {
+				limit = { has_pop_religion = yazidi is_state_religion = no location = { is_colonial = yes } }
+				militancy = 4
+				consciousness = 3
+				random_list = {
+					25 = { reduce_pop = 0.7 }
+					25 = { reduce_pop = 0.6 }
+					25 = { reduce_pop = 0.5 }
+					25 = { reduce_pop = 0.4 }
+				}
+			}
+			
+				clr_country_flag = colonial_genocide_only
+			}
+		}
+		
+		random_owned = { limit = { owner = { has_country_flag = non_colonial_genocide_only } }
+			owner = {
+			
+			any_owned = {
+				limit = { any_pop = { has_pop_religion = yazidi is_state_religion = no } is_colonial = no }
+				add_province_modifier = { name = genocide duration = 1825 }
+			}
+			any_pop = {
+				limit = { has_pop_religion = yazidi is_state_religion = no location = { is_colonial = no } }
+				militancy = 4
+				consciousness = 3
+				random_list = {
+					25 = { reduce_pop = 0.7 }
+					25 = { reduce_pop = 0.6 }
+					25 = { reduce_pop = 0.5 }
+					25 = { reduce_pop = 0.4 }
+				}
+			}
+			
+				clr_country_flag = non_colonial_genocide_only
+			}
+		}
+	
+		random_owned = { limit = { owner = { has_country_flag = everywhere_genocide_only } }
+				owner = {
+				
+				any_owned = {
+					limit = { any_pop = { has_pop_religion = yazidi is_state_religion = no } }
+					add_province_modifier = { name = genocide duration = 1825 }
+				}
+				any_pop = { limit = { has_pop_religion = yazidi is_state_religion = no }
+					militancy = 4
+					consciousness = 3
+					random_list = {
+						25 = { reduce_pop = 0.7 }
+						25 = { reduce_pop = 0.6 }
+						25 = { reduce_pop = 0.5 }
+						25 = { reduce_pop = 0.4 }
+					}
+				}
+				
+				clr_country_flag = everywhere_genocide_only
+			}
+		}
+	}
+		
+	option = {
+		name = "EVT443021OPTE" #Everyone
+		random_owned = { limit = { owner = { has_country_flag = colonial_genocide_only } }
+			owner = {
+		
+			any_owned = {
+				limit = {
+					is_colonial = yes
+					any_pop = {
+						is_state_religion = no
+						OR = {
+							has_pop_religion = yazidi
+							has_pop_religion = mahayana
+							has_pop_religion = animist
+							has_pop_religion = shinto
+						}
+					}
+				}
+			add_province_modifier = { name = genocide duration = 1825 }
+			}
+			any_pop = {
+				limit = {
+					is_state_religion = no
+					location = { is_colonial = yes }
+					OR = {
+						has_pop_religion = yazidi
+						has_pop_religion = mahayana
+						has_pop_religion = animist
+						has_pop_religion = shinto
+					}
+				}
+				militancy = 9
+				consciousness = 9
+			random_list = {
+				25 = { reduce_pop = 0.7 }
+				25 = { reduce_pop = 0.6 }
+				25 = { reduce_pop = 0.5 }
+				25 = { reduce_pop = 0.4 }
+				}
+			}
+			
+			clr_country_flag = colonial_genocide_only
+			}
+		}
+		
+		
+		random_owned = { limit = { owner = { has_country_flag = non_colonial_genocide_only } }
+			owner = {
+			
+			any_owned = {
+				limit = {
+				is_colonial = no
+				any_pop = {
+					is_state_religion = no
+					OR = {
+						has_pop_religion = yazidi
+						has_pop_religion = mahayana
+						has_pop_religion = animist
+						has_pop_religion = shinto
+						}
+					} 
+				}
+			add_province_modifier = { name = genocide duration = 1825 }
+			}
+			any_pop = {
+				limit = {
+				is_state_religion = no
+				location = { is_colonial = no }
+				OR = {
+					has_pop_religion = yazidi
+					has_pop_religion = mahayana
+					has_pop_religion = animist
+					has_pop_religion = shinto
+				} 
+			}
+				militancy = 9
+				consciousness = 9
+			random_list = {
+				25 = { reduce_pop = 0.7 }
+				25 = { reduce_pop = 0.6 }
+				25 = { reduce_pop = 0.5 }
+				25 = { reduce_pop = 0.4 }
+				}
+			}
+			
+			clr_country_flag = non_colonial_genocide_only
+			}
+		}
+		
+		random_owned = { limit = { owner = { has_country_flag = everywhere_genocide_only } }
+				owner = {
+				
+				any_owned = {
+					limit = {
+					any_pop = { 
+						is_state_religion = no
+						OR = {
+							has_pop_religion = yazidi
+							has_pop_religion = mahayana
+							has_pop_religion = animist
+							has_pop_religion = shinto
+						}
+					}
+				}
+				add_province_modifier = { name = genocide duration = 1825 }
+				}
+				
+				any_pop = {
+					limit = {
+						is_state_religion = no
+						OR = {
+							has_pop_religion = yazidi
+							has_pop_religion = mahayana
+							has_pop_religion = animist
+							has_pop_religion = shinto
+						}
+					}
+					militancy = 9
+					consciousness = 9
+					random_list = {
+						25 = { reduce_pop = 0.7 }
+						25 = { reduce_pop = 0.6 }
+						25 = { reduce_pop = 0.5 }
+						25 = { reduce_pop = 0.4 }
+					}
+				}
+				
+			clr_country_flag = everywhere_genocide_only
+			}
+		}
+					
+		any_country = {
+			limit = {
+				OR = {
+					has_country_flag = mahayana_country
+					has_country_flag = gelugpa_country
+					has_country_flag = theravada_country
+					has_country_flag = hindu_country
+					has_country_flag = shinto_country
+					has_country_flag = sikh_country
+				}
+			}
+			casus_belli = { target = THIS type = cut_down_to_size months = 60 }
+			relation = { who = THIS value = -400 }
+		}
+	}
+}
+	
+	
+#Fascist Government Coup Puppets - Set Up
+country_event = {
+	id = 443024
+	title = "EVTNAME443024"
+	desc = "EVTDESC443024"
+	picture = "fascist_march"
+	
+	trigger = {
+		is_vassal = yes
+		NOT = { government = fascist_dictatorship }
+		overlord = {
+			government = fascist_dictatorship
+			NOT = { truce_with = THIS }
+		}
+		civilized = yes
+		NOT = { has_country_modifier = no_freedom }
+	}
+
+	mean_time_to_happen = { 
+		months = 36
+		
+		modifier = {
+			factor = 0.5
+			OR = {
+				overlord = { war = yes }
+				overlord = { has_recently_lost_war = yes }
+			}
+		}
+	}
+	
+	option = {
+		name = "EVT443024OPTA"
+		overlord = { country_event = 443025 }
+	}
+		
+}
+
+#Fascist Government Coup Puppets - Overlords responds
+country_event = {
+	id = 443025
+	title = "EVTNAME443025"
+	desc = "EVTDESC443025"
+	picture = "fascist_hq"
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = "EVT443025OPTA"
+		FROM = { country_event = { id = 443026 days = 2 } }
+		any_greater_power = { limit = { NOT = { government = fascist_dictatorship } } relation = { who = THIS value = -25 } } 
+		any_country = { limit = { government = proletarian_dictatorship } relation = { who = THIS value = -100 } }
+		any_country = { limit = {  is_our_vassal = THIS NOT = { government = fascist_dictatorship } } relation = { who = THIS value = -100 } }
+		ai_chance = { factor = 0.95 }
+	}
+		
+	option = {
+		name = "EVT443025OPTB"
+		release_vassal = FROM
+		leave_alliance = FROM
+		relation = { who = FROM value = 100 } 
+		ai_chance = { factor = 0.05 }
+	}
+		
+}
+	
+#Fascist Government Coup Puppets - The coup attempt
+country_event = {
+	id = 443026
+	title = "EVTNAME443026"
+	desc = "EVTDESC443026"
+	picture = "storming_palace"
+	
+	is_triggered_only = yes
+	
+	option = {   #success!
+		name = "EVT443026OPTA"
+		prestige_factor = -0.25
+		government = fascist_dictatorship
+		ruling_party_ideology = fascist
+		political_reform = none_voting
+		political_reform = party_appointed
+		political_reform = no_meeting
+		political_reform = state_press
+		political_reform = state_controlled
+		political_reform = underground_parties
+		political_reform = primary_culture_only
+		political_reform = mandatory_service
+		clr_country_flag = theocratic_government
+		clr_country_flag = communist_gov
+		create_alliance = FROM
+		relation = { who = FROM value = 200 }
+		FROM = { diplomatic_influence = { who = THIS value = 100 } }
+		any_country = { limit = { NOT = { government = fascist_dictatorship } } relation = { who = THIS value = -100 } }
+		any_greater_power = { limit = { NOT = { government = fascist_dictatorship } } diplomatic_influence = { who = THIS value = -100 } }
+		
+		ai_chance = {
+			factor = 30
+			modifier = {
+				factor = 0.1
+					OR = {
+						FROM = { has_recently_lost_war = yes }
+						FROM = { NOT = { military_score = 100 } }
+					}
+				}
+			modifier = {
+				factor = 0.1
+					NOT = { in_sphere = FROM }
+				}
+			modifier = {
+				factor = 1.4
+				upper_house = {
+					ideology = fascist
+					value = 0.1
+				}
+			}
+			modifier = {
+				factor = 1.5
+				upper_house = {
+					ideology = fascist
+					value = 0.15
+				}
+			}
+			modifier = {
+				factor = 1.6
+				upper_house = {
+					ideology = fascist
+					value = 0.2
+				}
+			}
+			modifier = {
+				factor = 1.7
+				upper_house = {
+					ideology = fascist
+					value = 0.25
+				}
+			}
+			modifier = {
+				factor = 1.8
+				upper_house = {
+					ideology = fascist
+					value = 0.3
+				}
+			}
+			modifier = {
+				factor = 1.9
+				upper_house = {
+					ideology = fascist
+					value = 0.4
+				}
+			}
+		}
+	}
+		
+	option = {
+		name = "EVT443026OPTB"
+		add_country_modifier = { name = small_country_draft duration = 730 }
+		
+		end_military_access = FROM
+		leave_alliance = FROM
+		
+		FROM = { country_event = { id = 443027 days = 2 } }
+		
+		add_country_modifier = {
+			name = no_freedom
+			duration = 2920
+		}
+
+		capital_scope = { any_pop = { ideology = { factor = -0.1 value = fascist } } }
+		
+		random_pop = { limit = { pop_majority_ideology = fascist }
+			random_list = {
+				34 = { reduce_pop = 0.98 }
+				33 = { reduce_pop = 0.97 }
+				33 = { reduce_pop = 0.96 }
+				}
+			random_list = {
+				34 = { ideology = { factor = 0.1 value = conservative } }
+				33 = { ideology = { factor = 0.2 value = conservative } }
+				33 = { ideology = { factor = 0.3 value = conservative } }
+				}
+			random_list = {
+				34 = { ideology = { factor = -0.1 value = fascist } }
+				33 = { ideology = { factor = -0.15 value = fascist } }
+				33 = { ideology = { factor = -0.2 value = fascist } }
+				}
+		}
+			
+		random_pop = { limit = { pop_majority_ideology = fascist }
+			random_list = {
+				34 = { reduce_pop = 0.98 }
+				33 = { reduce_pop = 0.97 }
+				33 = { reduce_pop = 0.96 }
+				}
+			random_list = {
+				34 = { ideology = { factor = 0.1 value = conservative } }
+				33 = { ideology = { factor = 0.2 value = conservative } }
+				33 = { ideology = { factor = 0.3 value = conservative } }
+				}
+			random_list = {
+				34 = { ideology = { factor = -0.1 value = fascist } }
+				33 = { ideology = { factor = -0.15 value = fascist } }
+				33 = { ideology = { factor = -0.2 value = fascist } }
+				}
+		}
+
+		random_pop = { limit = { pop_majority_ideology = fascist }
+			random_list = {
+				34 = { reduce_pop = 0.98 }
+				33 = { reduce_pop = 0.97 }
+				33 = { reduce_pop = 0.96 }
+				}
+			random_list = {
+				34 = { ideology = { factor = 0.1 value = conservative } }
+				33 = { ideology = { factor = 0.2 value = conservative } }
+				33 = { ideology = { factor = 0.3 value = conservative } }
+				}
+			random_list = {
+				34 = { ideology = { factor = -0.1 value = fascist } }
+				33 = { ideology = { factor = -0.15 value = fascist } }
+				33 = { ideology = { factor = -0.2 value = fascist } }
+				}
+		}
+
+		ai_chance = {
+			factor = 70
+			modifier = {
+				factor = 1.6
+				NOT = { in_sphere = FROM }
+			}
+		}
+	}
+}
+
+#Fascist Government Coup Puppets - Overlords responds to failed coup
+country_event = {
+	id = 443027
+	title = "EVTNAME443027"
+	desc = "EVTDESC443027"
+	picture = "failed_revolution"
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = "EVT443027OPTA"
+		release_vassal = FROM
+		relation = { who = FROM value = -400 }
+		diplomatic_influence = { who = FROM value = -400 }
+		end_military_access = FROM
+		leave_alliance = FROM
+		casus_belli = { target = FROM type = install_fascism_make_puppet months = 24 }
+			
+		ai_chance = { factor = 0.95 }
+	}
+		
+	option = {
+		name = "EVT443027OPTC"
+		relation = { who = FROM value = -50 }
+		diplomatic_influence = { who = FROM value = -400 }
+		release_vassal = FROM
+		end_military_access = FROM
+		leave_alliance = FROM
+		ai_chance = { factor = 0.05 }
+	}		
+}
+
+#Communist Government Coup Puppets - Set Up
+country_event = {
+	id = 443028
+	title = "EVTNAME443028"
+	desc = "EVTDESC443028"
+	picture = "communist_rally"
+	
+	trigger = {
+		is_vassal = yes
+		civilized = yes
+		NOT = { government = proletarian_dictatorship }
+		overlord = {
+			government = proletarian_dictatorship
+			NOT = { truce_with = THIS }
+			NOT = { has_country_modifier = no_freedom }
+		}
+	}
+
+	mean_time_to_happen = { 
+		months = 20
+		
+		modifier = {
+			factor = 0.5
+			OR = {
+				overlord = { war = yes }
+				overlord = { has_recently_lost_war = yes }
+			}
+		}
+	}
+	
+	option = {
+		name = "EVT443024OPTA"
+		overlord = { country_event = 443029 }
+	}	
+}
+
+#Communist Government Coup Puppets - Overlords decides on coup
+country_event = {
+	id = 443029
+	title = "EVTNAME443029"
+	desc = "EVTDESC443029"
+	picture = "communist_congress"
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = "EVT443025OPTA"
+		FROM = { country_event = { id = 443030 days = 2 } }
+		any_greater_power = { limit = { NOT = { government = proletarian_dictatorship } } relation = { who = THIS value = -25 } } 
+		any_country = { limit = { government = fascist_dictatorship } relation = { who = THIS value = -100 } }
+		any_country = { limit = {  is_our_vassal = THIS NOT = { government = proletarian_dictatorship } } relation = { who = THIS value = -100 } }
+		ai_chance = { factor = 100 }
+	}
+		
+	option = {
+		name = "EVT443025OPTB"
+		release_vassal = FROM
+		leave_alliance = FROM
+		relation = { who = FROM value = 100 } 
+		ai_chance = { factor = 0 }
+	}	
+}
+	
+#Communist Government Coup Puppets - The coup attempt
+country_event = {
+	id = 443030
+	title = "EVTNAME443030"
+	desc = "EVTDESC443030"
+	picture = "storming_palace_communists"
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = "EVT443030OPTA"
+		prestige_factor = -0.25
+		government = proletarian_dictatorship
+		ruling_party_ideology = communist
+		political_reform = none_voting
+		political_reform = party_appointed
+		political_reform = no_meeting
+		political_reform = state_press
+		political_reform = state_controlled
+		political_reform = underground_parties
+		political_reform = no_slavery
+		political_reform = debtors_prisons
+		social_reform = good_minimum_wage
+		social_reform = eight_hours
+		social_reform = good_subsidies
+		social_reform = good_pensions
+		set_country_flag = communist_gov
+		clr_country_flag = theocratic_government
+		create_alliance = FROM
+		relation = { who = FROM value = 200 }
+		FROM = { diplomatic_influence = { who = THIS value = 100 } }
+		any_country = { limit = { NOT = { government = proletarian_dictatorship } } relation = { who = THIS value = -100 } }
+		any_greater_power = { limit = { NOT = { government = proletarian_dictatorship } } diplomatic_influence = { who = THIS value = -100 } }
+		
+		ai_chance = {
+			factor = 30
+			modifier = {
+				factor = 0.1
+					OR = {
+						FROM = { has_recently_lost_war = yes }
+						FROM = { NOT = { military_score = 100 } }
+					}
+				}
+			modifier = {
+				factor = 0.1
+					NOT = { in_sphere = FROM }
+				}
+			modifier = {
+				factor = 1.4
+				upper_house = {
+					ideology = communist
+					value = 0.1
+				}
+			}
+			modifier = {
+				factor = 1.5
+				upper_house = {
+					ideology = communist
+					value = 0.15
+				}
+			}
+			modifier = {
+				factor = 1.6
+				upper_house = {
+					ideology = communist
+					value = 0.2
+				}
+			}
+			modifier = {
+				factor = 1.7
+				upper_house = {
+					ideology = communist
+					value = 0.25
+				}
+			}
+			modifier = {
+				factor = 1.8
+				upper_house = {
+					ideology = communist
+					value = 0.3
+				}
+			}
+			modifier = {
+				factor = 1.9
+				upper_house = {
+					ideology = communist
+					value = 0.4
+				}
+			}
+		}
+	}
+		
+	option = {
+		name = "EVT443030OPTB"
+		add_country_modifier = { name = small_country_draft duration = 730 }
+		end_military_access = FROM
+		leave_alliance = FROM
+		
+		FROM = { country_event = { id = 443031 days = 2 } }
+
+		add_country_modifier = { name = no_freedom duration = 2920 }
+		
+		capital_scope = { any_pop = { ideology = { factor = -0.1 value = communist } } }
+		
+		random_pop = { limit = { pop_majority_ideology = communist }
+			random_list = {
+				34 = { reduce_pop = 0.98 }
+				33 = { reduce_pop = 0.97 }
+				33 = { reduce_pop = 0.96 }
+				}
+			random_list = {
+				34 = { ideology = { factor = 0.1 value = conservative } }
+				33 = { ideology = { factor = 0.2 value = conservative } }
+				33 = { ideology = { factor = 0.3 value = conservative } }
+				}
+			random_list = {
+				34 = { ideology = { factor = -0.1 value = communist } }
+				33 = { ideology = { factor = -0.15 value = communist } }
+				33 = { ideology = { factor = -0.2 value = communist } }
+				}
+			}
+			
+		random_pop = { limit = { pop_majority_ideology = communist }
+			random_list = {
+				34 = { reduce_pop = 0.98 }
+				33 = { reduce_pop = 0.97 }
+				33 = { reduce_pop = 0.96 }
+				}
+			random_list = {
+				34 = { ideology = { factor = 0.1 value = conservative } }
+				33 = { ideology = { factor = 0.2 value = conservative } }
+				33 = { ideology = { factor = 0.3 value = conservative } }
+				}
+			random_list = {
+				34 = { ideology = { factor = -0.1 value = communist } }
+				33 = { ideology = { factor = -0.15 value = communist } }
+				33 = { ideology = { factor = -0.2 value = communist } }
+				}
+			}
+
+		random_pop = { limit = { pop_majority_ideology = communist }
+			random_list = {
+				34 = { reduce_pop = 0.98 }
+				33 = { reduce_pop = 0.97 }
+				33 = { reduce_pop = 0.96 }
+				}
+			random_list = {
+				34 = { ideology = { factor = 0.1 value = conservative } }
+				33 = { ideology = { factor = 0.2 value = conservative } }
+				33 = { ideology = { factor = 0.3 value = conservative } }
+				}
+			random_list = {
+				34 = { ideology = { factor = -0.1 value = communist } }
+				33 = { ideology = { factor = -0.15 value = communist } }
+				33 = { ideology = { factor = -0.2 value = communist } }
+				}
+			}
+
+		ai_chance = {
+			factor = 70
+			modifier = {
+				factor = 1.6
+				NOT = { in_sphere = FROM }
+			}
+		}
+	}
+}
+
+#communist Government Coup Puppets - Overlords responds to failed coup
+country_event = {
+	id = 443031
+	title = "EVTNAME443031"
+	desc = "EVTDESC443031"
+	picture = "failed_revolution"
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = "EVT443027OPTA"
+		release_vassal = FROM
+		relation = { who = FROM value = -400 }
+		diplomatic_influence = { who = FROM value = -400 }
+		end_military_access = FROM
+		leave_alliance = FROM
+		casus_belli = { target = FROM type = install_communism_make_puppet months = 24 }
+		ai_chance = { factor = 100 }
+	}
+				
+	option = {
+		name = "EVT443027OPTC"
+		relation = { who = FROM value = -50 } 
+		ai_chance = { factor = 0 }
+	}
+		
+}
+	
+#Communist/Fascist Puppet Rebels against non Communist/Fascist Government - Set UP
+country_event = {
+	id = 443032
+	title = "EVTNAME443032"
+	desc = "EVTDESC443032"
+	picture = "fascist_march"
+	
+	trigger = {
+		is_vassal = yes
+		war = no
+		OR = {
+			AND = {
+				government = fascist_dictatorship
+				overlord = { OR = { government = democracy government = hms_government } }
+				NOT = { truce_with = THIS }
+			}
+			AND = {
+				government = proletarian_dictatorship
+				overlord = { OR = { government = democracy government = hms_government } }
+				NOT = { truce_with = THIS }
+			}
+			AND = {
+				government = bourgeois_dictatorship
+				overlord = { OR = { government = democracy government = hms_government } }
+				NOT = { truce_with = THIS }
+			}
+			AND = {
+				government = absolute_monarchy
+				overlord = { OR = { government = democracy } }
+				NOT = { truce_with = THIS }
+			}
+		}
+	}
+
+	mean_time_to_happen = { 
+		months = 6
+		
+		modifier = {
+			factor = 0.5
+			OR = {
+				overlord = { war = yes }
+				overlord = { has_recently_lost_war = yes }
+			}
+		}
+	}
+	
+	option = {
+		name = "EVT443032OPTA"
+		add_country_modifier = { name = small_country_draft duration = 730 }
+		overlord = {
+			release_vassal = THIS
+			end_military_access = THIS
+			leave_alliance = THIS
+			relation = { who = THIS value = -400 }
+			diplomatic_influence = { who = THIS value = -400 }
+			country_event = { id = 443033 days = 10 }
+		}
+	}	
+}
+	
+#Communist/Fascist Puppet Rebels against non Communist/Fascist Government - Overlord Answer
+country_event = {
+	id = 443033
+	title = "EVTNAME443033"
+	desc = "EVTDESC443033"
+	picture = "communist_congress"
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = "EVT443027OPTA"
+		casus_belli = { target = FROM type = install_democracy months = 24 }
+		ai_chance = { factor = 90 }
+	}
+
+		
+	option = {
+		name = "EVT443027OPTC"
+		badboy = -5
+		ai_chance = { factor = 10 }
+	}
+	
+	option = {
+		name = "EVT443027OPTD"
+		badboy = 5
+		war = {
+			target = FROM
+			attacker_goal = { casus_belli = conquest_any }
+			defender_goal = { casus_belli = status_quo }
+			call_ally = no
+		}
+		ai_chance = { factor = 0 }
+	}
+}
+
+##Mobilization during peace time ends in free CBs
+#country_event = {
+#	id = 443034
+#	title = "EVTNAME443034"
+#	desc = "EVTDESC443034"
+#	picture = "conscription_marching"
+#	
+#	trigger = {
+#		is_mobilised = yes
+#		OR = {
+#			war = no
+#			CLN = {
+#				AND = {
+#					any_neighbor_country = {
+#						war_with = THIS
+#						tag = CLN
+#					}
+#					NOT = {
+#						any_neighbor_country = {	#Engine doesnt read these conditions correctly
+#							NOT = { tag = THIS tag = CLN }
+#							war_with = THIS
+#						}
+#					}
+#				}
+#			}
+#		}
+#		NOT = { has_country_modifier = peacetime_mobilization }
+#		ai = no
+#		military_score = 5
+#		OR = {
+#			military_score = 10
+#			NOT = { any_core = { country_units_in_province = REB } }
+#		}
+#	}
+#	
+#	mean_time_to_happen = {
+#		days = 1
+#		#months = 6
+#		
+#		modifier = { factor = 1.5 is_secondary_power = yes is_greater_power = no }
+#		modifier = { factor = 2 is_secondary_power = no is_greater_power = no }
+#		modifier = { factor = 0.5 constructing_cb_progress = 0.1 }
+#		modifier = {
+#			factor = 2
+#			NOT = { badboy = 0.5 }
+#			any_neighbor_country = { NOT = { relation = { who = THIS value = 0 } } casus_belli = THIS }
+#		}
+#	}
+#	
+#	option = {
+#		name = "EVT443034OPTA"
+#		random_owned = { limit = { owner = { is_greater_power = yes } }
+#			owner = {
+#			add_country_modifier = { name = peacetime_mobilization duration = 365 }
+#			
+#			any_pop = { dominant_issue = { value = pacifism factor = 0.1 } }
+#		
+#			any_country = {
+#				limit = { neighbour = THIS NOT = { relation = { who = THIS value = -50 } alliance_with = THIS casus_belli = THIS in_sphere = THIS } }
+#				casus_belli = { target = THIS type = cut_down_to_size months = 12 }
+#			}
+#
+#			any_country = { limit = { is_greater_power = yes } relation = { who = THIS value = -75 } }
+#			any_country = { limit = { is_secondary_power = yes } relation = { who = THIS value = -50 } }
+#		
+#			any_country = {
+#				limit = { neighbour = THIS NOT = { vassal_of = THIS } NOT = { in_sphere = THIS } NOT = { alliance_with = THIS } }
+#					any_pop = { dominant_issue = { value = jingoism factor = 0.05 } }
+#					relation = { who = THIS value = -100 }
+#			}
+#		
+#			any_country = {
+#				limit = { neighbour = THIS NOT = { vassal_of = THIS } alliance_with = THIS }
+#					any_pop = { dominant_issue = { value = jingoism factor = 0.05 } }
+#					relation = { who = THIS value = -25 }
+#					}
+#				}
+#			}
+#		
+#		random_owned = { limit = { owner = { is_greater_power = no is_secondary_power = yes } }
+#			owner = {
+#			add_country_modifier = { name = peacetime_mobilization duration = 365 }
+#			
+#			any_pop = { dominant_issue = { value = pacifism factor = 0.1 } }
+#			
+#			any_country = {
+#				limit = { neighbour = THIS NOT = { relation = { who = THIS value = -50 } alliance_with = THIS casus_belli = THIS } }
+#				casus_belli = { target = THIS type = cut_down_to_size months = 12 }
+#			}
+#		
+#			any_country = { limit = { is_greater_power = yes } relation = { who = THIS value = -25 } }
+#		
+#		any_country = {
+#			limit = { neighbour = THIS NOT = { vassal_of = THIS } NOT = { alliance_with = THIS } }
+#				any_pop = { dominant_issue = { value = jingoism factor = 0.05 } }
+#				relation = { who = THIS value = -75 }
+#		}
+#		
+#		any_country = {
+#			limit = { neighbour = THIS NOT = { vassal_of = THIS } alliance_with = THIS }
+#				any_pop = { dominant_issue = { value = jingoism factor = 0.05 } }
+#				relation = { who = THIS value = -25 }
+#				}
+#			}
+#		}
+#		
+#		random_owned = { limit = { owner = { is_greater_power = no is_secondary_power = no } }
+#			owner = {
+#			add_country_modifier = { name = peacetime_mobilization duration = 182 }
+#			
+#			any_pop = { dominant_issue = { value = pacifism factor = 0.1 } }
+#		
+#		
+#		any_country = {
+#			limit = { neighbour = THIS NOT = { vassal_of = THIS } NOT = { alliance_with = THIS } NOT = { is_greater_power = yes } }
+#				any_pop = { dominant_issue = { value = jingoism factor = 0.05 } }
+#				relation = { who = THIS value = -100 }
+#				}
+#			}
+#		}
+#		
+#	}
+#}
+
+#Enslaving the Serfs
+country_event = {
+	id = 443035
+	title = "EVTNAME443035"
+	desc = "EVTDESC443035"
+	picture = "convict_labor"
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = "EVT443035OPTA" #Country Only
+		country_event = 443036
+	}
+	
+	option = {
+		name = "EVT443035OPTB" #Colonial Only
+		country_event = 443037
+	}
+	
+	option = {
+		name = "EVT443035OPTC" #Both
+		country_event = 443038
+	}
+}
+
+#Enslaving the Serfs - Country Only
+country_event = {
+	id = 443036
+	title = "EVTNAME443036"
+	desc = "EVTDESC443036"
+	picture = "convict_labor"
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = "EVT443036OPTA" #Everyone
+		political_reform = peonage
+		any_owned = {
+			limit = {
+				is_colonial = no
+				is_overseas = no
+				has_pop_type = serfs
+			}
+		any_pop = { limit = { type = serfs } militancy = 9 consciousness = 9 pop_type = slaves }
+		state_scope = { is_slave = yes }
+		}
+	}
+	
+	option = {
+		name = "EVT443036OPTB" #Minorities only
+		political_reform = peonage
+		any_owned = { 
+			limit = {
+				is_colonial = no
+				is_overseas = no
+				has_pop_type = serfs
+			}
+			any_pop = {
+				limit = {
+					type = serfs
+					is_primary_culture = no
+					is_accepted_culture = no
+				}
+				militancy = 9
+				consciousness = 9
+				pop_type = slaves
+				location = { state_scope = { is_slave = yes } } 
+			}
+		}
+		any_owned = {
+			limit = {
+				has_pop_type = labourers
+				has_pop_type = serfs
+			}
+			any_pop = { limit = { type = serfs } pop_type = labourers }
+		}
+		any_owned = {
+			limit = {
+				has_pop_type = farmers
+				has_pop_type = serfs
+			}
+			any_pop = { limit = { type = serfs } pop_type = farmers }
+		}
+	}
+}
+
+#Enslaving the Serfs - Colonial Only
+country_event = {
+	id = 443037
+	title = "EVTNAME443037"
+	desc = "EVTDESC443037"
+	picture = "convict_labor"
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = "EVT443036OPTA" #Everyone
+		political_reform = peonage
+		any_owned = { 
+			limit = {
+				is_colonial = yes
+				is_overseas = yes
+				has_pop_type = serfs
+			}
+		any_pop = { limit = { type = serfs } militancy = 9 consciousness = 9 pop_type = slaves }
+		state_scope = { is_slave = yes }
+		}
+	}
+	
+	option = {
+		name = "EVT443036OPTB" #Minorities only
+		political_reform = peonage
+		any_owned = {
+			limit = {
+				is_colonial = yes
+				is_overseas = yes
+				has_pop_type = serfs
+			}
+			any_pop = {
+				limit = {
+					type = serfs
+					is_primary_culture = no
+					is_accepted_culture = no 
+				}
+				militancy = 9
+				consciousness = 9
+				pop_type = slaves
+				location = { state_scope = { is_slave = yes } } 
+			}
+		}
+		
+		any_owned = {
+			limit = {
+				has_pop_type = labourers
+				has_pop_type = serfs
+			}
+			any_pop = { limit = { type = serfs } pop_type = labourers }
+		}
+		any_owned = {
+			limit = {
+				has_pop_type = farmers
+				has_pop_type = serfs
+			}
+			any_pop = { limit = { type = serfs } pop_type = farmers }
+		}
+	}
+}
+
+#Enslaving the Serfs - Everywhere
+country_event = {
+	id = 443038
+	title = "EVTNAME443038"
+	desc = "EVTDESC443038"
+	picture = "convict_labor"
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = "EVT443036OPTA" #Everyone
+		political_reform = peonage
+		any_owned = {
+			limit = { has_pop_type = serfs }
+			any_pop = { 
+				limit = { type = serfs }
+				militancy = 9 
+				consciousness = 9
+				pop_type = slaves
+			} 
+			state_scope = { is_slave = yes } 
+		}
+	}
+	
+	option = {
+		name = "EVT443036OPTB" #Minorities only
+		political_reform = peonage
+		any_pop = { limit = { type = serfs is_primary_culture = no is_accepted_culture = no } militancy = 9 consciousness = 9 pop_type = slaves location = { state_scope = { is_slave = yes } } }
+		
+		any_owned = {
+			limit = {
+				has_pop_type = labourers
+				has_pop_type = serfs
+			}
+			any_pop = { limit = { type = serfs } pop_type = labourers }
+		}
+		any_owned = {
+			limit = {
+				has_pop_type = farmers
+				has_pop_type = serfs
+			}
+			any_pop = { limit = { type = serfs } pop_type = farmers }
+		}
+	}
+}
+
+
+#National Awakening - Removing old accepted cultures
+country_event = {
+	id = 443039
+	title = "EVTNAME443039"
+	desc = "EVTDESC443039"
+	picture = "crisis_revolution_enabled"
+	
+	allow_multiple_instances  = yes
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = "EVT443039OPTA"
+		random_country = { limit = { tag = FROM primary_culture = ukrainian } 
+			THIS = { remove_accepted_culture = ukrainian }
+		}
+		random_country = { limit = { tag = FROM primary_culture = byelorussian } 
+			THIS = { remove_accepted_culture = byelorussian }
+		}
+		random_country = { limit = { tag = FROM primary_culture = alaskan } 
+			THIS = { remove_accepted_culture = alaskan }
+		}
+	}
+}
+
+#End of State of Emergency
+country_event = {
+	id = 443040
+	title = "EVTNAME443040"
+	desc = "EVTDESC443040"
+	picture = "crisis_revolution_enabled"
+	
+	trigger = {
+		has_country_flag = state_of_emergency
+		NOT = { has_country_modifier = state_of_emergency_modifier }
+	}
+	
+	option = {
+		name = "EVT443040OPTA"
+		clr_country_flag = state_of_emergency
+		any_pop = { militancy = 4 consciousness = 7 }
+		random_owned = { limit = { owner = { has_country_flag = return_to_yes_meeting } }
+			owner = { political_reform = yes_meeting clr_country_flag = return_to_yes_meeting }
+		}
+		
+		random_owned = { limit = { owner = { has_country_flag = return_to_censored_press } }
+			owner = { political_reform = censored_press clr_country_flag = return_to_censored_press }
+		}
+		
+		random_owned = { limit = { owner = { has_country_flag = return_to_free_press } }
+			owner = { political_reform = free_press clr_country_flag = return_to_free_press }
+		}
+	}
+}
+
+country_event = {
+    id = 9999990
+    title = "A Change of Overlord"
+    desc = "$FROMCOUNTRY$ is now our new overlord."
+    picture = "treaty"
+    
+    is_triggered_only = yes
+    
+    option = {
+        name = "Damn."
+        FROM = { create_vassal = THIS }
+    }
+}
+
+country_event = {
+	id = 7777933
+	title = "EVTNAME7777933"
+	desc = "EVTDESC7777933"
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = "EVTOPTA7777933"
+	}
+	
+	option = {
+		name = "EVTOPTB7777933"
+		any_state = {
+			limit = {
+				is_colonial = yes
+			}
+			any_pop = {
+				limit = { type = clergymen }
+				militancy = 7
+				consciousness = 7
+				pop_type = artisans
+			}
+		}
+	}
+}
+
+country_event = {
+	id = 7777936
+	title = "EVTNAME7777936"
+	desc = "EVTDESC7777936"
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = "EVTOPTA7777936"
+		set_country_flag = rank_1_crats
+	}
+	
+	option = {
+		name = "EVTOPTB7777936"
+		set_country_flag = rank_2_crats
+	}
+	
+	option = {
+		name = "EVTOPTC7777936"
+		set_country_flag = rank_3_crats
+	}
+	
+	option = {
+		name = "EVTOPTD7777936"
+	}
+}

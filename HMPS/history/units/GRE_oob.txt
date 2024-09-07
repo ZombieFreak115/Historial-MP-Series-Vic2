@@ -1,0 +1,68 @@
+leader = {
+	name = "von Heideck"
+	type = land
+	date="1833.1.1"
+	personality = defence_1.1
+	background = attack_1.1
+	prestige = 0.1
+}
+
+leader = {
+	name = "Demetrios Kalergis"
+	type = land
+	date="1836.1.1"
+	personality = defence_1.1
+	background = attack_2.1
+}
+
+leader = {
+	name = "Ioannis Kolokotronis"
+	type = land
+	date="1833.1.1"
+	personality = defence_1.1
+	background = attack_1.1
+	prestige = 0.1
+}
+
+leader = {
+	name = "Antonios Kriezis"
+	type = sea
+	date="1836.1.1"
+	personality = defence_4.1
+	background = attack_4.1
+}
+
+army = {
+	name = "1st Army"
+	location = 836
+	regiment = {
+		name= "1st Greek Cavalry"
+		type = dragoon
+		home = 842
+	}
+	
+	regiment = {
+		name= "1st Greek Artillery"
+		type = artillery
+		home = 834
+	}
+	
+	regiment = {
+		name= "2nd Greek Artillery"
+		type = artillery
+		home = 834
+	}
+}
+
+
+navy = {
+	name = "Hellenic Navy"
+	location = 834
+
+	ship = {
+		name= "Leda"
+		type = clipper_transport
+	}
+
+}
+

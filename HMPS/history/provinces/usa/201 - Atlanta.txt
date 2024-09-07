@@ -1,0 +1,37 @@
+owner = USA
+controller = USA
+add_core = USA
+trade_goods = cotton
+life_rating = 35
+terrain = atlanta
+
+party_loyalty = {
+}
+party_loyalty = {
+}
+
+state_building = {
+	level = 1
+	building = clipper_shipyard
+	upgrade = yes
+}
+
+state_building = {
+	level = 1
+	building = fabric_factory
+	upgrade = yes
+}
+
+1861.1.1 = {
+	party_loyalty = {
+}
+	controller = CSA
+	owner = CSA
+	add_core = CSA
+	state_building = {
+		level = 1
+		building = small_arms_factory
+		upgrade = yes
+	}
+}
+1861.1.1 = { railroad = 1 }

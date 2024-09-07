@@ -1,0 +1,2455 @@
+#
+# V2ME Cleanup 1.0.5 by Bob Bobington and Dr, configured for HMPS
+#
+#
+#
+# Features:
+#	
+#	-Nearly invisible cleanup tag
+#	-Zero performance degradation
+#	-Immersion will not be ruined, player interaction with cleanup is kept to an absolute minimum
+#	-Multiple stability improvements and bug fixes
+#	-Easy to customize for new content
+#	-Handles backend tasks (i.e. setting govflags, invention flags, etc) on a daily, monthly, or yearly tick, as needed
+#	-Handles vassal interactions with one decision instead of hundreds
+#	
+# Notable bugs addressed:
+#
+#	-Ghost units and ships of non-existing nations cleaned monthly
+#	-Prevent uncivs from gaining colonial states/capitals incorrectly
+#	-Prevent countries with slavery outlawed from having bugged slave states
+#	-Prevents existing countries from having non-existing overlords
+#	-Prevents existing countries from having non-existing vassals (disabled by default, this is intended in some mods)
+#	-Prevents non-existing countries from being at war
+#
+# Upcoming features (TBA):
+#	-Permanent fix to craftsmen exploit/bug, without player interaction
+#	-Dynamically adressing the liquidity crisis, effectively
+#
+
+
+country_event = {
+	id = 477877787
+	title = "AI: Daily Cleanup Check"
+	desc = "AI: Daily Cleanup Check"
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = "Checking..."
+		
+		#Adding in Mexican-American war cores
+		any_country = {
+			limit = {
+				OR = {
+					tag = USA
+					tag = MEX
+				}
+				USA = { has_country_flag = hasmanifestdestiny }
+				NOT = { USA = { war_with = MEX } }
+			}
+			any_owned = {
+				limit = {
+					OR = {
+						region = MEX_85
+						region = TEX_132
+						region = MEX_94
+						region = MEX_97
+						region = USA_129
+						region = USA_106
+						region = USA_78
+						region = USA_81
+						region = USA_91
+						region = USA_111
+						region = USA_126
+						region = MEX_103
+						region = MEX_100
+					}
+					owner = { tag = USA }
+				}
+				add_core = USA
+				remove_core = MEX
+			}
+			any_owned = {
+				limit = {
+					OR = {
+						region = MEX_85
+						region = TEX_132
+						region = MEX_94
+						region = MEX_97
+						region = USA_129
+						region = USA_106
+						region = USA_78
+						region = USA_81
+						region = USA_91
+						region = USA_111
+						region = USA_126
+						region = MEX_103
+						region = MEX_100
+					}
+					owner = { tag = MEX }
+				}
+				add_core = MEX
+				remove_core = USA
+			}
+		}
+		
+		#Fixing Japan if Shogonate annexed
+		any_country = {
+			limit = {
+				primary_culture = japanese
+				is_vassal = no
+				war = no
+				NOT = { tag = TKG }
+				NOT = { tag = JAP }
+			}
+			all_core = {
+				add_core = JAP
+				remove_core = TKG
+			}
+			annex_to = JAP
+		}
+		any_country = {
+			limit = {
+				tag = TKG
+				OR = {
+					exists = no
+					is_vassal = yes
+				}
+			}
+			all_core = { 
+				add_core = JAP
+				remove_core = TKG
+			}
+		}
+		
+		#prevents non-existing country from being at war
+		#NOTE: if this bug happens often in your mod, look at your code! you may be starting invalid wars
+		any_country = {
+			limit = {
+				exists = no
+				war = yes
+			}
+			annex_to = FROM
+		}
+		
+		#abolishing serfdom
+		any_country = {
+            limit = {
+				exists = yes
+                any_owned_province = { has_pop_type = serfs }
+                NOT = { debt_law = serfdom }
+            }
+            any_owned = {
+                limit = {
+                    has_pop_type = serfs
+                    has_pop_type = labourers
+                }
+                any_pop = { limit = { type = serfs } pop_type = labourers money = 1000 }
+            }
+            any_owned = {
+                limit = {
+                    has_pop_type = serfs
+                    has_pop_type = farmers
+                }
+                any_pop = { limit = { type = serfs } pop_type = farmers money = 1000 }
+            }
+            any_owned = {
+                limit = {
+                    has_pop_type = serfs
+                    NOT = { has_pop_type = farmers has_pop_type = labourers }
+                }
+                any_pop = { limit = { type = serfs } pop_type = farmers money = 1000 }
+            }
+        }
+		
+		#prevents craftsmen in colonial provs
+		any_country = {
+			any_owned = {
+				limit = {
+					state_scope = {
+						is_colonial = yes
+					}
+					has_pop_type = craftsmen
+					has_pop_type = farmers
+				}
+				any_pop = {
+					limit = {
+						type = craftsmen
+					}
+					pop_type = farmers
+				}
+			}
+			any_owned = {
+				limit = {
+					state_scope = {
+						is_colonial = yes
+					}
+					has_pop_type = craftsmen
+					has_pop_type = labourers
+				}
+				any_pop = {
+					limit = {
+						type = craftsmen
+					}
+					pop_type = labourers
+				}
+			}
+		}
+		
+		#prevents clerks in colonial provs
+		any_country = {
+			any_owned = {
+				limit = {
+					state_scope = {
+						is_colonial = yes
+					}
+					has_pop_type = clerks
+				}
+				any_pop = {
+					limit = {
+						type = clerks
+					}
+					pop_type = artisans
+				}
+			}
+		}
+		
+		#updating existing country flags
+		any_country = {
+			limit = {
+				exists = yes
+				NOT = {
+					has_country_flag = existing_country
+				}
+			}
+			set_country_flag = existing_country
+		}
+		any_country = {
+			limit = {
+				exists = no
+				has_country_flag = existing_country
+			}
+			clr_country_flag = existing_country
+		}
+		
+		#native assimilation cleanup
+		any_country = {
+            limit = {
+				exists = yes
+                has_country_flag = native_assimilation_enacted
+                NOT = { has_country_modifier = native_assimilation_act_policy }
+            }
+            clr_country_flag = native_assimilation_enacted
+        }
+		
+		#pay owed steamers
+		any_country = {
+			limit = {
+				exists = yes
+				check_variable = { which = owed_ammunition value = 5 }
+				ammunition = 5
+			}
+			ammunition = -5
+			change_variable = { which = owed_ammunition value = -5 }
+		}
+		any_country = {
+			limit = {
+				exists = yes
+				check_variable = { which = owed_small_arms value = 5 }
+				small_arms = 5
+			}
+			small_arms = -5
+			change_variable = { which = owed_small_arms value = -5 }
+		}
+		any_country = {
+			limit = {
+				exists = yes
+				check_variable = { which = owed_steamers value = 5 }
+				steamer_convoy = 5
+			}
+			steamer_convoy = -5
+			change_variable = { which = owed_steamers value = -5 }
+		}
+		any_country = {
+			limit = {
+				exists = yes
+				check_variable = { which = owed_artillery value = 5 }
+				artillery = 5
+			}
+			artillery = -5
+			change_variable = { which = owed_artillery value = -5 }
+		}
+		any_country = {
+			limit = {
+				exists = yes
+				check_variable = { which = owed_canned_food value = 5 }
+				canned_food = 5
+			}
+			canned_food = -5
+			change_variable = { which = owed_canned_food value = -5 }
+		}
+		any_country = {
+			limit = {
+				exists = yes
+				check_variable = { which = owed_cash_money value = 1 }
+				money = 10000
+			}
+			money = -10000
+			change_variable = { which = owed_cash_money value = -10 }
+		}
+		
+		any_country = {
+			limit = {
+				exists = yes
+			}
+			random_owned = {
+				limit = {
+					owner = {
+						NOT = { total_pops = 1000000 }
+					}
+				}
+				owner = { treasury = 0.1 }
+			}
+			random_owned = {
+				limit = {
+					owner = {
+						total_pops = 1000000
+						NOT = { total_pops = 2000000 }
+					}
+				}
+				owner = { treasury = 0.2 }
+			}
+			random_owned = {
+				limit = {
+					owner = {
+						total_pops = 2000000
+						NOT = { total_pops = 3000000 }
+					}
+				}
+				owner = { treasury = 0.3 }
+			}
+			random_owned = {
+				limit = {
+					owner = {
+						total_pops = 3000000
+						NOT = { total_pops = 4000000 }
+					}
+				}
+				owner = { treasury = 0.4 }
+			}
+			random_owned = {
+				limit = {
+					owner = {
+						total_pops = 4000000
+						NOT = { total_pops = 5000000 }
+					}
+				}
+				owner = { treasury = 0.5 }
+			}
+			random_owned = {
+				limit = {
+					owner = {
+						total_pops = 5000000
+						NOT = { total_pops = 6000000 }
+					}
+				}
+				owner = { treasury = 0.6 }
+			}
+			random_owned = {
+				limit = {
+					owner = {
+						total_pops = 6000000
+						NOT = { total_pops = 7000000 }
+					}
+				}
+				owner = { treasury = 0.7 }
+			}
+			random_owned = {
+				limit = {
+					owner = {
+						total_pops = 7000000
+						NOT = { total_pops = 8000000 }
+					}
+				}
+				owner = { treasury = 0.8 }
+			}
+			random_owned = {
+				limit = {
+					owner = {
+						total_pops = 8000000
+						NOT = { total_pops = 9000000 }
+					}
+				}
+				owner = { treasury = 0.9 }
+			}
+			random_owned = {
+				limit = {
+					owner = {
+						total_pops = 9000000
+						NOT = { total_pops = 10000000 }
+					}
+				}
+				owner = { treasury = 1 }
+			}
+			random_owned = {
+				limit = {
+					owner = {
+						total_pops = 10000000
+					}
+				}
+				owner = { treasury = 2 }
+			}
+			any_pop = {
+				limit = { NOT = { cash_reserves = 0.1 } }
+				money = 0.6
+			}
+			any_pop = {
+				limit = { NOT = { cash_reserves = 0.5 } }
+				money = 0.3
+			}
+		}
+		
+		CLN = { country_event = { id = 477877787 days = 1 } }
+	}
+}
+
+country_event = {
+	id = 477877790
+	title = "AI: Monthly Cleanup Check"
+	desc = "AI: Monthly Cleanup Check"
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = "Checking..."
+		
+		#Treaty Ports
+		any_country = {
+			limit = { civilized = no }
+			any_owned = {
+				limit = {
+					OR = {
+						province_id = 1498 #Macao
+						province_id = 1538 #Shanghai
+						province_id = 1496 #Hong Kong
+						province_id = 1566	#Qingdao
+						province_id = 1481 #Lushun - Port Arthur
+						province_id = 1569 #Weihaiwei
+						province_id = 1606 #Jiaxing
+						province_id = 2406 #Penghu
+						#province_id = 1499 #Hainan
+						province_id = 2632 #Kwangchowan
+						province_id = 1608 #Ningbo
+						province_id = 3249 #Old Tianjin
+						province_id = 1071 #Qeshm
+						province_id = 1695 #Ifni
+						province_id = 2640 #Gwadar
+						province_id = 1177 #Socotra
+						province_id = 2048 #Zanzibar
+						province_id = 1637 #Cheju
+						province_id = 2589 #Tsushima
+						province_id = 3260 #Sado
+					}
+				}
+				add_province_modifier = { name = chinese_concession duration = -1 }
+			}
+		}
+		any_country = {
+			limit = { civilized = yes }
+			any_owned = {
+				remove_province_modifier = chinese_concession
+			}
+		}
+		
+		#capital supply 
+		any_country = {
+			limit = { exists = yes }
+			capital_scope = { add_province_modifier = { name = capital_mobilisation duration = -1 } }
+			any_owned = {
+				limit = { is_capital = no }
+				remove_province_modifier = capital_mobilisation
+			}
+		}
+		
+		
+		#germany
+		random_owned = {
+			limit = { owner = { GER = { accepted_culture = south_german } } }
+			owner = { GER = { set_country_flag = accepts_south_german } }
+		}
+		random_owned = {
+			limit = { owner = { GER = { NOT = { accepted_culture = south_german } } } }
+			owner = { GER = { clr_country_flag = accepts_south_german } }
+		}
+		random_owned = {
+			limit = { owner = { GER = { accepted_culture = north_german } } }
+			owner = { GER = { set_country_flag = accepts_north_german } }
+		}
+		random_owned = {
+			limit = { owner = { GER = { NOT = { accepted_culture = north_german } } } }
+			owner = { GER = { clr_country_flag = accepts_north_german } }
+		}
+		
+		#italy
+		random_owned = {
+			limit = { owner = { ITA = { accepted_culture = south_italian } } }
+			owner = { ITA = { set_country_flag = accepts_south_italian } }
+		}
+		random_owned = {
+			limit = { owner = { ITA = { NOT = { accepted_culture = south_italian } } } }
+			owner = { ITA = { clr_country_flag = accepts_south_italian } }
+		}
+		random_owned = {
+			limit = { owner = { ITA = { accepted_culture = north_italian } } }
+			owner = { ITA = { set_country_flag = accepts_north_italian } }
+		}
+		random_owned = {
+			limit = { owner = { ITA = { NOT = { accepted_culture = north_italian } } } }
+			owner = { ITA = { clr_country_flag = accepts_north_italian } }
+		}
+		
+		#north america
+		random_owned = {
+			limit = { owner = { USA = { accepted_culture = yankee } } }
+			owner = { USA = { set_country_flag = accepts_yankee } }
+		}
+		random_owned = {
+			limit = { owner = { USA = { NOT = { accepted_culture = yankee } } } }
+			owner = { USA = { clr_country_flag = accepts_yankee } }
+		}
+		random_owned = {
+			limit = { owner = { USA = { accepted_culture = dixie } } }
+			owner = { USA = { set_country_flag = accepts_dixie } }
+		}
+		random_owned = {
+			limit = { owner = { USA = { NOT = { accepted_culture = dixie } } } }
+			owner = { USA = { clr_country_flag = accepts_dixie } }
+		}
+		
+		#china
+		random_owned = {
+			limit = { owner = { CHI = { accepted_culture = beifaren } } }
+			owner = { CHI = { set_country_flag = accepts_beifaren } }
+		}
+		random_owned = {
+			limit = { owner = { CHI = { NOT = { accepted_culture = beifaren } } } }
+			owner = { CHI = { clr_country_flag = accepts_beifaren } }
+		}
+		random_owned = {
+			limit = { owner = { CHI = { accepted_culture = nanfaren } } }
+			owner = { CHI = { set_country_flag = accepts_nanfaren } }
+		}
+		random_owned = {
+			limit = { owner = { CHI = { NOT = { accepted_culture = nanfaren } } } }
+			owner = { CHI = { clr_country_flag = accepts_nanfaren } }
+		}
+		random_owned = {
+			limit = { owner = { CHI = { accepted_culture = manchu } } }
+			owner = { CHI = { set_country_flag = accepts_manchu } }
+		}
+		random_owned = {
+			limit = { owner = { CHI = { NOT = { accepted_culture = manchu } } } }
+			owner = { CHI = { clr_country_flag = accepts_manchu } }
+		}
+		random_owned = {
+			limit = { owner = { CHI = { accepted_culture = hakka } } }
+			owner = { CHI = { set_country_flag = accepts_hakka } }
+		}
+		random_owned = {
+			limit = { owner = { CHI = { NOT = { accepted_culture = hakka } } } }
+			owner = { CHI = { clr_country_flag = accepts_hakka } }
+		}
+		random_owned = {
+			limit = { owner = { CHI = { accepted_culture = miao } } }
+			owner = { CHI = { set_country_flag = accepts_miao } }
+		}
+		random_owned = {
+			limit = { owner = { CHI = { NOT = { accepted_culture = miao } } } }
+			owner = { CHI = { clr_country_flag = accepts_miao } }
+		}
+		random_owned = {
+			limit = { owner = { CHI = { accepted_culture = min } } }
+			owner = { CHI = { set_country_flag = accepts_min } }
+		}
+		random_owned = {
+			limit = { owner = { CHI = { NOT = { accepted_culture = min } } } }
+			owner = { CHI = { clr_country_flag = accepts_min } }
+		}
+		random_owned = {
+			limit = { owner = { CHI = { accepted_culture = zhuang } } }
+			owner = { CHI = { set_country_flag = accepts_zhuang } }
+		}
+		random_owned = {
+			limit = { owner = { CHI = { NOT = { accepted_culture = zhuang } } } }
+			owner = { CHI = { clr_country_flag = accepts_zhuang } }
+		}
+		random_owned = {
+			limit = { owner = { CHI = { accepted_culture = yue } } }
+			owner = { CHI = { set_country_flag = accepts_yue } }
+		}
+		random_owned = {
+			limit = { owner = { CHI = { NOT = { accepted_culture = yue } } } }
+			owner = { CHI = { clr_country_flag = accepts_yue } }
+		}
+		random_owned = {
+			limit = { owner = { CHI = { accepted_culture = yi } } }
+			owner = { CHI = { set_country_flag = accepts_yi } }
+		}
+		random_owned = {
+			limit = { owner = { CHI = { NOT = { accepted_culture = yi } } } }
+			owner = { CHI = { clr_country_flag = accepts_yi } }
+		}
+		random_owned = {
+			limit = { owner = { CHI = { accepted_culture = hanhui } } }
+			owner = { CHI = { set_country_flag = accepts_hanhui } }
+		}
+		random_owned = {
+			limit = { owner = { CHI = { NOT = { accepted_culture = hanhui } } } }
+			owner = { CHI = { clr_country_flag = accepts_hanhui } }
+		}
+		
+		#cleanup vassals with nonexistent overlords
+		any_country = {
+			limit = {
+				is_vassal = yes
+				exists = yes
+				overlord = { 
+					OR = {
+						exists = no
+						is_vassal = yes
+					}
+				}
+			}
+			country_event = 477877788
+		}
+		
+		#cleanup overlords with nonexistent vassals - disabled by default
+		any_country = {
+			limit = {
+				is_vassal = yes
+				exists = no
+			}
+			country_event = 477877794
+		}
+		
+		#applying land strait province notification
+		any_country = {
+			limit = {
+				exists = yes
+			}
+			any_owned = {
+				limit = {
+					OR = {
+						### Copenhagen Region
+						province_id = 372
+						province_id = 334
+						province_id = 373
+						province_id = 2557
+						province_id = 371
+						
+						### Gibraltar Straits
+						province_id = 512
+						province_id = 1687
+						
+						### Italy
+						province_id = 759
+						province_id = 763
+						
+						### Golden Horn
+						province_id = 860
+						province_id = 861
+						
+						### Croatia
+						province_id = 780
+						province_id = 782
+						
+						### Japan & Korea
+						province_id = 1403
+						province_id = 1413
+						province_id = 1664
+						province_id = 1666
+						province_id = 1638
+						province_id = 1667
+						province_id = 1659
+						province_id = 1404
+						province_id = 1399
+						province_id = 1458
+						province_id = 1455
+						province_id = 1460
+						province_id = 1461
+						province_id = 2565
+						province_id = 1463
+						province_id = 1462
+						province_id = 1642
+						province_id = 1672
+						
+						### Indonesia
+						province_id = 1420
+						province_id = 1438
+						province_id = 1439
+						province_id = 1440
+						province_id = 1442
+						province_id = 1444
+						province_id = 1443
+						province_id = 1445
+						province_id = 1446
+						province_id = 1437
+						province_id = 1436
+					}
+				}
+				add_province_modifier = {
+					name = land_crossing_notification
+					duration = -1
+				}
+			}
+		}
+		
+		#applying sea strait province notification
+		any_country = {
+			limit = {
+				exists = yes
+			}
+			any_owned = {
+				limit = {
+					OR = {
+						### Dover-Calais
+						province_id = 301
+						province_id = 401
+						
+						### Maritimes
+						province_id = 72
+						province_id = 73
+						province_id = 68
+						province_id = 70
+						
+						### Newfoundland
+						province_id = 62
+						province_id = 75
+						province_id = 74
+						province_id = 77
+						
+						### Vancouver Area
+						province_id = 14
+						province_id = 13
+						province_id = 78
+						
+						### Caribbean
+						province_id = 2237
+						province_id = 2269
+						province_id = 2334
+						province_id = 2335
+						province_id = 2399
+						province_id = 2400
+						province_id = 2212
+						province_id = 2215
+						province_id = 2214
+						province_id = 2222
+						province_id = 2238
+						province_id = 2233
+						province_id = 2409
+						province_id = 2229
+						province_id = 2231
+						province_id = 2228
+						province_id = 2232
+						province_id = 2230
+						province_id = 2225
+						province_id = 2224
+						province_id = 2227
+						province_id = 2236
+						province_id = 3246
+						province_id = 2223
+						province_id = 2226
+						province_id = 45
+						province_id = 2219
+						province_id = 2220
+						
+						### Zanzibar
+						province_id = 2036
+						province_id = 2048
+						
+						### Comoros-Mayotte
+						province_id = 2123
+						province_id = 2124
+						
+						### GB & Ireland
+						province_id = 254
+						province_id = 271
+						province_id = 304
+						province_id = 267
+						province_id = 1724
+						
+						### Scandinavia
+						province_id = 324
+						province_id = 348
+						province_id = 335
+						province_id = 374
+						province_id = 345
+						province_id = 353
+						province_id = 349
+						province_id = 358
+						province_id = 331
+						province_id = 332
+						
+						### Netherlands
+						province_id = 375
+						province_id = 385
+						
+						### Italy
+						province_id = 473
+						province_id = 766
+						
+						### Greece & Turkey
+						province_id = 826
+						province_id = 824
+						province_id = 853
+						province_id = 838
+						province_id = 834
+						province_id = 845
+						province_id = 843
+						province_id = 869
+						province_id = 859
+						province_id = 865
+						province_id = 837
+						province_id = 827
+						province_id = 846
+						province_id = 872
+						province_id = 844
+						
+						### Egypt
+						province_id = 1757
+						province_id = 1772
+						
+						### Aden Strait
+						province_id = 1412
+						province_id = 1875
+						
+						### Russia
+						province_id = 966
+						province_id = 1049
+						
+						### Japan, Korea & China
+						#province_id = 1632
+						#province_id = 2589
+						#province_id = 1661
+						province_id = 1540
+						province_id = 1538
+						province_id = 1539
+						province_id = 1541
+						province_id = 1452
+						province_id = 1454
+						province_id = 2406
+						province_id = 1485
+						#province_id = 2562
+						#province_id = 1484
+						#province_id = 1662
+						province_id = 1679
+						province_id = 1678
+						province_id = 1142
+						province_id = 1141
+						province_id = 1083
+						province_id = 1086
+						#province_id = 1087
+						#province_id = 1643
+						province_id = 1162
+						province_id = 1165
+						province_id = 1644
+						province_id = 1089
+						province_id = 1088
+						province_id = 1074
+						province_id = 1635
+						province_id = 1637
+						
+						### India
+						province_id = 1309
+						province_id = 1322
+						province_id = 1310
+						
+						### Indonesia
+						province_id = 1384
+						province_id = 1402
+						province_id = 1385
+						province_id = 1418
+						province_id = 1421
+						province_id = 1495
+						province_id = 1499
+						province_id = 1457
+						province_id = 1461
+						province_id = 1411
+						province_id = 1408
+						province_id = 1401
+						province_id = 1440
+						province_id = 1458
+						province_id = 1459
+						province_id = 1462
+						province_id = 1464
+						province_id = 1441
+						province_id = 1444
+						province_id = 1446
+						province_id = 1451
+						province_id = 1450
+						province_id = 1449
+						province_id = 1447
+						province_id = 1448
+						province_id = 1453
+						province_id = 1434
+						province_id = 1435
+						province_id = 1425
+						
+						### Arabia
+						province_id = 2664
+						province_id = 1071
+						
+						### Oceania
+						province_id = 2512
+						province_id = 2516
+						province_id = 2537
+						province_id = 1531
+					}
+				}
+				add_province_modifier = {
+					name = sea_crossing_notification
+					duration = -1
+				}
+			}
+		}
+		
+		#applying canal control province notification
+		any_country = {
+			limit = {
+				exists = yes
+			}
+			any_owned = {
+				limit = {
+					OR = {
+						### Copenhagen Strait
+						province_id = 372
+						
+						### Gibraltar Strait
+						province_id = 517
+						province_id = 2590
+						
+						### Bosphorus Strait
+						province_id = 859
+						province_id = 860
+						
+						### Aden Strait
+						province_id = 1875
+						
+						### Indonesian Straits
+						province_id = 1384
+						province_id = 1413
+						province_id = 1438
+						province_id = 1442
+						province_id = 1439
+						province_id = 1446
+					}
+				}
+				add_province_modifier = {
+					name = canal_notification
+					duration = -1
+				}
+			}
+		}
+		
+		#applying river province notifications
+		any_country = {
+			limit = {
+				exists = yes
+			}
+			any_owned = {
+				limit = {
+					OR = {
+						### River Siene
+						province_id = 415
+						province_id = 416
+						province_id = 2570
+						province_id = 41
+						province_id = 42
+						province_id = 403
+						province_id = 425
+						province_id = 427
+						province_id = 429
+						province_id = 406
+						province_id = 408
+						
+						### The Rhine
+						province_id = 575
+						province_id = 581
+						province_id = 577
+						province_id = 3265
+						province_id = 574
+						province_id = 570
+						province_id = 571
+						province_id = 409
+						province_id = 410
+						province_id = 587
+						province_id = 586
+						province_id = 604
+						province_id = 603
+						province_id = 569
+						province_id = 2560
+						province_id = 565
+						province_id = 579
+						province_id = 2561
+						province_id = 578
+						province_id = 378
+						province_id = 380
+						province_id = 379
+						province_id = 382
+						province_id = 377
+						province_id = 376
+						
+						
+						### The Dnieper and The Daugava
+						province_id = 970
+						province_id = 971
+						province_id = 972
+						province_id = 961
+						province_id = 958
+						province_id = 959
+						province_id = 942
+						province_id = 948
+						province_id = 946
+						province_id = 947
+						province_id = 357
+						province_id = 354
+						province_id = 355
+						province_id = 356
+						province_id = 949
+						province_id = 962
+						province_id = 963
+						province_id = 974
+						province_id = 973
+						province_id = 965
+						province_id = 941
+						province_id = 718
+						
+						### The Vistula
+						province_id = 690
+						province_id = 693
+						province_id = 691
+						province_id = 694
+						province_id = 700
+						province_id = 710
+						province_id = 708
+						province_id = 706
+						province_id = 709
+						province_id = 711
+						province_id = 713
+						province_id = 715
+						province_id = 705
+						province_id = 716
+						province_id = 703
+						province_id = 714
+						province_id = 2584
+						
+						### The Danube
+						province_id = 675
+						province_id = 674
+						province_id = 818
+						province_id = 811
+						province_id = 810
+						province_id = 795
+						province_id = 794
+						province_id = 791
+						province_id = 793
+						province_id = 779
+						province_id = 640
+						province_id = 644
+						province_id = 643
+						province_id = 642
+						province_id = 623
+						province_id = 624
+						province_id = 620
+						province_id = 622
+						province_id = 599
+						province_id = 600
+						province_id = 621
+						province_id = 619
+						province_id = 633
+						province_id = 635
+						province_id = 646
+						province_id = 641
+						province_id = 645
+						province_id = 2538
+						province_id = 792
+						province_id = 653
+						province_id = 665
+						province_id = 666
+						province_id = 664
+						province_id = 669
+						province_id = 668
+						province_id = 673
+						province_id = 678
+						province_id = 613
+						province_id = 617
+						
+						### The Rhone
+						province_id = 461
+						province_id = 449
+						province_id = 453
+						province_id = 452
+						province_id = 431
+						province_id = 451
+						province_id = 454
+						province_id = 469
+						province_id = 468
+						province_id = 467
+						
+						### The Amur
+						province_id = 1084
+						province_id = 2617
+						province_id = 1085
+						province_id = 1081
+						province_id = 1079
+						province_id = 1002
+						province_id = 1553
+						province_id = 1552
+						province_id = 1554
+						province_id = 1083
+						
+						### The Yalu and The Tumen
+						province_id = 1082
+						province_id = 1555
+						province_id = 1479
+						province_id = 1620
+						province_id = 1623
+						province_id = 1622
+						
+						### The Po River
+						province_id = 731
+						province_id = 730
+						province_id = 728
+						province_id = 726
+						province_id = 723
+						province_id = 738
+						province_id = 739
+						province_id = 742
+						
+						### The Saint Lawrence
+						province_id = 56
+						province_id = 239
+						province_id = 66
+						province_id = 67
+						province_id = 65
+						province_id = 64
+						province_id = 58
+						
+						### The Indus River
+						province_id = 1288
+						province_id = 1289
+						province_id = 1228
+						province_id = 1218
+						province_id = 1223
+						province_id = 1225
+						province_id = 1226
+						province_id = 1235
+						province_id = 1224
+						province_id = 1222
+						province_id = 1221
+						province_id = 1219
+						province_id = 1217
+						province_id = 1216
+						province_id = 1210
+						
+						### The Yellow River
+						province_id = 1567
+						province_id = 1568
+						province_id = 1564
+						province_id = 1508
+						province_id = 1510
+						province_id = 1562
+						province_id = 1559
+						province_id = 2062
+						province_id = 1575
+						province_id = 1511
+						province_id = 1515
+						province_id = 1563
+						province_id = 3309
+						province_id = 1570
+						
+						### The Yangtze River
+						province_id = 1537
+						province_id = 1544
+						province_id = 2221
+						province_id = 1475
+						province_id = 1471
+						province_id = 1549
+						province_id = 1522
+						province_id = 1528
+						province_id = 1525
+						province_id = 1521
+						province_id = 1520
+						province_id = 1516
+						province_id = 1518
+						province_id = 1470
+						province_id = 1474
+						province_id = 1477
+						province_id = 1543
+						province_id = 1541
+						
+						### The Nile River
+						province_id = 1751
+						province_id = 1746
+						province_id = 1755
+						province_id = 1759
+						province_id = 1760
+						province_id = 1761
+						province_id = 2564
+						province_id = 1806
+						province_id = 1838
+						province_id = 1840
+						province_id = 1843
+						province_id = 1845
+						province_id = 1998
+						province_id = 1997
+						province_id = 2020
+						province_id = 2021
+						province_id = 2022
+						province_id = 1752
+						province_id = 1749
+						province_id = 1745
+						province_id = 1765
+						province_id = 1772
+						province_id = 1770
+						province_id = 1771
+						province_id = 1836
+						province_id = 1829
+						province_id = 1828
+						province_id = 1831
+						province_id = 1844
+						province_id = 1846
+						province_id = 2019
+						province_id = 2023	
+						province_id = 1847
+						province_id = 1830
+						province_id = 1827
+						province_id = 1837
+						province_id = 1832
+						province_id = 1835
+						province_id = 1766
+						province_id = 1768
+						province_id = 1767
+						province_id = 1769
+						province_id = 2559
+						province_id = 1762
+						province_id = 1764
+						province_id = 1763
+						province_id = 1750
+
+						### The Lake Erie
+						province_id = 236
+						province_id = 55
+						province_id = 54
+						province_id = 173
+						
+						### The Rio Grande
+						province_id = 138
+						province_id = 136
+						province_id = 105
+						province_id = 103
+						province_id = 2149
+						province_id = 2147
+						province_id = 2144
+						province_id = 2143
+						province_id = 2662
+						province_id = 2148
+						province_id = 108
+						
+						### The Mississippi River
+						province_id = 139
+						province_id = 140
+						province_id = 192
+						province_id = 193
+						province_id = 189
+						province_id = 187
+						province_id = 168
+						province_id = 167
+						province_id = 141
+						province_id = 3252
+						province_id = 142
+						province_id = 144
+						province_id = 143
+						province_id = 148
+						province_id = 146
+					}
+				}
+				add_province_modifier = {
+					name = river_notification
+					duration = -1
+				}
+			}
+		}
+		
+		#clean up crisis tension
+		any_country = {
+            limit = {
+				exists = yes
+                OR = {
+                    NOT = { has_global_flag = revolution_n_counter_researched }
+                    is_vassal = yes
+                }
+            }
+            any_state  = { flashpoint_tension = -100 }
+        }
+		#make CLN unable to be interacted with by ai
+		any_country = {
+			limit = {
+				exists = yes
+			}
+			relation = { who = THIS value = -400 }
+		}
+		
+		#stop vassal payments
+		any_country = {
+			limit = {
+				exists = yes
+				is_vassal = yes
+				overlord = { has_country_flag = vassals_dont_need_to_pay }
+			}
+			set_country_flag = exempt_from_vassal_contribution
+		}
+		
+		#cleanup unciv colonies
+		any_country = {
+			limit = {
+				civilized = no
+				any_state = { is_colonial = yes }
+				NOT = {
+					tag = EIC
+					tag = EGY
+					UTI = { exists = yes }
+				}
+			}
+			any_state = {
+				limit = {
+					is_colonial = yes
+				}
+				any_owned = {
+					add_core = UTI
+				}
+			}
+			any_owned = {
+				limit = {
+					is_core = UTI
+				}
+				secede_province = THIS
+			}
+			THIS = {
+				any_owned = {
+					limit = {
+						is_core = UTI
+					}
+					secede_province = UTI
+				}
+				create_vassal = UTI
+			}
+			inherit = UTI
+			any_owned = {
+				limit = {
+					is_core = UTI
+				}
+				remove_core = UTI
+			}
+		}
+		
+		#cleanup bugged slave states
+		any_country = {
+			limit = {
+				any_state = { is_slave = yes }
+				slavery = no_slavery
+			}
+			any_state = {
+				limit = {
+					is_slave = yes
+				}
+				is_slave = no
+			}
+		}
+		
+		#cleanup bad govflags
+		any_country = {
+			limit = {
+				OR = {
+					AND = {
+						government = theocracy
+						NOT = { has_country_flag = theocratic_government }
+					}
+					AND = {
+						government = proletarian_dictatorship
+						NOT = { has_country_flag = communist_gov }
+					}
+					AND = {
+						government = colonial_company
+						NOT = { has_country_flag = clean_up_colonial_government }
+					}
+					AND = {
+						government = dominion
+						NOT = { has_country_flag = dominion_gov }
+					}
+				}
+			}
+			clr_country_flag = theocratic_government
+			clr_country_flag = communist_gov
+			clr_country_flag = clean_up_colonial_government
+			clr_country_flag = dominion_gov
+			random_owned = {
+				limit = {
+					owner = {
+						government = theocracy
+					}
+				}
+				owner = { set_country_flag = theocratic_government }
+			}
+			random_owned = {
+				limit = {
+					owner = {
+						government = proletarian_dictatorship
+					}
+				}
+				owner = { set_country_flag = communist_gov }
+			}
+			random_owned = {
+				limit = {
+					owner = {
+						government = colonial_company
+					}
+				}
+				owner = { set_country_flag = clean_up_colonial_government }
+			}
+			random_owned = {
+				limit = {
+					owner = {
+						government = dominion
+					}
+				}
+				owner = { set_country_flag = dominion_gov }
+			}
+		}
+		
+		#updating flags for techs/inventions
+		any_country = {
+			limit = {
+				medicine = 1
+				NOT = { has_country_flag = medicine_invented }
+			}
+			set_country_flag = medicine_invented
+		}
+		any_country = {
+			limit = {
+				biologism = 1
+				NOT = { has_country_flag = biologism_invented }
+			}
+			set_country_flag = biologism_invented
+		}
+		any_country = {
+			limit = {
+				invention = germ_theory
+				NOT = { has_country_flag = germs_invented }
+			}
+			set_country_flag = germs_invented
+		}
+		any_country = {
+			limit = {
+				invention = gaslights
+				NOT = { has_country_flag = gaslights_invented }
+			}
+			set_country_flag = gaslights_invented
+		}
+		any_country = {
+			limit = {
+				electricity = 1
+				NOT = { has_country_flag = electricity_invented }
+			}
+			set_country_flag = electricity_invented
+		}
+		any_country = {
+			limit = {
+				invention = national_fraternity
+				NOT = { has_country_flag = nat_frat_invented }
+			}
+			set_country_flag = nat_frat_invented
+		}
+		any_country = {
+			limit = {
+				revolution_n_counterrevolution = 1
+				NOT = { has_country_flag = revolution_n_counter_researched }
+			}
+			set_country_flag = revolution_n_counter_researched
+		}
+		any_country = {
+			limit = {
+				modern_central_bank_system = 1
+				NOT = { has_country_flag = modern_central_bank_system_invented }
+			}
+			set_country_flag = modern_central_bank_system_invented
+		}
+		any_country = {
+			limit = {
+				invention = secret_police
+				NOT = { has_country_flag = secret_police_invented }
+			}
+			set_country_flag = secret_police_invented
+		}
+		
+		#enabling crisis
+		random_country = {
+			limit = {
+				exists = yes
+				NOT = { has_global_flag = perma_disable_crises }
+				NOT = { has_global_flag = revolution_n_counter_researched }
+				revolution_n_counterrevolution = 1
+			}
+			set_global_flag = revolution_n_counter_researched
+		}
+		
+		#ghost units monthly cleanup
+		any_country = {
+			limit = {
+				exists = no
+                is_greater_power = no
+                #has_country_flag = existing_country
+                capital_scope = { NOT = { province_control_days = 120 } }
+                OR = {
+                    is_mobilised = yes
+                    total_amount_of_ships = 1
+                }
+			}
+			annex_to = FROM
+		}
+		
+		#monthly substate payment
+		#substate payment
+		any_country = {
+			limit = {
+				exists = yes
+				OR = {
+					is_substate = yes
+					AND = {
+						is_vassal = yes
+						is_substate = no
+						total_pops = 250000
+					}
+				}
+				NOT = { has_country_flag = exempt_from_vassal_contribution }
+			}
+			random_owned = {
+				limit = {
+					owner = {
+						money = 1500
+						NOT = { total_pops = 750000 }
+					}
+				}
+				owner = {
+					treasury = -1500
+					overlord = { treasury = 1500 }
+				}
+			}
+			random_owned = {
+				limit = {
+					owner = {
+						money = 2500
+						total_pops = 750000
+						NOT = { total_pops = 1000000 }
+					}
+				}
+				owner = {
+					treasury = -2500
+					overlord = { treasury = 2500 }
+				}
+			}
+			random_owned = {
+				limit = {
+					owner = {
+						money = 3000
+						total_pops = 1000000
+						NOT = { total_pops = 1250000 }
+					}
+				}
+				owner = {
+					treasury = -3000
+					overlord = { treasury = 3000 }
+				}
+			}
+			random_owned = {
+				limit = {
+					owner = {
+						money = 3500
+						total_pops = 1250000
+						NOT = { total_pops = 1500000 }
+					}
+				}
+				owner = {
+					treasury = -3500
+					overlord = { treasury = 3500 }
+				}
+			}
+			random_owned = {
+				limit = {
+					owner = {
+						money = 4000
+						total_pops = 1500000
+						NOT = { total_pops = 1750000 }
+					}
+				}
+				owner = {
+					treasury = -4000
+					overlord = { treasury = 4000 }
+				}
+			}
+			random_owned = {
+				limit = {
+					owner = {
+						money = 4500
+						total_pops = 1750000
+						NOT = { total_pops = 2000000 }
+					}
+				}
+				owner = {
+					treasury = -4500
+					overlord = { treasury = 4500 }
+				}
+			}
+			random_owned = {
+				limit = {
+					owner = {
+						money = 5000
+						total_pops = 2000000
+						NOT = { total_pops = 2250000 }
+					}
+				}
+				owner = {
+					treasury = -5000
+					overlord = { treasury = 5000 }
+				}
+			}
+			random_owned = {
+				limit = {
+					owner = {
+						money = 5500
+						total_pops = 2250000
+						NOT = { total_pops = 2500000 }
+					}
+				}
+				owner = {
+					treasury = -5500
+					overlord = { treasury = 5500 }
+				}
+			}
+			random_owned = {
+				limit = {
+					owner = {
+						money = 6000
+						total_pops = 2500000
+					}
+				}
+				owner = {
+					treasury = -6000
+					overlord = { treasury = 6000 }
+				}
+			}
+		}
+		
+		#remove colonial policy from non colonial nations
+		any_country = {
+			limit = {
+				NOT = {
+					colonial_policy = no_colonies
+					any_state = { is_colonial = yes }
+				}
+			}
+			political_reform = no_colonies
+		}
+		
+		#manage assim debuffs
+		any_country = {
+			limit = {
+				exists = yes
+				OR = {
+					citizens_rights = culture_voting_only
+					citizens_rights = all_voting_pops
+				}
+				OR = {
+					AND = {
+						slavery = yes_slavery
+						NOT = {
+							capital_scope = north_america
+							capital_scope = south_america
+							capital_scope = australia_new_zealand
+						}
+					}
+					debt_law = serfdom
+				}
+			}
+			add_country_modifier = {
+				name = slow_assim_modifier
+				duration = -1
+			}
+		}
+		
+		any_country = {
+			limit = {
+				exists = yes
+				NOT = {
+					slavery = yes_slavery
+					debt_law = serfdom
+				}
+				has_country_modifier = slow_assim_modifier
+			}
+			remove_country_modifier = slow_assim_modifier
+		}
+		
+		any_country = {
+			limit = {
+				exists = yes
+				OR = {
+					citizens_rights = culture_voting_only
+					citizens_rights = all_voting_pops
+				}
+				any_state = { is_colonial = yes }
+			}
+			add_country_modifier = {
+				name = slow_assim_modifier_2
+				duration = -1
+			}
+		}
+		
+		any_country = {
+			limit = {
+				exists = yes
+				NOT = { any_state = { is_colonial = yes } }
+				has_country_modifier = slow_assim_modifier_2
+			}
+			remove_country_modifier = slow_assim_modifier_2
+		}
+		
+		CLN = { country_event = { id = 477877790 days = 30 } }
+	}
+}
+
+country_event = {
+	id = 477877791
+	title = "AI: Yearly Cleanup Check"
+	desc = "AI: Yearly Cleanup Check"
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = "Checking..."
+		
+		#life rating decreases
+		any_country = {
+			limit = {
+				OR = {
+					#USA conditions
+					AND = {
+						OR = {
+							tag = USA
+							tag = CSA
+							tag = FSA
+							tag = MEX
+						}
+						year = 1850
+						NOT = { year = 1851 }
+					}
+					AND = {
+						OR = {
+							tag = USA
+							tag = CSA
+							tag = FSA
+							tag = MEX
+						}
+						year = 1854
+						NOT = { year = 1855 }
+					}
+					AND = {
+						OR = {
+							tag = USA
+							tag = CSA
+							tag = FSA
+							tag = MEX
+						}
+						year = 1858
+						NOT = { year = 1859 }
+					}
+					AND = {
+						OR = {
+							tag = USA
+							tag = CSA
+							tag = FSA
+							tag = MEX
+						}
+						year = 1862
+						NOT = { year = 1863 }
+					}
+					AND = {
+						OR = {
+							tag = USA
+							tag = CSA
+							tag = FSA
+							tag = MEX
+						}
+						year = 1866
+					}
+					
+					#GB conditions
+					AND = {
+						tag = ENG
+						year = 1880
+						NOT = { year = 1881 }
+					}
+					AND = {
+						OR = {
+							tag = ENG
+							tag = GBR
+						}
+						year = 1890
+						NOT = { year = 1891 }
+					}
+					AND = {
+						OR = {
+							tag = ENG
+							tag = GBR
+						}
+						year = 1900
+						NOT = { year = 1901 }
+					}
+					AND = {
+						OR = {
+							tag = ENG
+							tag = GBR
+						}
+						year = 1910
+						NOT = { year = 1911 }
+					}
+					
+					#Italy conditions
+					AND = {
+						OR = {
+							tag = ITA
+							tag = SAR
+							tag = SIC
+							tag = PAP
+							tag = PAR
+							tag = MOD
+							tag = LUC
+							tag = TUS
+						}
+						year = 1890
+						NOT = { year = 1891 }
+					}
+					AND = {
+						OR = {
+							tag = ITA
+							tag = SAR
+							tag = SIC
+							tag = PAP
+							tag = PAR
+							tag = MOD
+							tag = LUC
+							tag = TUS
+						}
+						year = 1900
+					}
+					
+					#Germany conditions
+					AND = {
+						OR = {
+							tag = GER
+							tag = NGF
+							tag = SGF
+							tag = PRU
+							tag = BAV
+							tag = AUS
+							tag = KUK
+							tag = DNB
+						}
+						year = 1900
+						NOT = { year = 1901 }
+					}
+					AND = {
+						OR = {
+							tag = GER
+							tag = NGF
+							tag = SGF
+							tag = PRU
+							tag = BAV
+							tag = AUS
+							tag = KUK
+							tag = DNB
+						}
+						year = 1904
+						NOT = { year = 1905 }
+					}
+					AND = {
+						OR = {
+							tag = GER
+							tag = NGF
+							tag = SGF
+							tag = PRU
+							tag = BAV
+							tag = AUS
+							tag = KUK
+							tag = DNB
+						}
+						year = 1908
+						NOT = { year = 1909 }
+					}
+					AND = {
+						OR = {
+							tag = GER
+							tag = NGF
+							tag = SGF
+							tag = PRU
+							tag = BAV
+							tag = AUS
+							tag = KUK
+							tag = DNB
+						}
+						year = 1912
+						NOT = { year = 1913 }
+					}
+					AND = {
+						OR = {
+							tag = GER
+							tag = NGF
+							tag = SGF
+							tag = PRU
+							tag = BAV
+							tag = AUS
+							tag = KUK
+							tag = DNB
+						}
+						year = 1916
+						NOT = { year = 1917 }
+					}
+					AND = {
+						OR = {
+							tag = GER
+							tag = NGF
+							tag = SGF
+							tag = PRU
+							tag = BAV
+							tag = AUS
+							tag = KUK
+							tag = DNB
+						}
+						year = 1920
+					}
+				}
+			}
+			all_core = {
+				limit = {
+					life_rating = 36
+					NOT = {
+						AND = {
+							is_capital = yes
+							NOT = { life_rating = 41 }
+						}
+					}
+				}
+				life_rating = -1
+			}
+		}
+		
+		#life rating increases to 35 and 40
+		any_country = {
+			limit = {
+				OR = {
+					#France conditions
+					AND = {
+						tag = FRA
+						year = 1900
+						NOT = { year = 1901 }
+					}
+					AND = {
+						tag = FRA
+						year = 1905
+						NOT = { year = 1906 }
+					}
+					AND = {
+						tag = FRA
+						year = 1910
+						NOT = { year = 1911 }
+					}
+					
+					#East Asia conditions
+					AND = {	#33
+						exists = yes
+						OR = {
+							tag = CHI
+							tag = HND
+							tag = KOR
+							tag = IDO
+							tag = INO
+						}
+						year = 1910
+						NOT = { year = 1911 }
+					}
+					AND = {	#34
+						exists = yes
+						OR = {
+							tag = CHI
+							tag = HND
+							tag = KOR
+							tag = IDO
+							tag = INO
+						}
+						year = 1913
+						NOT = { year = 1914 }
+					}
+					AND = {	#35
+						exists = yes
+						OR = {
+							tag = CHI
+							tag = HND
+							tag = KOR
+							tag = IDO
+							tag = INO
+						}
+						year = 1916
+						NOT = { year = 1917 }
+					}
+					AND = {	#36
+						exists = yes
+						OR = {
+							tag = CHI
+							tag = HND
+							tag = KOR
+							tag = IDO
+							tag = INO
+						}
+						year = 1919
+						NOT = { year = 1920 }
+					}
+					AND = {	#37
+						exists = yes
+						OR = {
+							tag = CHI
+							tag = HND
+							tag = KOR
+							tag = IDO
+							tag = INO
+						}
+						year = 1922
+						NOT = { year = 1923 }
+					}
+					AND = {	#38
+						exists = yes
+						OR = {
+							tag = CHI
+							tag = HND
+							tag = KOR
+							tag = IDO
+							tag = INO
+						}
+						year = 1925
+						NOT = { year = 1926 }
+					}
+					AND = {	#39
+						exists = yes
+						OR = {
+							tag = CHI
+							tag = HND
+							tag = KOR
+							tag = IDO
+							tag = INO
+						}
+						year = 1928
+						NOT = { year = 1929 }
+					}
+					AND = {	#40
+						exists = yes
+						OR = {
+							tag = CHI
+							tag = HND
+							tag = KOR
+							tag = IDO
+							tag = INO
+						}
+						year = 1931
+						NOT = { year = 1932 }
+					}
+				}
+			}
+			all_core = {
+				limit ={
+					OR = {
+						NOT = { life_rating = 35 }
+						AND = {
+							NOT = { is_core = FRA }
+							NOT = { life_rating = 40 }
+						}
+					}
+				}
+				life_rating = 1
+			}
+		}
+		
+		#reactionary upper house
+		any_country = {
+			limit = {
+				exists = yes
+				NOT = { ruling_party_ideology = reactionary }
+			}
+			clr_country_flag = buffed_reactionary_uh
+			clr_country_flag = buffed_reactionary_uh_2
+			clr_country_flag = buffed_reactionary_uh_3
+			clr_country_flag = buffed_reactionary_uh_4
+			clr_country_flag = buffed_reactionary_uh_5
+			remove_country_modifier = reactionary_uh_increased
+		}
+		any_country = {
+			limit = {
+				exists = yes
+				ruling_party_ideology = reactionary
+				has_country_flag = buffed_reactionary_uh_5
+			}
+			upper_house = {
+				ideology = reactionary
+				value = 0.5
+			}
+		}
+		any_country = {
+			limit = {
+				exists = yes
+				ruling_party_ideology = reactionary
+				has_country_flag = buffed_reactionary_uh_4
+			}
+			clr_country_flag = buffed_reactionary_uh_4
+			upper_house = {
+				ideology = reactionary
+				value = 0.4
+			}
+			set_country_flag = buffed_reactionary_uh_5
+		}
+		any_country = {
+			limit = {
+				exists = yes
+				ruling_party_ideology = reactionary
+				has_country_flag = buffed_reactionary_uh_3
+			}
+			clr_country_flag = buffed_reactionary_uh_3
+			upper_house = {
+				ideology = reactionary
+				value = 0.3
+			}
+			set_country_flag = buffed_reactionary_uh_4
+		}
+		any_country = {
+			limit = {
+				exists = yes
+				ruling_party_ideology = reactionary
+				has_country_flag = buffed_reactionary_uh_2
+			}
+			clr_country_flag = buffed_reactionary_uh_2
+			upper_house = {
+				ideology = reactionary
+				value = 0.2
+			}
+			set_country_flag = buffed_reactionary_uh_3
+		}
+		any_country = {
+			limit = {
+				exists = yes
+				ruling_party_ideology = reactionary
+				has_country_flag = buffed_reactionary_uh
+			}
+			clr_country_flag = buffed_reactionary_uh
+			upper_house = {
+				ideology = reactionary
+				value = 0.1
+			}
+			set_country_flag = buffed_reactionary_uh_2
+		}
+		
+		#literacy decay
+		any_country = {
+            limit = {
+				exists = yes
+            }
+			any_owned = {
+				#any_pop = { limit = { literacy = 0.10 } literacy = -0.001 }  #dL/dt=0.01L
+				#any_pop = { limit = { literacy = 0.20 } literacy = -0.001 }
+				#any_pop = { limit = { literacy = 0.30 } literacy = -0.001 }
+				any_pop = { limit = { literacy = 0.40 } literacy = -0.001 }
+				any_pop = { limit = { literacy = 0.50 } literacy = -0.001 }
+				any_pop = { limit = { literacy = 0.60 } literacy = -0.001 }
+				any_pop = { limit = { literacy = 0.70 } literacy = -0.001 }
+				any_pop = { limit = { literacy = 0.80 } literacy = -0.001 }
+				any_pop = { limit = { literacy = 0.90 } literacy = -0.001 }
+			}
+		}
+		
+		#updating mil gain for ottomans
+		random_country = {
+			limit = {
+				tag = TUR
+				exists = yes
+				has_country_modifier = ottoman_oppression
+				NOT = { has_country_modifier = religious_minority_oppression }
+			}
+			any_pop = {
+				limit = { is_state_religion = no }
+				consciousness = 1.2
+				militancy = 0.6
+				money = -1000
+			}
+			add_country_modifier = {
+				name = religious_minority_oppression
+				duration = 365
+			}
+		}
+		
+		#upgrade rebels
+		random_owned = {
+			limit = {
+				owner = {
+					year = 1880
+					NOT = { has_global_flag = rebel_tech_1850 }
+				}
+			}
+			owner = {
+				REB = {
+					activate_technology = post_napoleonic_thought
+					activate_technology = flintlock_rifles
+					activate_technology = muzzle_loaded_rifles
+					activate_technology = bronze_muzzle_loaded_artillery
+					activate_technology = military_staff_system
+					activate_technology = army_command_principle
+				}
+				set_global_flag = rebel_tech_1850
+			}
+		}
+		random_owned = {
+			limit = {
+				owner = {
+					year = 1900
+					NOT = { has_global_flag = rebel_tech_1870 }
+				}
+			}
+			owner = {
+				set_global_flag = rebel_tech_1870
+				REB = {
+					activate_technology = strategic_mobility
+					activate_technology = breech_loaded_rifles
+					activate_technology = iron_muzzle_loaded_artillery
+					activate_technology = military_plans
+					activate_technology = army_professionalism
+				}
+			}
+		}
+		random_owned = {
+			limit = {
+				owner = {
+					year = 1910
+					NOT = { has_global_flag = rebel_tech_1900 }
+				}
+			}
+			owner = {
+				set_global_flag = rebel_tech_1900
+				REB = {
+					activate_technology = point_defense_system
+					activate_technology = iron_breech_loaded_artillery
+					activate_technology = army_decision_making
+				}
+			}
+		}
+		random_owned = {
+			limit = {
+				owner = {
+					year = 1920
+					NOT = { has_global_flag = rebel_tech_1920 }
+				}
+			}
+			owner = {
+				set_global_flag = rebel_tech_1920
+				REB = {
+					activate_technology = bolt_action_rifles
+				}
+			}
+		}
+		
+		CLN = { country_event = { id = 477877791 days = 365 } }
+	}
+}
+
+country_event = {
+	id = 477877788
+	title = "Freedom!"
+	desc = "We have acquired independence!"
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = "Nice."
+		overlord = { release_vassal = THIS }
+	}
+}
+
+country_event = {
+	id = 477877794
+	title = "Non-Existing Vassal Cleanup"
+	desc = "We have acquired independence!"
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = "Nice."
+		THIS = { annex_to = THIS }
+	}
+}
+
+country_event = {
+	id = 477877789
+	title = "AI: Cleanup Setup"
+	desc = "AI: Cleanup Setup"
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = "Cleanup Setup"
+		CLN = {
+			country_event = 477877787
+			country_event = 477877790
+			country_event = 477877791
+			add_country_modifier = { name = neutrality duration = -1 }
+		}
+	}
+}
+
+##vassal interactions events
+
+country_event = {
+	id = 477877792
+	title = "Vassal Interactions: $FROMCOUNTRY$"
+	desc = "If $FROMCOUNTRY$ is the country you want to interact with, select an option. Otherwise, select 'Next country' to cycle through, or select 'Exit options' to return to the game."
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = "Release this country"
+		FROM = {
+			country_event = 477877788
+		}
+		any_country = {
+			limit = {
+				exists = yes
+				vassal_of = THIS
+			}
+			clr_country_flag = interacted_with
+		}
+	}
+	
+	option = {
+		name = "Return cores to this country"
+		any_owned = {
+			limit = {
+				is_core = FROM
+				NOT = { is_core = THIS }
+			}
+			secede_province = FROM
+		}
+		any_country = {
+			limit = {
+				exists = yes
+				vassal_of = THIS
+			}
+			clr_country_flag = interacted_with
+		}
+	}
+	
+	option = {
+		name = "Next country"
+		random_country = {
+			limit = {
+				vassal_of = THIS
+				exists = yes
+				NOT = { has_country_flag = interacted_with }
+			}
+			country_event = 477877793
+			THIS = { set_country_flag = possible_interactions }
+		}
+		any_country = {
+			limit = {
+				vassal_of = THIS
+				exists = yes
+				THIS = { NOT = { has_country_flag = possible_interactions } }
+			}
+			clr_country_flag = interacted_with
+		}
+	}
+	
+	option = {
+		name = "Exit options"
+		any_country = {
+			limit = {
+				exists = yes
+				vassal_of = THIS
+			}
+			clr_country_flag = interacted_with
+		}
+	}
+}
+
+country_event = {
+	id = 477877793
+	title = "AI: Vassal Interactions"
+	desc = "This event lets your overlord interact with you. If you are a player, just close this."
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = "OK"
+		set_country_flag = interacted_with
+		FROM = { clr_country_flag = possible_interactions }
+		overlord = { country_event = 477877792 }
+	}
+}
+
+country_event = {
+	id = 477877795
+	title = "Colonizing a State"
+	desc = "This event will start the colonization of the any states you marked, and turn them into colonial states. This removes all factories in the states, along with costing money, giving militancy, and giving infamy. Are you sure you want to continue?"
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = "I live for the struggle"
+		treasury = -500000
+		add_country_modifier = {
+			name = costs_of_colonization
+			duration = 365
+		}
+		any_owned = {
+			limit = {
+				has_province_modifier = marked_for_colonization
+				is_capital = no
+			}
+			add_core = UTI
+			secede_province = UTI
+		}
+		inherit = UTI
+		any_owned = {
+			limit = {
+				is_core = UTI
+			}
+			remove_core = UTI
+			add_province_modifier = {
+				name = current_colonization
+				duration = 7300
+			}
+		}
+	}
+	
+	option = {
+		name = "No, I'm too scared"
+		any_owned = {
+			limit = {
+				has_province_modifier = marked_for_colonization
+			}
+			remove_province_modifier = marked_for_colonization
+		}
+	}
+}

@@ -1,0 +1,137 @@
+#100001 = Potential giving countries notified of aid request
+#10000(2,4,6,8,11) = Necessary to trigger next event in giving country's series and pass receiving countries TAG along.
+#10000(2,4,6,8,11) = Triggers giving country's selected order of magnitude and one lower to allow two sig figs for grants
+#100010 aid decline notification. May remove later. Not sure if relevevant
+#10000(3,5,7,9,12) = Giving country chooses amount within each order of magnitude, can still opt out. Ascending, logarithmic, (0-9)000-(0-9)0million
+
+country_event = {
+
+	is_triggered_only = yes
+	id = 2000011
+	title = "$FROMCOUNTRY$ Requests Diplomatic Aid"
+	desc = "$FROMCOUNTRY$ has asked we give them a grant. How much should we give?"
+	allow_multiple_instances = yes
+	option = {
+	ai_chance={factor=100}
+	name = "Our infamy is better spent at home."
+		#FROM = { country_event = {id = 2000010 days = 0} }
+	
+	}
+	option = {
+	name = "Small diplomatic aid"
+	
+		FROM = {
+			country_event = {id = 2000021 days = 0}
+		
+		}
+		ai_chance = {factor = 100} 
+	}
+	
+	option = {
+	name = "Large diplomatic aid"
+	
+		FROM = {
+			country_event = {id = 200004 days = 0}
+		} 
+	}	
+}
+
+country_event = {
+	is_triggered_only = yes
+	id = 2000031
+	title = "Choose Diplomatic Aid for $FROMCOUNTRY$"
+	desc = "How much aid would you like to give $FROMCOUNTRY$ (1s)?"
+	allow_multiple_instances = yes	
+	option = {
+	name = "None"
+	}
+	option = {
+	name = "1 infamy"
+	ai_chance = {factor = 100}
+	badboy = 1
+	FROM = {badboy = -1}
+	}
+	option = {
+	name = "2 infamy"
+	ai_chance = {factor = 100}
+	badboy = 2
+	FROM = {badboy = -2}
+	}
+	option = {
+	name = "3 infamy"
+	ai_chance = {factor = 100}
+	badboy = 3
+	FROM = {badboy = -3}
+	}
+	option = {
+	name = "4 infamy"
+	ai_chance = {factor = 100}
+	badboy = 4
+	FROM = {badboy = -4}
+	}
+	option = {
+	name = "5 infamy"
+	ai_chance = {factor = 100}
+	badboy = 5
+	FROM = {badboy = -5}
+	}
+	option = {
+	name = "6 infamy"
+	ai_chance = {factor = 100}
+	badboy = 6
+	FROM = {badboy = -6}
+	}
+	option = {
+	name = "7 infamy"
+	ai_chance = {factor = 100}
+	badboy = 7
+	FROM = {badboy = -7}
+	}
+	option = {
+	name = "8 infamy"
+	ai_chance = {factor = 100}
+	badboy = 8
+	FROM = {badboy = -8}
+	}
+	option = {
+	name = "9 infamy"
+	ai_chance = {factor = 100}
+	badboy = 9
+	FROM = {badboy = -9}
+	}
+}
+
+country_event = {
+	id = 2000051
+	title = "Choose Diplomatic Aid for $FROMCOUNTRY$"
+	desc = "How much money would you like to give $FROMCOUNTRY$ (10s)?"
+	allow_multiple_instances = yes	
+	is_triggered_only = yes
+	option = {
+	name = "None"
+	}
+	option = {
+	name = "10 infamy"
+	ai_chance = {factor = 100}
+	badboy = 10
+	FROM = {badboy = -10}
+	}
+	option = {
+	name = "20 infamy"
+	ai_chance = {factor = 100}
+	badboy = 20
+	FROM = {badboy = -20}
+	}
+}
+
+country_event = {
+	id = 2000010
+	title = "$FROMCOUNTRY$ Declines Diplomatic Aid Request"
+	desc = "$FROMCOUNTRY$ decided against giving us diplomatic aid"
+	allow_multiple_instances = yes	
+	is_triggered_only = yes
+	option = {
+	ai_chance = {factor = 100}
+	name = "I guess we just have to better fabricate claims..."
+	}
+}

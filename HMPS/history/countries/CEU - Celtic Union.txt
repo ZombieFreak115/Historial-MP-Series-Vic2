@@ -1,0 +1,19 @@
+capital = 263
+primary_culture = irish
+religion = catholic
+government = democracy
+plurality = 0.1
+nationalvalue = nv_order
+literacy = 0.55
+civilized = yes
+
+ruling_party = IRE_conservative
+upper_house = {
+	fascist = 0
+	liberal = 15
+	conservative = 75
+	reactionary = 10
+	anarcho_liberal = 0
+	socialist = 0
+	communist = 0
+}

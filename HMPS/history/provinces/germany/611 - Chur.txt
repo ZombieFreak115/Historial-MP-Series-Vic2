@@ -1,0 +1,9 @@
+owner = SWI
+controller = SWI
+add_core = SWI
+trade_goods = cattle
+life_rating = 32
+party_loyalty = {
+}
+party_loyalty = {
+}

@@ -1,0 +1,161 @@
+SHK = {
+	truce_until = 1840.1.1
+}
+
+
+leader = {
+	name = "Ibrahim Pasha"
+	type = land
+	date="1832.1.1"
+	personality = defence_3.1
+	background = attack_2.1
+	prestige = 0.3
+}
+
+leader = {
+	name = "Suleyman Pasha"
+	type = land
+	date="1832.1.1"
+	personality = defence_2.1
+	background = attack_1.1
+	prestige = 0.1
+}
+
+navy = {
+	name = "Taba"
+	location = 1753
+	ship = {
+		name= "Toushka"
+		type = manowar
+	}
+
+	ship = {
+		name= "Sharm El-Sheikh"
+		type = manowar
+	}
+
+	ship = {
+		name= "Damyat"
+		type = manowar
+	}
+
+	ship = {
+		name= "Rasheed"
+		type = manowar
+	}
+
+	ship = {
+		name= "El Suez"
+		type = manowar
+	}
+
+	ship = {
+		name= "El Aboukir"
+		type = frigate
+	}
+
+	ship = {
+		name= "Najim al Zafir"
+		type = frigate
+	}
+
+	ship = {
+		name= "Cairo"
+		type = frigate
+	}
+
+	ship = {
+		name= "Al Iskandariyah"
+		type = frigate
+	}
+
+	ship = {
+		name= "Aswan"
+		type = frigate
+	}
+
+	ship = {
+		name= "Port Said"
+		type = frigate
+	}
+
+	ship = {
+		name= "Marsa Matruh"
+		type = frigate
+	}
+
+	ship = {
+		name= "Bur Tawfiq"
+		type = frigate
+	}
+
+	ship = {
+		name= "Al Ghardaqah"
+		type = frigate
+	}
+
+	ship = {
+		name= "Bur Safajah"
+		type = frigate
+	}
+
+	ship = {
+		name= "1st transport flotilla"
+		type = clipper_transport
+	}
+
+}
+
+army = {
+	name = "1st Army"
+	location = 1745
+	regiment = {
+		name= "1st Infantry"
+		type = infantry
+		home = 894
+	}
+	
+	regiment = {
+		name= "2nd Infantry"
+		type = infantry
+		home = 1827
+	}
+	
+	regiment = {
+		name= "3rd Infantry"
+		type = infantry
+		home = 1763
+	}
+	
+	regiment = {
+		name= "4th Infantry"
+		type = infantry
+		home = 1751
+	}
+
+	regiment = {
+		name= "1st Calvary"
+		type = dragoon
+		home = 1751
+	}
+	
+	regiment = {
+		name= "1st Artillery"
+		type = artillery
+		home = 1745
+	}
+	
+	regiment = {
+		name= "2nd Artillery"
+		type = artillery
+		home = 1745
+	}
+	
+	regiment = {
+		name= "3rd Artillery"
+		type = artillery
+		home = 1745
+	}
+
+}
+

@@ -1,0 +1,6 @@
+owner = VNZ
+controller = VNZ
+add_core = VNZ
+trade_goods = fruit
+terrain = mountain
+life_rating = 31

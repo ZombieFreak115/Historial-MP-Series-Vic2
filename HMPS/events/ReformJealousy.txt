@@ -1,0 +1,59 @@
+country_event = {
+	
+	id = 7777907 
+
+	trigger = {
+		OR = {
+			unemployment_subsidies = acceptable_subsidies 
+			unemployment_subsidies = good_subsidies 
+		}
+		NOT = {
+			OR = {
+				ruling_party_ideology = socialist
+				ruling_party_ideology = communist
+			}
+		}
+	}
+ 
+	mean_time_to_happen =  {
+		days = 10
+	}
+
+	title = "EVTNAME7777907"
+	desc = "EVTDESC7777907"
+	picture = "Demonstration"
+	
+
+	option = {
+		name = "I'm sure it is for the best" 
+		social_reform = low_subsidies
+		set_country_flag = upper_house_no_ubi
+	}
+}
+
+country_event = {
+	
+	id = 77779071
+
+	trigger = {
+		OR = {
+			ruling_party_ideology = socialist
+			ruling_party_ideology = communist
+		}
+		has_country_flag = upper_house_no_ubi
+	}
+ 
+	mean_time_to_happen =  {
+		days = 10
+	}
+
+	title = "EVTNAME77779071"
+	desc = "EVTDESC77779071"
+	picture = "Demonstration"
+	
+
+	option = {
+		name = "EVT77779071A"
+		clr_country_flag = upper_house_no_ubi
+	}
+}

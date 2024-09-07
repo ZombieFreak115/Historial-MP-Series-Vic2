@@ -1,0 +1,44 @@
+#Jan Mayen Isolationism
+country_event = {
+	id = 91290
+	title = "World Bank Isolationism"
+
+
+	trigger = {
+		tag = CLN
+		NOT = { has_country_modifier = jan_mayen_isolationism }
+	}
+
+
+	option = {
+		add_country_modifier = { name = jan_mayen_isolationism duration = 362 }
+		add_country_modifier = { name = neutrality duration = -1 }
+		any_country = {
+			relation = {
+				who = CLN
+				value = -200
+			}
+		}
+	}
+}
+
+#Leave Jan Mayen
+country_event = {
+	id = 91291
+	title = "Leave Bank"
+
+	trigger = {
+		tag = CLN
+		exists = CLN
+		part_of_sphere = yes
+	}
+	
+	option = {
+		sphere_owner = {
+			diplomatic_influence = {
+				who = THIS
+				value = -400
+			}
+		}
+	}
+}

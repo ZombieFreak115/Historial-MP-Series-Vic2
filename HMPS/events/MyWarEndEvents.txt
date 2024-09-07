@@ -1,0 +1,17 @@
+country_event = {
+
+	id = 777791
+	title = "EVTNAME777791"
+	desc = "EVTDESC777791"
+	picture = "ships_to_bangkok"
+
+	is_triggered_only = yes
+	
+	option = {
+		name = "EVT777791OPTA"
+		add_country_modifier = {
+			name = lost_the_tarrif_war
+			duration = 1825
+		}
+	}
+}

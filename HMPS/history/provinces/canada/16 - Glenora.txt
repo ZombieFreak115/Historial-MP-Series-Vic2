@@ -1,0 +1,13 @@
+owner = RPL
+controller = RPL
+add_core = COL
+trade_goods = timber
+terrain = new_world_montane_tundra
+life_rating = 20
+colonial = 2
+
+1836.1.2 = {
+	controller = CAN
+	owner = CAN
+	colonial = 0
+}

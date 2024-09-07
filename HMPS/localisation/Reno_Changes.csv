@@ -1,0 +1,11 @@
+Key;English;French;German;Polish;Spanish;Italian;Swedish;Czech;Hungarian;Dutch;Portuguese;Russian;Finnish;
+EVTNAME9999901;Craftsmen Exploit Fix;;;;;;;;;;;;;
+EVTDESC9999901;This event converts all non-core/non-accepted craftsmen into farmers/labourers if they are on your cores.;;;;;;;;;;;;;
+craftsmen_fix_title;§CCraftsmen Fix Decision (10 year cooldown)§!;;;;;;;;;;;;;
+craftsmen_fix_desc;This decision converts all non-core / non-accepted craftsmen that are on your cores ONLY into farmers/labourers.;;;;;;;;;;;;;
+craftsmen_fix_cooldown;§CCraftsmen Fix Cooldown§!;;;;;;;;;;;;;
+craftsmen_fix_cooldown_desc;10 year reset before the decision can be taken again.;;;;;;;;;;;;;
+bureaucrats_fix_title;§CNon-Accepted Bureaucrats Decision (10 year cooldown)§!;;;;;;;;;;;;;
+bureaucrats_fix_desc;This decision is intended to convert non-accepted Bureaucrats into Artisans, in both states and colonies, so they stop getting fat off of state admin funding.;;;;;;;;;;;;;
+bureaucrats_fix_cooldown;§CBureaucrats Fix Cooldown§!;;;;;;;;;;;;;
+bureaucrats_fix_cooldown_desc;10 year reset before the decision can be taken again.;;;;;;;;;;;;;

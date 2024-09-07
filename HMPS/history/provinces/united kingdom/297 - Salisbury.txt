@@ -1,0 +1,11 @@
+owner = ENG
+controller = ENG
+add_core = ENG
+trade_goods = grain
+life_rating = 35
+fort = 1
+party_loyalty = {
+}
+party_loyalty = {
+}
+1861.1.1 = { railroad = 3 }

@@ -1,0 +1,51 @@
+owner = ENG
+controller = ENG
+add_core = ENG
+trade_goods = coal
+life_rating = 35
+terrain = newcastle
+party_loyalty = {
+}
+party_loyalty = {
+}
+state_building = {
+	level = 1
+	building = fabric_factory
+	upgrade = yes
+}
+state_building = {
+	level = 1
+	building = glass_factory
+	upgrade = yes
+}
+state_building = {
+	level = 2
+	building = winery
+	upgrade = yes
+}
+state_building = {
+	level = 1
+	building = liquor_distillery
+	upgrade = yes
+}
+state_building = {
+	level = 1
+	building = bronze_factory
+	upgrade = yes
+}
+state_building = {
+	level = 1
+	building = machine_parts_factory
+	upgrade = yes
+}
+state_building = {
+	level = 2
+	building = shoe_factory
+	upgrade = yes
+}
+state_building = {
+	level = 2
+	building = pharma_factory
+	upgrade = yes
+}
+1861.1.1 = { railroad = 3 }

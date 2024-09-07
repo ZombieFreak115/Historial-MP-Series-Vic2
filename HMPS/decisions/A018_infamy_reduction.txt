@@ -1,0 +1,22 @@
+political_decisions = {	
+	i_promise = {
+		picture = victorian_diplomats
+		potential = {
+			ai = no
+			NOT = { has_country_flag = made_promise }
+			NOT = { has_country_flag = hiding_the_decisions }
+		}
+		allow = {
+			badboy = 0.8
+		}
+		effect = {
+			badboy = -10
+			add_country_modifier = {
+				name = promise_against_expansion
+				duration = 3650
+			}
+			set_country_flag = made_promise
+		}
+		ai_will_do = { factor = 0 }
+	}
+}

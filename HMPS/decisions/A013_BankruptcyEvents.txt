@@ -1,0 +1,33 @@
+political_decisions = {
+	stop_bankrupt_events = {
+		picture = accept_trade_no
+		alert = no
+		potential = {
+			ai = no
+			NOT = { has_country_flag = bankruptcy_events_disabled }
+			NOT = { has_country_flag = hiding_the_decisions }
+		}
+		allow = {
+			exists = yes
+		}
+		effect = {
+			set_country_flag = bankruptcy_events_disabled
+		}
+	}
+	
+	allow_bankrupt_events = {
+		picture = accept_trade_yes
+		alert = no
+		potential = {
+			ai = no
+			has_country_flag = bankruptcy_events_disabled
+			NOT = { has_country_flag = hiding_the_decisions }
+		}
+		allow = {
+			exists = yes
+		}
+		effect = {
+			clr_country_flag = bankruptcy_events_disabled
+		}
+	}
+}

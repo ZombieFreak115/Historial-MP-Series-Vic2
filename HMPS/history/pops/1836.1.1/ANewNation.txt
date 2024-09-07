@@ -1,0 +1,271 @@
+#Monaco (170800/22700 POPS)
+3251 = {
+	aristocrats = {
+		culture = north_italian
+		religion = catholic
+		size = 175
+	}
+
+	soldiers = {
+		culture = north_italian
+		religion = catholic
+		size = 150
+	}
+
+	aristocrats = {
+		culture = occitan
+		religion = catholic
+		size = 55
+	}
+
+	clergymen = {
+		culture = occitan
+		religion = catholic
+		size = 75
+	}
+
+	artisans = {
+		culture = occitan
+		religion = catholic
+		size = 575
+	}
+
+	soldiers = {
+		culture = occitan
+		religion = catholic
+		size = 75
+	}
+
+	farmers = {
+		culture = occitan
+		religion = catholic
+		size = 10600
+	}
+
+}
+
+#Andorra (228000/37000 POPS)
+3252 = {
+	aristocrats = {
+		culture = dixie
+		religion = protestant
+		size = 150
+	}
+
+	clergymen = {
+		culture = dixie
+		religion = protestant
+		size = 75
+	}
+
+	artisans = {
+		culture = dixie
+		religion = protestant
+		size = 200
+	}
+
+	soldiers = {
+		culture = dixie
+		religion = protestant
+		size = 125
+	}
+
+	farmers = {
+		culture = dixie
+		religion = protestant
+		size = 3050
+	}
+	
+	clergymen = {
+		culture = cajun
+		religion = catholic
+		size = 75
+	}
+	
+	farmers = {
+		culture = cajun
+		religion = catholic
+		size = 1550
+	}
+
+	clergymen = {
+		culture = afro_american
+		religion = protestant
+		size = 15
+	}
+
+	artisans = {
+		culture = afro_american
+		religion = protestant
+		size = 100
+	}
+
+	farmers = {
+		culture = afro_american
+		religion = protestant
+		size = 10
+	}
+
+	slaves = {
+		culture = afro_american
+		religion = protestant
+		size = 5875
+	}
+}
+
+#Liechtenstein
+3253 = {
+	clergymen = {
+		culture = brazilian
+		religion = catholic
+		size = 5
+	}
+
+	artisans = {
+		culture = amazonian
+		religion = catholic
+		size = 10
+	}
+
+	soldiers = {
+		culture = amazonian
+		religion = catholic
+		size = 5
+	}
+
+	farmers = {
+		culture = brazilian
+		religion = catholic
+		size = 200
+	}
+
+	aristocrats = {
+		culture = amazonian
+		religion = animist
+		size = 5
+	}
+
+	clergymen = {
+		culture = amazonian
+		religion = animist
+		size = 5
+	}
+
+	artisans = {
+		culture = amazonian
+		religion = animist
+		size = 25
+	}
+
+	soldiers = {
+		culture = amazonian
+		religion = animist
+		size = 5
+	}
+
+	farmers = {
+		culture = amazonian
+		religion = animist
+		size = 750
+	}
+}
+
+
+#San Marino
+3266 = {
+	aristocrats = {
+		culture = dixie
+		religion = protestant
+		size = 750
+	}
+
+	bureaucrats = {
+		culture = dixie
+		religion = protestant
+		size = 250
+	}
+
+	officers = {
+		culture = dixie
+		religion = protestant
+		size = 175
+	}
+
+	clergymen = {
+		culture = dixie
+		religion = protestant
+		size = 275
+	}
+
+	artisans = {
+		culture = dixie
+		religion = protestant
+		size = 1650
+	}
+
+	soldiers = {
+		culture = dixie
+		religion = protestant
+		size = 2000
+	}
+
+	farmers = {
+		culture = dixie
+		religion = protestant
+		size = 35950
+	}
+
+	aristocrats = {
+		culture = dixie
+		religion = catholic
+		size = 15
+	}
+
+	clergymen = {
+		culture = dixie
+		religion = catholic
+		size = 35
+	}
+
+	artisans = {
+		culture = dixie
+		religion = catholic
+		size = 100
+	}
+
+	soldiers = {
+		culture = dixie
+		religion = catholic
+		size = 25
+	}
+
+	farmers = {
+		culture = dixie
+		religion = catholic
+		size = 1825
+	}
+
+	clergymen = {
+		culture = afro_american
+		religion = protestant
+		size = 25
+	}
+
+	artisans = {
+		culture = afro_american
+		religion = protestant
+		size = 450
+	}
+
+	farmers = {
+		culture = afro_american
+		religion = protestant
+		size = 25
+	}
+
+	slaves = {
+		culture = afro_american
+		religion = protestant
+		size = 23500
+	}
+}

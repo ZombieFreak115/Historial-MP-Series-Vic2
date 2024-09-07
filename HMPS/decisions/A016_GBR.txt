@@ -1,0 +1,212 @@
+political_decisions = {
+	for_the_republic = {
+		picture = british_republic_flag
+		alert = no
+		potential = {
+			tag = ENG
+			NOT = { year = 1837 }
+		}
+		allow = {
+			NOT = { year = 1837 }
+		}
+
+		effect = {
+			ENG_296 = { add_core = GBR }
+			ENG_273 = { add_core = GBR }
+			ENG_277 = { add_core = GBR }
+			ENG_280 = { add_core = GBR }
+			ENG_266 = { add_core = GBR }
+			ENG_284 = { add_core = GBR }
+			ENG_291 = { add_core = GBR }
+			ENG_300 = { add_core = GBR }
+			ENG_271 = { add_core = GBR }
+			ENG_254 = { add_core = GBR }
+			ENG_260 = { add_core = GBR }
+			ENG_263 = { add_core = GBR }
+			ENG_258 = { add_core = GBR }
+			
+			any_owned = {
+				limit = {
+					OR = {
+						province_id = 257
+						province_id = 258
+						province_id = 259
+						province_id = 260
+						province_id = 261
+						province_id = 262
+						province_id = 263
+						province_id = 264
+						province_id = 265
+						province_id = 269
+						province_id = 271
+						province_id = 277
+						province_id = 278
+						province_id = 283
+						province_id = 284
+						province_id = 287
+						province_id = 288
+						province_id = 289
+						province_id = 291
+						province_id = 292
+						province_id = 293
+						province_id = 294
+						province_id = 295
+						province_id = 296
+						province_id = 297
+						province_id = 298
+						province_id = 299
+						province_id = 300
+						province_id = 301
+						province_id = 302
+						province_id = 3268
+						province_id = 3269
+						province_id = 303
+						province_id = 304
+					}
+				}
+				secede_province = GBR
+			}
+			
+			change_tag_no_core_switch = GBR
+			
+			capital = 304
+			money = 1000000
+			leadership = 80
+			set_country_flag = revolution_spread
+			
+			### starting the civil_war
+			ENG = {
+				war = {
+					target = GBR
+						attacker_goal = { casus_belli = civil_war }
+						defender_goal = { casus_belli = acquire_all_cores country = GBR }
+					call_ally = yes
+				}
+			}
+			
+			country_event = {id=7777937 days = 150}
+		}
+		ai_will_do = {
+			factor = 0
+		}
+	}
+	irish_reconcilliation = {
+		picture = ireland
+		potential = {
+			tag = GBR
+			NOT = { has_country_flag = tried_reconciliation }
+		}
+		allow = {
+			war = no
+			nationalism_n_imperialism = 1
+			OR = {
+				AND = {
+					IRE = { exists = yes }
+					relation = {
+						who = IRE
+						value = 200
+					}
+					OR = {
+						part_of_sphere = no
+						in_sphere = THIS
+					}
+					NOT = { citizenship_policy = residency }
+				}
+				AND = {
+					IRE = { exists = no }
+					IRE = { all_core = { owned_by = THIS } }
+					citizens_rights = all_voting_pops
+				}
+			}
+		}
+		effect = {
+			country_event = {
+				id = 7777939
+				days = 0
+			}
+			set_country_flag = tried_reconciliation
+		}
+	}
+	irish_integration = {
+		picture = ireland
+		potential = {
+			tag = GBR
+			NOT = { accepted_culture = irish }
+			NOT = { has_country_flag = rejected_irish_reconciliation }
+		}
+		allow = {
+			social_science = 1
+			has_country_flag = irish_reconciled
+		}
+		effect = {
+			inherit = IRE
+			add_accepted_culture = irish
+		}
+	}
+	rebuilding_effort = {
+		picture = alsace_lorraine_mines
+		potential = {
+			tag = GBR
+			has_country_modifier = shattered_economy
+		}
+		allow = {
+			industrial_score = 400
+			steam_turbine = 1
+			scientific_management = 1
+		}
+		effect = {
+			remove_country_modifier = shattered_economy
+			add_country_modifier = {
+				name = recovering_economy
+				duration = -1
+			}
+		}
+	}
+	rebuilding_effort_2 = {
+		picture = alsace_lorraine_mines
+		potential = {
+			tag = GBR
+			has_country_modifier = recovering_economy
+		}
+		allow = {
+			industrial_score = 750
+		}
+		effect = {
+			remove_country_modifier = recovering_economy
+			add_country_modifier = {
+				name = common_land
+				duration = -1
+			}
+			all_core = {
+				life_rating = 1
+			}
+		}
+	}
+	come_one_come_all = {
+		picture = british_republic_flag
+		potential = {
+			tag = GBR
+			NOT = { has_country_flag = to_us }
+		}
+		allow = {
+			OR = {
+				ruling_party_ideology = liberal
+				ruling_party_ideology = socialist
+			}
+			NOT = { has_country_modifier = shattered_economy }
+			NOT = { has_country_modifier = recovering_economy }
+			romanticism = 1
+			war = no
+		}
+		effect = {
+			add_country_modifier = {
+				name = come_all
+				duration = -1
+			}
+			set_country_flag = to_us
+		}
+		ai_will_do = {
+			factor = 0
+		}
+	}
+}	

@@ -1,0 +1,65 @@
+# 555101 - USSA Inheritance
+country_event = {
+	id = 555101
+	title = "EVTNAME11101"
+	desc = "EVTDESC11101"
+	picture = "Celebration"
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = "EVTOPTA11101"
+		any_country = {
+			limit = {
+				OR = {
+					is_sphere_leader_of = THIS
+					is_our_vassal = THIS
+				}
+				NOT = { tag = FROM }
+			}
+			relation = {
+				who = FROM
+				value = -25
+			}
+			casus_belli = {
+				target = FROM
+				type = humiliate
+				months = 24
+			}
+			casus_belli = {
+				target = FROM
+				type = free_peoples
+				months = 24
+			}
+		}
+		FROM = { inherit = THIS }	
+		ai_chance = {
+			factor = 100
+		}
+	}
+	
+	option = {
+		name = "EVTOPTB11101"
+		clr_country_flag = wants_to_unify
+		prestige = 1
+		leave_alliance = FROM
+		relation = {
+			who = FROM
+			value = -200
+		}
+		FROM = {
+			diplomatic_influence = {
+				who = THIS
+				value = -200
+			}
+		}
+		any_pop = {
+			limit = { is_primary_culture = yes }
+			militancy = 3
+			consciousness = 2
+		}
+		ai_chance = {
+			factor = 0
+		}
+	}
+}

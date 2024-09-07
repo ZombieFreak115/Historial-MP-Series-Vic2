@@ -1,0 +1,43 @@
+political_decisions = {
+
+	start_fake_war = {
+		picture = peking_field_force
+		alert = no
+		potential = {
+			ai = no
+			NOT = { war_with = CLN }
+			NOT = { has_country_flag = hiding_the_decisions }
+		}
+		
+		allow = {
+			ai = no
+		}
+		effect = {
+			#CLN = { country_event = 7777934 }
+			war = {
+			target = CLN
+			attacker_goal = { casus_belli = fake_war_cb }
+			defender_goal = { casus_belli = status_quo }
+		}
+		}
+
+	}
+	
+	end_fake_war = {
+		picture = peking_field_force
+		potential = {
+			ai = no
+			war_with = CLN
+		}
+		
+		allow = {
+			war_with = CLN
+		}
+		
+		effect = {
+			end_war = CLN
+		}
+
+	}
+	
+}

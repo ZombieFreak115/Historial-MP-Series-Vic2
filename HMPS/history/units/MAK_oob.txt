@@ -1,0 +1,10 @@
+army = {
+	name = "Army of the Nawab of Makran"
+	location = 3293
+	regiment = {
+		name= "1.Baluchye"
+		type = cavalry
+		home = 3293
+	}
+}
+

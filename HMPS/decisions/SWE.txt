@@ -1,0 +1,28 @@
+political_decisions = {
+
+	pass_folkskolereformen = {
+		potential = {
+			OR = {
+				tag = SWE
+				AND = {
+					tag = SCA
+					primary_culture = swedish
+				}
+			}
+			NOT = {
+				has_country_modifier = folkis_educates
+			}
+		}
+		
+		allow = {
+			ideological_thought = 1
+		}
+		
+		effect = {
+			add_country_modifier = {
+				name = folkis_educates
+				duration = -1
+			}
+		}
+	}
+}
