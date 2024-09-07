@@ -1,3 +1,5 @@
+This is a reupload of HMPS after Townes deleted it, everything below is the original readme:
+
 # THE Historical MP Series
 
 
